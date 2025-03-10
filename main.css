@@ -134,6 +134,10 @@ body, html {
     font-size: 12px;
 }
 
+.notice {
+    color: #FF5555;
+}
+
 /* fonts */
 h1 {
     font-family: "Archivo Black";
