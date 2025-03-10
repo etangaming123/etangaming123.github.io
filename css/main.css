@@ -55,6 +55,9 @@ body, html {
     border: 2px solid #808080;
     box-shadow: 5px 5px 0px #404040;
     border-radius: 5px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .-title-bar {
@@ -71,11 +74,17 @@ body, html {
 
 .title-text {
     margin-left: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Adjust based on parent width */
 }
 
 .-content {
     padding: 15px;
     font-size: 14px;
+    overflow: auto; 
+    max-height: calc(70vh - 30px);
 }
 
 .map-btn {
