@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>etangaming123</title>
-    <link rel="stylesheet" href="../main.css">
+    <title>etangaming123 > Map</title>
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
     <div class="scrolling-background"></div>
@@ -12,7 +12,7 @@
         <div class="-title-bar" id="titleBar">
             <span class="title-text">etangaming123 > <a href="https://etangaming123.github.io/" class="title-link">Home</a> > <a href="" class="title-link">Map</a></span>
             <a href="" class="map-btn">
-                <img src="../map.svg" alt="Map" class="map-icon" title="View the site map!">
+                <img src="./images/map.svg" alt="Map" class="map-icon" title="View the site map!">
             </a>
         </div>
         <div class="-content">

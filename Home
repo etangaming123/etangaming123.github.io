@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>etangaming123 > Home</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="scrolling-background"></div>
+    <div class="-window" id="Window">
+        <div class="-title-bar" id="titleBar">
+            <span class="title-text">etangaming123 > <a href="" class="title-link">Home</a></span>
+            <a href="Map.html" class="map-btn">
+                <img src="./images/map.svg" alt="Map" class="map-icon" title="View the site map!">
+            </a>
+        </div>
+        <div class="-content">
+            <h1>Home</h1>
+            <h2 class="notice">Important Notice:</h2>
+            <p class="notice">As of now, this website is VERY VERY unfinished and some pages do not exist or are empty.</p>
+            <div class="container">
+                <div class="image-container">
+                    <img src="./images/ether.pnhg" alt="A Roblox character wearing a white blazer with fluffy grey hair, a wing on his right, and a red checkered background." title="This is Ether, one of the characters I have made! Check out more characters at etangaming123.github.io/characters" class="image-left">
+                </div>
+                <div class="text-right">
+                    <h2>Hello!</h2>
+                    <p id="dynamic-text-element"></p>
+                    <script defer src="./scripts/getparams.js"></script>
+                    <p>I'm <strong>etangaming123</strong>, but you may know me as <a href="Names.html" class="link">many names</a>. I make <strong>random things</strong> on the internet, one of them being <strong>this website</strong>, hosted on <strong>github.io</strong>!<br></p><p class="tiny-text">This is more of a personal profile, not a business portfolio</p>
+                </div>
+            </div>
+            <h2>Who I am</h2>
+            <p>I'm a person that works on many projects at once. Some days I'm chilling, playing games with friends, and other days I'm pushing myself to update / make new things. (This website is an example of one of them!)</p>
+            <h2>What I'm known for</h2>
+            <p>I'm the founder of <a href="https://www.roblox.com/communities/15518039/etans-gamers#!/about" class="link" target="_blank">etan's gamers</a>, a small Roblox group as of writing this. I'm also the developer behind <a href="https://github.com/etangaming123/katsune", class="link", target="_blank">Katsune</a>, a Discord bot for <a href="https://discord.com/invite/CpsCCqSAmq", class="link", target="_blank">Ghost Hunt's Discord</a>!<br><br>You'll see me on Roblox Studio every now and then, as I'm either aniamting (Moon Animator 2) or creating renders of avatars. (the image at the very top of this page is one!)</p>
+        </div>
+    </div>
+</body>
+</html>
