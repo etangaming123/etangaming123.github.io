@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Open+Sans:ital,wght@0,300..800;1,300..800');
+
+/* fonts */
+.archivo-black-regular {
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.open-sans {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+/* scroll */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; 
+    font-family: Tahoma, sans-serif;
+}
+
+.scrolling-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('bg.png') repeat;
+    background-size: 1080px 1080px; 
+    animation: scrollBoth 15s linear infinite;
+}
+
+@keyframes scrollBoth {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -1080px -1080px;
+    }
+}
+
+/* the window */
+.-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background: #777777;
+    border: 2px solid #808080;
+    box-shadow: 5px 5px 0px #404040;
+    border-radius: 5px;
+}
+
+.-title-bar {
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    cursor: move;
+}
+
+.title-text {
+    margin-left: 8px;
+}
+
+.-content {
+    padding: 15px;
+    font-size: 14px;
+}
+
+.map-btn {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-icon {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.map-icon:hover {
+    border-color: yellow;
+}
+
+/* layout */
+.container {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
+  
+.image-left {
+    width: 100%;
+}
+
+.image-container {
+    width: 10%;
+    min-width: 100px;
+    float: left;
+}
+
+.text-right {
+    font-size: 20px;
+    padding-left: 20px;
+    float: left;
+}
+
+/* colors */
+.title-link {
+    color: #6CB96C;
+    font-weight: bold;
+}
+
+.link {
+    font-weight: bold;
+}
+
+#dynamic-text-element {
+    font-size: 12px;
+}
+
+/* fonts */
+h1 {
+    font-family: "Archivo Black";
+    color: #6cff6c;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 1);
+    font-size: 30px;
+}
+
+h2 {
+    font-family: "Archivo Black";
+    color: #EEEEEE;
+    font-size: 24px;
+}
+
+p {
+    font-family: "Open Sans";
+    color: #EEEEEE;
+    font-size: 14px;
+}
+
+.tiny-text {
+    font-size: 12px;
+    color: #AAAAAA
+}

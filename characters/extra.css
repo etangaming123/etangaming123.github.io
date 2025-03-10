@@ -1,0 +1,11 @@
+.character-container {
+    margin-left: 2%;
+    margin-right: 2%;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
+
+.link {
+    color: #88BF7E;
+}
