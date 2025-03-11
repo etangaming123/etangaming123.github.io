@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
         const scrollingBackground = document.querySelector(".scrolling-background");
         if (scrollingBackground) {
-            scrollingBackground.style.backgroundImage = `url('./images/${fileName}')`;
+            scrollingBackground.style.backgroundImage = `url('./images/backgrounds/${fileName}')`;
         } else {
             console.error("Element with class .scrolling-background not found!");
         }
