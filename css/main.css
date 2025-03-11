@@ -171,3 +171,8 @@ p {
     font-size: 12px;
     color: #AAAAAA
 }
+
+/* images */
+#image-404 {
+    max-width: 100px;
+}
