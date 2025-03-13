@@ -8,6 +8,10 @@ async function replaceText(id) {
     try {
         const response = await fetch(`https://gist.githubusercontent.com/etangaming123/${id}/raw`) // MY gists thank you very much >:P
         if (!response.ok) {
+            if (response.status == 404) {
+                messageElement.textContent = "The message id you inputted either does not exist or has been deleted."
+                return
+            }
             messageElement.textContent = `Failed to get message! Status: ${response.status}`
             return
         }
