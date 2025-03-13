@@ -17,10 +17,17 @@ async function replaceText(id) {
         }
         text = await response.text()
         messageElement.innerText = text.replace("/\n\g", "\n")
-        statusElement.innerHTML = `Message from <a href=https://gist.githubusercontent.com/etangaming123/${id}/raw class="link">https://gist.githubusercontent.com/etangaming123/${id}/raw</a>`;
+        statusElement.innerHTML = `Message from <a href=https://gist.githubusercontent.com/etangaming123/${id}/raw class="link">this link</a>`;
     }
     catch (error) {
         console.error("Failed to fetch message:", error)
+    }
+}
+
+function updateURL() {
+    let inputValue = document.getElementById("inputField").value;
+    if (inputValue) {
+        window.location.href = window.location.pathname + "?id=" + encodeURIComponent(inputValue);
     }
 }
 

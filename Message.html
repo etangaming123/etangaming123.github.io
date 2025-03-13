@@ -25,7 +25,9 @@
         </div>
         <div class="-content">
             <h1>Message</h1>
-            <p id="status">Add ?id=[YOUR MESSAGE ID] to the page's url and reload the page.<br><br>If you came here without a message id, <a href="Home.html" class="link">let's take you back home</a>.</p>
+            <p id="status">Add ?id=[YOUR MESSAGE ID] to the page's url and reload the page.<br><br>Alternatively, enter in your message id here:</p>
+            <input type="text" id="inputField" placeholder="Enter message ID">
+            <button onclick="updateURL()">Load message</button>
             <p id="message">No message yet...</p>
         </div>
     </div>
