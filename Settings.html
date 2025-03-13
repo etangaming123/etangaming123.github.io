@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>etangaming123 > Settings</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script defer src="./scripts/drag.js"></script>
+    <script defer src="./scripts/dynamicbackground.js"></script>
+    <script defer src="./scripts/loadingscreen.js"></script>
+</head>
+<body>
+    <div class="scrolling-background"></div>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <p>Loading page...</p>
+    </div>
+    <div class="-window" id="Window">
+        <div class="-title-bar" id="titleBar">
+            <span class="title-text">etangaming123 > <a href="Home.html" class="title-link">Home</a> > <a href="" class="title-link">Settings</a></span>
+            <div class="topbuttons">
+                <a href="./Map.html" class="top-btn">
+                    <img src="./images/map.svg" alt="Map" class="top-icon" title="View the site map!">
+                </a>
+                <a href="" class="top-btn">
+                    <img src="./images/settings.png" alt="Settings" class="top-icon" title="Change your settings!">
+                </a>
+            </div>
+        </div>
+        <div class="-content">
+            <h1>Settings</h1>
+            <p>Personalise your experience!</p>
+            <h2>Background Color</h2>
+            <p>Refresh your page to apply settings! (Setting your background to none will make the site pick the current global background.)</p>
+            <script>
+                function setUserBg(color) {
+                    statustext = document.getElementById("status-text")
+                    if (color == "none") {
+                        localStorage.removeItem("userbg");
+                    }
+                    else {
+                        localStorage.setItem("userbg", color);
+                    }
+                    statustext.innerText = `Set background to ${color}!`
+                }
+            </script>
+            <button class="button" style="background-color: #000000; color: #FFFFFF" onclick="setUserBg('none')">None</button>
+            <button class="button" style="background-color: #717B7B;" onclick="setUserBg('')">Plain</button>
+            <button class="button" style="background-color: #6CB96C;" onclick="setUserBg('green')">Mint</button>
+            <button class="button" style="background-color: #E23D46;" onclick="setUserBg('red')">Apple</button>
+            <button class="button" style="background-color: #E2F468; color: black;" onclick="setUserBg('yellow')">Banana</button>
+            <button class="button" style="background-color: #CC8B46;" onclick="setUserBg('orange')">Orange</button>
+            <button class="button" style="background-color: #E28BA0; color: black;" onclick="setUserBg('pink')">Rose</button>
+            <button class="button" style="background-color: #A046E2;" onclick="setUserBg('purple')">Grape</button>
+            <button class="button" style="background-color: #703700; color: white;" onclick="setUserBg('brown')">Chocolate</button>
+            <button class="button" style="background-color: #353535; color: white;" onclick="setUserBg('black')">Coal</button>
+            <button class="button" style="background-color: #463DE2;" onclick="setUserBg('blue')">Blueberry</button>
+            <button class="button" style="background-color: #FFCC00; color: black;" onclick="setUserBg('gold')">Gold</button>
+            <button class="button" style="background-color: #46E2E2; color: black;" onclick="setUserBg('cyan')">Club</button>
+            <p id="status-text"></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -120,22 +120,29 @@ body, html {
     max-height: calc(70vh - 30px);
 }
 
-.map-btn {
+.topbuttons {
+    display: flex;
+    gap: 5px;
     margin-right: 8px;
+    flex-direction: row;
+}
+
+/* Map Button */
+.top-btn {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.map-icon {
-    width: 20px;
+.top-icon {
+    width: 20px;  
     height: 20px;
     border: 2px solid white;
     border-radius: 3px;
     cursor: pointer;
 }
 
-.map-icon:hover {
+.top-icon:hover {
     border-color: yellow;
 }
 
@@ -177,7 +184,7 @@ body, html {
 }
 
 .notice {
-    color: #FF5555;
+    color: #b23b3b;
 }
 
 /* fonts */
@@ -198,6 +205,19 @@ p {
     font-family: "Open Sans";
     color: #EEEEEE;
     font-size: 14px;
+}
+
+h1:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+h2:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+p:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .tiny-text {

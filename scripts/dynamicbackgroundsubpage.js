@@ -1,17 +1,31 @@
 document.addEventListener("DOMContentLoaded", async function() {
-    const gistUrl = "https://gist.githubusercontent.com/etangaming123/071d58869981c2a5a56c2f3ff11aebc9/raw";
+    const params = new URLSearchParams(window.location.search); // Get params
+    const bgparam = params.get('bg'); // Get specific param
+    const scrollingBackground = document.querySelector(".scrolling-background");
 
-    try {
-        const response = await fetch(gistUrl);
-        const fileName = await response.text();
-
-        const scrollingBackground = document.querySelector(".scrolling-background");
-        if (scrollingBackground) {
-            scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${fileName}')`;
-        } else {
-            console.error("Element with class .scrolling-background not found!");
+    if (bgparam == null) {
+        userbg = localStorage.getItem("userbg")
+    
+        if (userbg == null) {
+            const gistUrl = "https://gist.githubusercontent.com/etangaming123/071d58869981c2a5a56c2f3ff11aebc9/raw";
+    
+            try {
+                const response = await fetch(gistUrl);
+                const fileName = await response.text();
+        
+                scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${fileName}')`;
+            } catch (error) {
+                console.error("Error fetching Gist data:", error);
+                scrollingBackground.style.backgroundImage = `url('../images/backgrounds/bg.png')`;
+            }    
         }
-    } catch (error) {
-        console.error("Error fetching Gist data:", error);
+    
+        else {
+            scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${userbg}bg.png')`;
+            }
+        }
+
+    else {
+        scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${bgparam}bg.png')`;
     }
 });
