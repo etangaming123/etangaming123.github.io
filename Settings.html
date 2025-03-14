@@ -8,6 +8,7 @@
     <script defer src="./scripts/drag.js"></script>
     <script defer src="./scripts/dynamicbackground.js"></script>
     <script defer src="./scripts/loadingscreen.js"></script>
+    <script defer src="./scripts/changebackground.js"></script>
 </head>
 <body>
     <div class="scrolling-background"></div>
@@ -31,19 +32,7 @@
             <h1>Settings</h1>
             <p>Personalise your experience!</p>
             <h2>Background Color</h2>
-            <p>Refresh your page to apply settings! (Setting your background to none will make the site pick the current global background.)</p>
-            <script>
-                function setUserBg(color) {
-                    statustext = document.getElementById("status-text")
-                    if (color == "none") {
-                        localStorage.removeItem("userbg");
-                    }
-                    else {
-                        localStorage.setItem("userbg", color);
-                    }
-                    statustext.innerText = `Set background to ${color}!`
-                }
-            </script>
+            <p>Setting your background to none will make the site pick the current global background.</p>
             <button class="button" style="background-color: #000000; color: #FFFFFF" onclick="setUserBg('none')">None</button>
             <button class="button" style="background-color: #717B7B;" onclick="setUserBg('')">Plain</button>
             <button class="button" style="background-color: #6CB96C;" onclick="setUserBg('green')">Mint</button>
