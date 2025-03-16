@@ -16,11 +16,9 @@ async function replaceText(id) {
             return
         }
         text = await response.text()
-        const urlMatch = text.match(/https?:\/\/\S+/);
-    
-        if (urlMatch) { // haha funny redirect on some messages that have links hahdsfhaskj
-            window.location.href = urlMatch[0];
-        }
+        if (/^https?:\/\/\S+$/.test(text)) {
+            window.location.href = text;
+        }    
         messageElement.innerText = text.replace("/\n\g", "\n")
         statusElement.innerHTML = `Message from <a href=https://gist.githubusercontent.com/etangaming123/${id}/raw class="link">this link</a>`;
     }
