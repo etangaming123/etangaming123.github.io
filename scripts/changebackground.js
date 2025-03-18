@@ -27,6 +27,10 @@ async function setUserBg(color) {
     else {
         scrollingBackground.style.backgroundImage = `url('./images/backgrounds/${userbg}bg.png')`;
     }
-
-    statustext.innerText = `Set background to ${color}!`
+    if (color == "") {
+        statustext.innerText = `Set background to plain!`
+    }
+    else {
+        statustext.innerText = `Set background to ${color}!`
+    }
 }

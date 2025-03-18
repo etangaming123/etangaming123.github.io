@@ -177,6 +177,12 @@ body, html {
 
 .link {
     font-weight: bold;
+    color: #6CB96C
+}
+
+.link:hover {
+    color: #6CB96C;
+    text-decoration: underline;
 }
 
 #dynamic-text-element {
@@ -208,16 +214,16 @@ p {
 }
 
 h1:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(200, 200, 200, 0.2);
 }
 
 h2:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(200, 200, 200, 0.2);
 
 }
 
 p:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(200, 200, 200, 0.2);
 }
 
 .tiny-text {
@@ -228,6 +234,15 @@ p:hover {
 /* images */
 #image-404 {
     max-width: 100px;
+}
+
+/* character backgrounds */
+.ether-background {
+    background-color: #772D2E;
+}
+
+.net-background {
+    background-color: #2A267C;
 }
 
 /* other fancy stuff */
