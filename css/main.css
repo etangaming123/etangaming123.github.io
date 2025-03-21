@@ -185,6 +185,10 @@ body, html {
     text-decoration: underline;
 }
 
+.link:visited {
+    color: #51b142;
+}
+
 #dynamic-text-element {
     font-size: 12px;
 }
