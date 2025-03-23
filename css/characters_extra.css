@@ -4,8 +4,30 @@
     display: flex;
     align-items: left;
     justify-content: left;
+    gap: 5px;
+    flex-direction: row;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
-.link {
-    color: #88BF7E;
+/* character backgrounds */
+.ether-background {
+    background-color: #772D2E;
+}
+
+.net-background {
+    background-color: #2A267C;
+}
+
+.lemomaid-background {
+    background-color: #767F35;
+}
+
+.Esther-background {
+    background-color: #292929;
+}
+
+.cyn-background {
+    background-color: #4E0000;
 }

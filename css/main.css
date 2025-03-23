@@ -68,15 +68,6 @@ body, html {
     animation: scrollBoth 15s linear infinite;
 }
 
-@keyframes scrollBoth {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: -1080px -1080px;
-    }
-}
-
 /* the window */
 .-window {
     position: absolute;
@@ -91,6 +82,7 @@ body, html {
     max-height: 90vh;
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
 }
 
 .-title-bar {
@@ -158,7 +150,7 @@ body, html {
 }
 
 .image-container {
-    width: 10%;
+    width: 12%;
     min-width: 100px;
     float: left;
 }
@@ -194,7 +186,7 @@ body, html {
 }
 
 .notice {
-    color: #b23b3b;
+    color: #ff4646;
 }
 
 /* fonts */
@@ -202,12 +194,20 @@ h1 {
     font-family: "Archivo Black";
     color: #6cff6c;
     text-shadow: 2px 2px 2px rgba(255, 255, 255, 1);
-    font-size: 30px;
+    font-size: 36px;
 }
 
 h2 {
     font-family: "Archivo Black";
+    color: #7DB773;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 1);
+    font-size: 30px;
+}
+
+h3 {
+    font-family: "Archivo Black";
     color: #EEEEEE;
+    text-shadow: 2px 2px 2px rgba(25, 25, 25, 1);
     font-size: 24px;
 }
 
@@ -223,7 +223,10 @@ h1:hover {
 
 h2:hover {
     background-color: rgba(200, 200, 200, 0.2);
+}
 
+h3:hover {
+    background-color: rgba(200, 200, 200, 0.2);
 }
 
 p:hover {
@@ -238,15 +241,6 @@ p:hover {
 /* images */
 #image-404 {
     max-width: 100px;
-}
-
-/* character backgrounds */
-.ether-background {
-    background-color: #772D2E;
-}
-
-.net-background {
-    background-color: #2A267C;
 }
 
 /* other fancy stuff */
