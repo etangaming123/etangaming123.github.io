@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function() {
     const params = new URLSearchParams(window.location.search); // Get params
     const bgparam = params.get('bg'); // Get specific param
+    const scrollparam = params.get('scroll'); // Get specific param
     const scrollingBackground = document.querySelector(".scrolling-background");
 
     if (bgparam == null) {
@@ -29,20 +30,26 @@ document.addEventListener("DOMContentLoaded", async function() {
         scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${bgparam}bg.png')`;
     }
 
-    scrollingenabled = localStorage.getItem("scrollingenabled");
-    if (scrollingenabled == "true") {
-        let link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = "../css/scroll.css";
-        document.head.appendChild(link);    }
-
-    else {
-        if (scrollingenabled == null) {
-            localStorage.setItem("scrollingenabled", "true");
+    if (scrollparam == null) {
+        scrollingenabled = localStorage.getItem("scrollingenabled");
+        if (scrollingenabled == "true") {
             let link = document.createElement("link");
             link.rel = "stylesheet";
-            link.href = "../css/scroll.css"; 
-            document.head.appendChild(link);
+            link.href = "./css/scroll.css";
+            document.head.appendChild(link);    
         }
+        else {
+            if (scrollingenabled == null) {
+                localStorage.setItem("scrollingenabled", "true");
+                let link = document.createElement("link");
+                link.rel = "stylesheet";
+                link.href = "./css/scroll.css"; 
+                document.head.appendChild(link);
+            }
+        }
+    }
+
+    else {
+        localStorage.setItem("scrollingenabled", scrollparam);
     }
 });
