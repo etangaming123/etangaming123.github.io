@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         if (scrollingenabled == "true") {
             let link = document.createElement("link");
             link.rel = "stylesheet";
-            link.href = "./css/scroll.css";
+            link.href = "../css/scroll.css";
             document.head.appendChild(link);    
         }
         else {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function() {
                 localStorage.setItem("scrollingenabled", "true");
                 let link = document.createElement("link");
                 link.rel = "stylesheet";
-                link.href = "./css/scroll.css"; 
+                link.href = "../css/scroll.css"; 
                 document.head.appendChild(link);
             }
         }
