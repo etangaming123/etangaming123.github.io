@@ -4,7 +4,7 @@ const isqr = params.get('qr')
 
 const dymanicTextElement = document.getElementById("dynamic-text-element"); // Get the element to change
 
-const visitsFrom = ["discord", "youtube", "github", "instagram", "bluesky"] // Avaliable visit pages
+const visitsFrom = ["discord", "youtube", "github", "instagram", "bluesky", "steam"] // Avaliable visit pages
 
 if (isqr && isqr === "true") {
     dymanicTextElement.textContent = `I see you're visiting from a QR code!` // Change the text
