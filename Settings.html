@@ -51,6 +51,17 @@
             <p>Changes whether the background scrolls or not.</p>
             <button class="button" style="background-color: #FFFFFF; color: black;" onclick="setUserScroll()">Toggle Scrolling</button>
             <p id="status-text-bg-scroll"></p>
+            <h2>Window</h2>
+            <h3>Drag</h3>
+            <p>Changes whether the window can be dragged or not. Refresh to apply changes.</p>
+            <button class="button" style="background-color: #FFFFFF; color: black;" onclick="setDraggable()">Toggle Dragging</button>
+            <p id="status-text-drag"></p>
+            <h3>Background</h3>
+            <p>Changes the background color of the window. These do not apply to character pages.</p>
+            <button class="button" style="background-color: #777777; color: white" onclick="setWindowBg('default')">Default</button>
+            <button class="button" style="background-color: #000000; color: white" onclick="setWindowBg('pitch black')">Pitch Black</button>
+            <button class="button" style="background-color: #313338; color: white" onclick="setWindowBg('discord')">Discord</button>
+            <p id="status-text-window-bg"></p>
         </div>
     </div>
 </body>

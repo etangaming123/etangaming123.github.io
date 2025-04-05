@@ -57,3 +57,34 @@ function setUserScroll() {
         statustext.innerText = `Scrolling is now enabled!`
     }
 }
+
+function setDraggable() {
+    statustext = document.getElementById("status-text-drag")
+    userdraggable = localStorage.getItem("draggable")
+    if (userdraggable == "true") {
+        localStorage.setItem("draggable", "false");
+        statustext.innerText = `Dragging is disabled!`
+    }
+    else {
+        localStorage.setItem("draggable", "true");
+        statustext.innerText = `Dragging is enabled!`
+    }
+}
+
+function setWindowBg(thing) {
+    statustext = document.getElementById("status-text-window-bg")
+    localStorage.setItem("windowbg", thing);
+    if (thing == "default") {
+        element = document.getElementsByClassName("-window")[0]
+        element.style.backgroundColor = "#777777";
+    }
+    if (thing == "pitch black") {
+        element = document.getElementsByClassName("-window")[0]
+        element.style.backgroundColor = "#000000";
+    }
+    if (thing == "discord") {
+        element = document.getElementsByClassName("-window")[0]
+        element.style.backgroundColor = "#313338";
+    }
+    statustext.innerText = `Set window background to ${thing}!`
+}

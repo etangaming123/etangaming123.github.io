@@ -263,3 +263,11 @@ p:hover {
     text-decoration: line-through;
     font-weight: normal;
 }
+
+button {
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

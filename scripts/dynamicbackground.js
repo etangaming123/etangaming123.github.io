@@ -52,5 +52,19 @@ document.addEventListener("DOMContentLoaded", async function() {
     else {
         localStorage.setItem("scrollingenabled", scrollparam);
     }
+
+    windowbackground = localStorage.getItem("windowbg");
+    if (windowbackground == null) {
+        windowbackground = "default";
+        localStorage.setItem("windowbg", "default");
+    }
+    if (windowbackground == "pitch black") {
+        element = document.getElementsByClassName("-window")[0]
+        element.style.backgroundColor = "#000000";
+    }
+    if (windowbackground == "discord") {
+        element = document.getElementsByClassName("-window")[0]
+        element.style.backgroundColor = "#313338";
+    }
     document.getElementById("loading-screen").remove();
 });
