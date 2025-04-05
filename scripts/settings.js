@@ -77,14 +77,17 @@ function setWindowBg(thing) {
     if (thing == "default") {
         element = document.getElementsByClassName("-window")[0]
         element.style.backgroundColor = "#777777";
+        localStorage.setItem("windowbg", "default");
     }
     if (thing == "pitch black") {
         element = document.getElementsByClassName("-window")[0]
         element.style.backgroundColor = "#000000";
+        localStorage.setItem("windowbg", "pitch black");
     }
     if (thing == "discord") {
         element = document.getElementsByClassName("-window")[0]
         element.style.backgroundColor = "#313338";
+        localStorage.setItem("windowbg", "discord");
     }
     statustext.innerText = `Set window background to ${thing}!`
 }

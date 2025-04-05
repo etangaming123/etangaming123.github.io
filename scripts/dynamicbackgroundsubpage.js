@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", async function() {
     windowbackground = localStorage.getItem("windowbg");
     if (windowbackground == null) {
         windowbackground = "default";
-        localStorage.setItem("windowbg", "default");
     }
     if (windowbackground == "pitch black") {
         element = document.getElementsByClassName("-window")[0]

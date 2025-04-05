@@ -56,17 +56,14 @@ document.addEventListener("DOMContentLoaded", async function() {
     windowbackground = localStorage.getItem("windowbg");
     if (windowbackground == null) {
         windowbackground = "default";
-        localStorage.setItem("windowbg", "default");
     }
     if (windowbackground == "pitch black") {
         element = document.getElementsByClassName("-window")[0]
         element.style.backgroundColor = "#000000";
-        localStorage.setItem("windowbg", "pitch black");
     }
     if (windowbackground == "discord") {
         element = document.getElementsByClassName("-window")[0]
         element.style.backgroundColor = "#313338";
-        localStorage.setItem("windowbg", "discord");
     }
     document.getElementById("loading-screen").remove();
 });
