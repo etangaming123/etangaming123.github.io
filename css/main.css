@@ -181,6 +181,20 @@ body, html {
     color: #51b142;
 }
 
+.external-link {
+    font-weight: bold;
+    color: #46E2E2
+}
+
+.external-link:hover {
+    color: #36adad;
+    text-decoration: underline;
+}
+
+.external-link:visited {
+    color: #26adad;
+}
+
 #dynamic-text-element {
     font-size: 12px;
 }

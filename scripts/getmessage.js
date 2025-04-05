@@ -20,7 +20,7 @@ async function replaceText(id) {
             window.location.href = text;
         }    
         messageElement.innerText = text.replace("/\n\g", "\n")
-        statusElement.innerHTML = `Message from <a href=https://gist.githubusercontent.com/etangaming123/${id}/raw class="link">this link</a>`;
+        statusElement.innerHTML = `Message from <a href=https://gist.githubusercontent.com/etangaming123/${id}/raw class="external-link">this link</a>`;
     }
     catch (error) {
         console.error("Failed to fetch message:", error)

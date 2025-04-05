@@ -27,6 +27,5 @@ document.addEventListener("DOMContentLoaded", () => {
       document.removeEventListener("mouseup", onMouseUp);
   }
 
-  // Ensure the window starts with absolute positioning
   windowElement.style.position = "absolute";
 });

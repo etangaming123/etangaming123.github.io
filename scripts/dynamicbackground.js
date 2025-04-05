@@ -52,4 +52,5 @@ document.addEventListener("DOMContentLoaded", async function() {
     else {
         localStorage.setItem("scrollingenabled", scrollparam);
     }
+    document.getElementById("loading-screen").remove();
 });
