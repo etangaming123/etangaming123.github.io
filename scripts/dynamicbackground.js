@@ -40,11 +40,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         }
         else {
             if (scrollingenabled == null) {
-                localStorage.setItem("scrollingenabled", "true");
-                let link = document.createElement("link");
-                link.rel = "stylesheet";
-                link.href = "./css/scroll.css"; 
-                document.head.appendChild(link);
+                localStorage.setItem("scrollingenabled", "false");
             }
         }
     }
