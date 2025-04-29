@@ -256,6 +256,28 @@ p:hover {
     max-width: 100px;
 }
 
+/* embed */
+.embed-container {
+    display: flex;
+    gap: 10px;
+}
+
+.discord-embed {
+    background-color: #2f3136;
+    border-radius: 5px;
+    padding: 10px;
+    color: #ffffff;
+    flex: 1;
+}
+
+.guilded-embed {
+    background-color: #2f3136;
+    border-radius: 5px;
+    padding: 10px;
+    color: #ffffff;
+    flex: 1;
+}
+
 /* other fancy stuff */
 .strikethrough {
     text-decoration: line-through;
