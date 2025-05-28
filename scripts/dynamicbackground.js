@@ -14,20 +14,20 @@ document.addEventListener("DOMContentLoaded", async function() {
                 const response = await fetch(gistUrl);
                 const fileName = await response.text();
         
-                scrollingBackground.style.backgroundImage = `url('./images/backgrounds/${fileName}')`;
+                scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${fileName}')`;
             } catch (error) {
                 console.error("Error fetching Gist data:", error);
-                scrollingBackground.style.backgroundImage = `url('./images/backgrounds/bg.png')`;
+                scrollingBackground.style.backgroundImage = `url('../images/backgrounds/bg.png')`;
             }    
         }
     
         else {
-            scrollingBackground.style.backgroundImage = `url('./images/backgrounds/${userbg}bg.png')`;
+            scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${userbg}bg.png')`;
             }
         }
 
     else {
-        scrollingBackground.style.backgroundImage = `url('./images/backgrounds/${bgparam}bg.png')`;
+        scrollingBackground.style.backgroundImage = `url('../images/backgrounds/${bgparam}bg.png')`;
     }
 
     if (scrollparam == null) {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         if (scrollingenabled == "true") {
             let link = document.createElement("link");
             link.rel = "stylesheet";
-            link.href = "./css/scroll.css";
+            link.href = "../css/scroll.css";
             document.head.appendChild(link);    
         }
         else {
