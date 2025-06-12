@@ -1,0 +1,94 @@
+@font-face {
+  font-family: NimbusSanL;
+  src: url(../fonts/NimbusSanL-Reg.otf) format('opentype');
+  font-weight: normal;
+}
+
+body {
+    background-image: linear-gradient(to bottom, #062E95, #051631);
+}
+
+p {
+    color: white;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+h3 {
+    color: white;
+}
+
+h4 {
+    color: white;
+}
+
+h5 {
+    color: white;
+}
+
+.darkbluetext {
+    color: #062E95;
+}
+
+.col-md-4 {
+    border: 3px solid transparent;
+    border-image: linear-gradient(to bottom, #00FF00, #00FFFF);
+    border-image-slice: 1;
+    padding: 25px;
+}
+
+.thebratfont {
+    font-family: NimbusSanL, sans-serif
+}
+
+#searchResults {
+    display: none;
+    position: fixed !important; 
+    top: 60px;
+    right: 0 !important;
+    width: 300px;
+    z-index: 1000;
+    border: 3px solid #F395F6;
+    padding: 10px;
+    text-align: right;
+    background-color: white;
+}
+
+/*
+.jumbotron {
+    background-color: #b4dd13; <-- apple turning yellow and green
+}
+*/
+
+#etherLogo {
+    border-radius: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 10px;
+    width: 100px;
+}
+
+.ether-logo-text-container {
+    display: flex;
+    align-items: center;
+    width: 50px;
+}
+
+.WRAPITUPBRO {
+    text-wrap: wrap;
+}
+
+.jumbotron {
+    background-image: linear-gradient(to right, #57E1E6, #F395F6);
+}
+
+.navbar {
+    background-image: linear-gradient(to right, #062E95, #381267);
+    border: 3px solid #552B9D;
+}
