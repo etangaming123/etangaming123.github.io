@@ -1,10 +1,9 @@
 const subpages = [
-    { name: "Home", url: "../Home.html", desc: "The home of the website" },
-    { name: "About", url: "../About.html", desc: "More about me" },
-    { name: "Links", url: "../Links.html", desc: "Links to my other accounts" },
+    { name: "Home", url: "../Home.html", desc: "The home of the website!" },
+    { name: "Links", url: "../Links.html", desc: "Links to my other accounts!" },
     { name: "Site Info", url: "../SiteInfo.html", desc: "Information about this site!" },
     { name: "Trombone Champ Charts", url: "../TromboneChamp/ChartList.html", desc: "My Trombone Champ Charts!" },
-    { name: "Character List", url: "../Characters/List.html", desc: "A list of my OCs!" },
+    { name: "Character List", url: "../Characters/List.html", desc: "A list of my characters!" },
     { name: "Ether", url: "../Characters/Ether/Info.html", desc: "Ether's page!" }
 ];
 
@@ -20,7 +19,7 @@ const subpages = [
                 const a = document.createElement('a');
                 a.className = 'dropdown-item';
                 a.href = page.url;
-                a.textContent = `${page.name} // ${page.desc}`;
+                a.innerHTML = `<span style="display:block;">${page.name}</span><small style="display:block; font-size: 0.85em; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${page.desc}</small>`;
                 resultsDiv.appendChild(a);
             });
             resultsDiv.style.display = 'block';

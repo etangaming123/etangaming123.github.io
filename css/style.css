@@ -60,6 +60,38 @@ h5 {
     background-color: white;
 }
 
+.card {
+    background-color: #696969; /* nice */
+}
+
+.btn-steam {
+    color: #fff;
+    background-color: #27497C;
+    border-color: #27497C;
+}
+
+.btn-steam:hover {
+    color: #fff;
+    background-color: rgb(0, 42, 56);
+    border-color: rgb(0, 42, 56);
+}
+
+.btn-youtube {
+    color: #fff;
+    background-color: #EA333D;
+    border-color: #EA333D;
+}
+
+.btn-youtube:hover {
+    color: #fff;
+    background-color: #b7282f;
+    border-color: #b7282f;
+}
+
+.x35 {
+    width: 35px;
+}
+
 /*
 .jumbotron {
     background-color: #b4dd13; <-- apple turning yellow and green
