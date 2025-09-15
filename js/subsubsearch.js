@@ -1,10 +1,10 @@
 const subpages = [
-    { name: "Home", url: ".../Home.html", desc: "The home of the website!" },
-    { name: "Links", url: ".../Links.html", desc: "Links to my other accounts!" },
-    { name: "Site Info", url: "../SiteInfo.html", desc: "Information about this site!" },
-    { name: "Trombone Champ Charts", url: ".../TromboneChamp/ChartList.html", desc: "My Trombone Champ Charts!" },
-    { name: "Character List", url: ".../Characters/List.html", desc: "A list of my characters!" },
-    { name: "Ether", url: ".../Characters/Ether/Info.html", desc: "Ether's page!" }
+    { name: "Home", url: ".././Home.html", desc: "The home of the website!" },
+    { name: "Links", url: ".././Links.html", desc: "Links to my other accounts!" },
+    { name: "Site Info", url: ".././SiteInfo.html", desc: "Information about this site!" },
+    { name: "Trombone Champ Charts", url: ".././TromboneChamp/ChartList.html", desc: "My Trombone Champ Charts!" },
+    { name: "Character List", url: ".././Characters/List.html", desc: "A list of my characters!" },
+    { name: "Ether", url: ".././Characters/Ether/Info.html", desc: "Ether's page!" }
 ];
 
     function handleSearch(event) {
