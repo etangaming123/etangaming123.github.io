@@ -1,56 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>etangaming123</title>
-    <link rel="stylesheet" href="css/main.css">
-    <script defer src="./scripts/drag.js"></script>
-    <script defer src="./scripts/dynamicbackground.js"></script>
-</head>
-<body>
-    <div class="scrolling-background"></div>
-    <div class="-window" id="Window">
-        <div class="-title-bar" id="titleBar">
-            <span class="title-text"><a href="" class="title-link">etangaming123</a></span>
-            <div class="topbuttons">
-                <a href="./Map.html" class="top-btn">
-                    <img src="./images/map.svg" alt="Map" class="top-icon" title="View the site map!">
-                </a>
-                <a href="./Settings.html" class="top-btn">
-                    <img src="./images/settings.png" alt="Settings" class="top-icon" title="Change your settings!">
-                </a>
-            </div>
-        </div>
-        <div id="loading-screen">
-            <div class="spinner"></div>
-            <p>Loading page...</p>
-        </div>
-        <div class="-content">
-            <h1>Home</h1>
-            <div class="container">
-                <div class="image-container">
-                    <img src="./images/ether.png" alt="A Roblox character wearing a white blazer with fluffy grey hair, a wing on his right, and a red checkered background." title="This is Ether, one of the characters I have made! Check out more characters at etangaming123.github.io/Characters" class="image-left">
-                </div>
-                <div class="text-right">
-                    <h2>Heyo!</h2>
-                    <p id="dynamic-text-element"></p>
-                    <script defer src="./scripts/dynamictext.js"></script>
-                    <p>I'm <strong>etangaming123</strong>, but you may know me as etan, etanya, or <a href="./Names.html" class="link">many other names</a>. I make <strong>random things</strong> on the internet, one of them being <strong>this website</strong>, hosted on <strong>github.io</strong>!</p>
-                    <p class="tiny-text">This is more of a personal profile, not a business portfolio.<br>This entire website will be redesigned and rewritten soon.</p>
-                </div>
-            </div>
-            <h2>What's this website?</h2>
-            <p>This website is a <strong>personal project of mine</strong>, where I can share my creations and other things about me!<br>It is also a place for me to <strong>learn web development, and to experiment with new ideas</strong>.</p>
-            <h2>Featured Pages</h2>
-            <p>> <a href="./Community.html" class="link">Community</a> - Join the etan's gamers community!<br>> <a href="./Links.html" class="link">Links</a> - View links to my other accounts!<br>> <a href="./Map.html" class="link">Map</a> - A "map" of this site (a list of every subpage)!<br>> <a href="./Settings.html" class="link">Settings</a> - Personalise your site experience!<br>> <a href="./About.html" class="link">About</a> - Get to know more about me!</p>
-            <h2>Featured external sites</h2>
-            <p>> <a href="https://www.youtube.com/@etangaming123" target="_blank" class="external-link">Youtube</a> - My youtube channel!</p>
-            <h2>Creations</h2>
-            <p>> <a href="./Characters.html" class="link">Characters</a> - Characters that are a part of my lore!<br>> <a href="./Trombone-Champ.html" class="link">Trombone Champ</a> - A list of all the custom songs I've made in Trombone Champ!</p>
-            <h2>Other petty notes that I feel like I have to add here for the sake of it also this title is really long</h2>
-            <p>Blue links that look like <a href="https://youtu.be/dQw4w9WgXcQ" class="external-link" target="_blank">this</a> are external links, and will open in a new tab.<br>Links that look like <a href="./Random.html" class="link">this</a> are internal links (subpages on my this website), and will open in the same tab.<br><br>This site is open source, you can view the repo on <a href="https://github.com/etangaming123/etangaming123.github.io" class="external-link" target="_blank">GitHub</a>!</p>
-        </div>
-    </div>
-</body>
-</html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>etan://Home</title>
+		<!-- Bootstrap -->
+		<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="Home.html">etangaming123</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="./Home.html">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="./About.html">About</a>
+				<a class="dropdown-item" href="./Links.html">Links</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="./SiteInfo.html">Site Info</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Creations</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="./TromboneChamp.html">Trombone Champ Charts</a>
+				<a class="dropdown-item" href="./maisquared.html">maimai Custom Charts</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="./Characters/List.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Characters</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="./Characters/List.html">Character List</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="./Characters/Ether/Info.html">Ether</a>
+			<li class="nav-item">
+				<a class="nav-link" href="./Settings.html">Settings</a>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" id="searchForm" autocomplete="off" onsubmit="return handleSearch(event)">
+			<input class="form-control mr-sm-2" type="search" placeholder="Looking for smth?" aria-label="Search" id="searchInput">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+			<div id="searchResults"></div>
+		</div>
+		</nav>
+		<section>
+		<div class="jumbotron text-center mt-2">
+			<div class="container">
+			<div class="row">
+				<div class="col-12" class="ether-logo-text-container">
+				<img src="images/characters/ether.png" alt="Ether, a character I made!" id="etherLogo">
+				<div>
+					<h1 class="thebratfont" class="WRAPITUPBRO darkbluetext">etangaming123</h1> <!-- the apple did not turn yellow and green. -->
+					<p id="visitingfrom" class="darkbluetext">Hello!</p>
+					<p class="darkbluetext WRAPITUPBRO">I'm etan, a creator on the internet who makes stuff every now and then. You may know me as the person who posts stuff on YouTube, the coder of random projects on GitHub, or just someone you see every now and then in games.</p>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		</section>
+		<section>
+		<div class="container">
+			<div class="row">
+			<div class="col-12 text-center">
+				<h1>Welcome to my website!</h1>
+				<p>This website is hosted on github.io and serves as a <strong>personal profile</strong> for me! You'll see my creations, projects, and other information about me here.<br><br>You're viewing the redesigned version of this site, which is <strong>still in development and many pages have empty spaces!</strong><br>You can head back to the old page <a href="./legacy/Home.html">here</a>.</p>
+			</div>
+			</div>
+		</div>
+		</section>
+		<section>
+		<div class="container mt-2">
+			<div class="row">
+			<div class="col-md-4 col-12">
+				<br>
+				<ul class="list-unstyled">
+				<li class="media">
+					<img class="mr-3 x35" src="images/vscode.png" alt="VSCode logo">
+					<div class="media-body">
+					<h5 class="mt-0 mb-1">Beginner Coder</h5>
+					<p>I use GitHub to publish coding projects, and I'm the coder of <a href="Redirect?redirect=https://github.com/etangaming123/Katsune" target="_blank">Katsune</a>, a Discord bot used in the <a href="Redirect?redirect=placeholder url" target="_blank">Ghost Hunt Discord Server!</a></p>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-12">
+				<br>
+				<ul class="list-unstyled">
+				<li class="media">
+					<img class="mr-3 x35" src="images/youtube.webp" alt="Youtube logo">
+					<div class="media-body">
+					<h5 class="mt-0 mb-1">Content Creator</h5>
+					<p>Sometimes I make gaming videos and post them on YouTube, Tiktok, and Instagram! You can check out my links <a href="Links">here</a>.</p>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-12">
+				<br>
+				<ul class="list-unstyled">
+				<li class="media">
+					<img class="mr-3 x35" src="images/characters/ether.png" alt="Ether">
+					<div class="media-body">
+					<h5 class="mt-0 mb-1">Community</h5>
+					<p>I'm the founder of <a href="/etans-gamers.html">etan's gamers</a>, a small group created for gamers alike! In the future, we might make games of our own!</p>
+					</div>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+		</section>
+		<hr>
+		<section>
+		<div class="container">
+			<div class="row">
+			<div class="col-12 text-center">
+				<h1>You might have seen me...</h1>
+			</div>
+			</div>
+		</div>
+		</section>		<section>
+		<div class="container mt-2">
+			<div class="row">
+			<div class="col-md-4 col-12">
+				<br>
+				<ul class="list-unstyled">
+				<li class="media">
+					<img class="mr-3 x35" src="images/tiktok.webp" alt="Tiktok Logo">
+					<div class="media-body">
+					<h5 class="mt-0 mb-1">on Tiktok</h5>
+					<p>Or YouTube, or Instagram... (although as of writing my instagram is DEAD)</p>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-12">
+				<br>
+				<ul class="list-unstyled">
+				<li class="media">
+					<img class="mr-3 x35" src="images/roblox.png" alt="Roblox Logo">
+					<div class="media-body">
+					<h5 class="mt-0 mb-1">on Roblox</h5>
+					<p>Seeing me ingame or something (sometimes I record and publish, say hi!)</p>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-12">
+				<br>
+				<ul class="list-unstyled">
+				<li class="media">
+					<img class="mr-3 x35" src="images/qr.png" alt="QR code that leads to this website">
+					<div class="media-body">
+					<h5 class="mt-0 mb-1">With a QR code on my bag</h5>
+					<p>(but not everyone with a qr code is necessarily me)</p>
+					</div>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+		</section>
+		<hr>
+		<section>
+		<div class="container">
+			<div class="row">
+			<div class="col-12 text-center">
+				<h1>Get in touch</h1>
+				<p><strong>Send an email to <a href="Redirect.html?redirect=https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=etangamingxyz@gmail.com" target="_blank">etangamingxyz@gmail.com</a>!</strong><br>Alternatively, check out my social media accounts below.</p>
+				<button type="button" class="btn btn-success" onclick="window.location.href='./Links.html'">Links</button>
+				<p><br>No spam or marketing, please!</p>
+			</div>
+			</div>
+		</div>
+		</section>
+		<hr>
+		<footer class="text-center">
+		<div class="container">
+			<div class="row">
+			<div class="col-12">
+				<!-- idk if i actually have to include this copyright notice, but better to stay on the safe side, amirite? -->
+				<p> * <a href="Redirect.html?redirect=https://getbootstrap.com/" target="_blank">Bootstrap v4.4.1</a><br> * Copyright 2011-2019 The Bootstrap Authors<br> * Copyright 2011-2019 Twitter, Inc.<br> * Licensed under <a href="Redirect.html?redirect=https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a></p> 
+				<p>Hosted with GitHub Pages (github.io)</p>
+				<p><a href="Redirect.html?redirect=https://github.com/etangaming123/etangaming123.github.io" target="_blank">Open source website</a></p>
+				<p>// etangaming123</p>
+			</div>
+			</div>
+		</div>
+		</footer>
+		<script src="js/search.js"></script> <!-- search script because uh yeah (this isnt part of bootstrap btw) -->
+		<script src="js/visitingfrom.js"></script> <!-- remember the "i see you're visiting from [platform]" from the old website? -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap-4.4.1.js"></script>
+	</body>
+	</html>

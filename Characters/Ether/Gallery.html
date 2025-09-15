@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>etan://Characters/Ether/Gallery</title>
+		<!-- Bootstrap -->
+		<link href="../../css/bootstrap-4.4.1.css" rel="stylesheet">
+		<link href="../../css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Navbar</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="../../Home.html">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="../../About.html">About</a>
+				<a class="dropdown-item" href="../../Links.html">Links</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="../../SiteInfo.html">Site Info</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Creations</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="../../TromboneChamp.html">Trombone Champ Charts</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="../../Characters/List.html">Characters</a>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="Settings">Settings [WIP]</a>
+			</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" id="searchForm" autocomplete="off" onsubmit="return handleSearch(event)">
+			<input class="form-control mr-sm-2" type="search" placeholder="Looking for smth?" aria-label="Search" id="searchInput">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+			<div id="searchResults"></div>
+		</div>
+		</nav>
+		<section>
+		<div class="jumbotron text-center mt-2">
+			<div class="container">
+			<div class="row">
+				<div class="col-12" class="ether-logo-text-container">
+				<img src="../../images/characters/ether.png" alt="Ether, a character I made!" id="etherLogo">
+				<div>
+					<h1 class="thebratfont" class="WRAPITUPBRO darkbluetext">Ether://Gallery</h1> <!-- the apple did not turn yellow and green. -->
+					<p class="darkbluetext">The gallery page for Ether!</p>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		</section>
+		<section>
+		<div class="container">
+			<div class="row">
+			<div class="col-12 text-center">
+				<p><a href="./Info.html">Info</a> // <a href="./Gallery.html">Gallery (you are here)</a></p>
+                <h1>We're still working on it!</h1>
+				<p>Ether currently does not have more images other than his main sprite (his profile picture).</p>
+			</div>
+			</div>
+		</div>
+		</section>
+		<hr>
+		<footer class="text-center">
+		<div class="container">
+			<div class="row">
+			<div class="col-12">
+				<!-- idk if i actually have to include this copyright notice, but better to stay on the safe side, amirite? -->
+				<p> * <a href="../../Redirect.html?redirect=https://getbootstrap.com/" target="_blank">Bootstrap v4.4.1</a><br> * Copyright 2011-2019 The Bootstrap Authors<br> * Copyright 2011-2019 Twitter, Inc.<br> * Licensed under <a href="../../Redirect.html?redirect=https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a></p> 
+				<p>Hosted with GitHub Pages (github.io)</p>
+				<p><a href="../../Redirect.html?redirect=https://github.com/etangaming123/etangaming123.github.io" target="_blank">Open source website</a></p>
+				<p>// etangaming123</p>
+			</div>
+			</div>
+		</div>
+		</footer>
+		<script src="../../js/search.js"></script> <!-- search script because uh yeah (this isnt part of bootstrap btw) -->
+		<script src="../../js/visitingfrom.js"></script> <!-- remember the "i see you're visiting from [platform]" from the old website? -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="../../js/jquery-3.4.1.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../../js/popper.min.js"></script>
+		<script src="../../js/bootstrap-4.4.1.js"></script>
+	</body>
+	</html>
