@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>etan://Settings/</title>
+        <!-- Bootstrap -->
+        <link href="./css/bootstrap-4.4.1.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./Home.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="./About.html">About</a>
+          <a class="dropdown-item" href="./Links.html">Links</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="./SiteInfo.html">Site Info</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Creations</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="./TromboneChamp.html">Trombone Champ Charts</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="./Characters/List.html">Characters</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="./Settings.html">Settings [WIP]</a>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" id="searchForm" autocomplete="off" onsubmit="return handleSearch(event)">
+        <input class="form-control mr-sm-2" type="search" placeholder="Looking for smth?" aria-label="Search" id="searchInput">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div id="searchResults"></div>
+          </div>
+        </div>
+      </nav>
+      <div class="jumbotron text-center mt-2">
+			<div class="container">
+			<div class="row">
+				<div class="col-12" class="ether-logo-text-container">
+				<img src="./images/characters/ether.png" alt="Ether, a character I made!" id="etherLogo">
+				<div>
+					<h1 class="thebratfont" class="WRAPITUPBRO">Settings</h1>
+					<p class="WRAPITUPBRO">Configure your site experience!</p>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-4 pb-1 pb-md-0">
+            <div class="card">
+              <h5 class="card-title">Default PFP</h5>
+              <p class="card-text">Changes the profile picture on every page (except the home page!)</p>
+              <select>
+                
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 pb-1 pb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="./images/trombonethumbnails/mcls.jpeg" alt="M@GICAL☆CURE! LOVE ♥ SHOT!">
+              <div class="card-body">
+                <h5 class="card-title">M@GICAL☆CURE! LOVE ♥ SHOT!</h5>
+                <p class="card-text">MIKU MIKU BEAAAAAAMMMMMM<br><br>(lyrics included, have fun)</p>
+                <a href="./Redirect.html?redirect=https://steamcommunity.com/sharedfiles/filedetails/?id=3484661618" class="btn btn-steam" target="_blank">Steam Workshop Item</a>
+                <a href="./Redirect.html?redirect=https://youtu.be/LcwZep2a_j0" class="btn btn-youtube" target="_blank">YouTube Video</a>
+                <a href="./Redirect.html?redirect=https://drive.google.com/drive/folders/1OxWUAOkHl2KxjQbJSAk7Pcqds8JBad1-?usp=sharing" class="btn btn-primary" target="_blank">Chart Files</a>              </div>
+            </div>
+          </div>
+          <div class="col-md-4 pb-1 pb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="./images/trombonethumbnails/candycookiechocolate.jpeg" alt="Candy Cookie Chocolate">
+              <div class="card-body">
+                <h5 class="card-title">Candy Cookie Chocolate</h5>
+                <p class="card-text">"If I had a nickel for every time Miku and Teto got hypnotized in 2024, id have two nickels. Which isn’t a lot but it’s weird that it’s happened twice"</p>
+                <a href="./Redirect.html?redirect=https://steamcommunity.com/sharedfiles/filedetails/?id=3484714787" class="btn btn-steam" target="_blank">Steam Workshop Item</a>
+                <a href="./Redirect.html?redirect=https://youtu.be/h6rGo4K6JSc" class="btn btn-youtube" target="_blank">YouTube Video</a>
+                <a href="./Redirect.html?redirect=https://drive.google.com/drive/folders/1s3aHudZp-4bqckt8DVXu0ytlyyBsR9hP?usp=sharing" class="btn btn-primary" target="_blank">Chart Files</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center mt-4">
+          <div class="col-md-4 pb-1 pb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="./images/trombonethumbnails/steveslavachicken.jpeg" alt="Steve's Lava Chicken">
+              <div class="card-body">
+                <h5 class="card-title">Steve's Lava Chicken</h5>
+                <p class="card-text">(is movie soundtracks even a real song genre??)<br><br>the chicken is indeed tasty as hell</p>
+                <a href="./Redirect.html?redirect=https://steamcommunity.com/sharedfiles/filedetails/?id=3484714990" class="btn btn-steam" target="_blank">Steam Workshop Item</a>
+                <a href="./Redirect.html?redirect=https://youtu.be/kqxYWV-FjKY" class="btn btn-youtube" target="_blank">YouTube Video</a>
+                <a href="./Redirect.html?redirect=https://drive.google.com/drive/folders/1dFrzotcDgeeul_sK5CSsAmchZImB8q5M?usp=drive_link" class="btn btn-primary" target="_blank">Chart Files</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 pb-1 pb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="./images/trombonethumbnails/tetoris.jpeg" alt="TETORIS">
+              <div class="card-body">
+                <h5 class="card-title">TETORIS</h5>
+                <p class="card-text">teto spin triple<br><br>literally unplayable (either that or i have skill issue)</p>
+                <a href="./Redirect.html?redirect=https://steamcommunity.com/sharedfiles/filedetails/?id=3484715154teto" class="btn btn-steam" target="_blank">Steam Workshop Item</a>
+                <a href="./Redirect.html?redirect=https://youtu.be/QKThns-xJ9Y" class="btn btn-youtube" target="_blank">YouTube Video</a>
+                <a href="./Redirect.html?redirect=https://drive.google.com/drive/folders/18vK1lQ9Gp2y88_tTmDbPVuTcVM_gVOwn?usp=sharing" class="btn btn-primary" target="_blank">Chart Files</a>              </div>
+            </div>
+          </div>
+          <div class="col-md-4 pb-1 pb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="./images/trombonethumbnails/triplebaka.jpeg" alt="Triple Baka">
+              <div class="card-body">
+                <h5 class="card-title">Triple Baka</h5>
+                <p class="card-text">"o o o o oo o o" -teto<br><br>took way too long to chart</p>
+                <a href="./Redirect.html?redirect=https://steamcommunity.com/sharedfiles/filedetails/?id=3485790150" class="btn btn-steam" target="_blank">Steam Workshop Item</a>
+                <a href="./Redirect.html?redirect=https://youtu.be/cGHB2JEj-W0" class="btn btn-youtube" target="_blank">YouTube Video</a>
+                <a href="./Redirect.html?redirect=https://drive.google.com/drive/folders/1HTJP09GK_fGofvZeqo-Z_WnORbWVq9zO?usp=sharing" class="btn btn-primary" target="_blank">Chart Files</a>              </div>
+            </div>
+          </div>
+            <div class="col-md-4 pb-1 pb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="./images/trombonethumbnails/monitoring.png" alt="Monitoring">
+              <div class="card-body">
+                <h5 class="card-title">Monitoring</h5>
+                <p class="card-text">"Muah!"</p>
+                <a href="./Redirect.html?redirect=https://steamcommunity.com/sharedfiles/filedetails/?id=3553245587" class="btn btn-steam" target="_blank">Steam Workshop Item</a>
+                <a href="./Redirect.html?redirect=https://youtu.be/0ZTBWM6MkZs" class="btn btn-youtube" target="_blank">YouTube Video</a>
+                <a href="./Redirect.html?redirect=https://drive.google.com/drive/folders/1w2gueJ5UvgcCfdeH96ML50HAbFispf92?usp=sharing" class="btn btn-primary" target="_blank">Chart Files</a>              </div>
+            </div>
+        </div>
+      </div>
+      <hr>
+		<section>
+		<div class="container">
+			<div class="row">
+			<div class="col-12 text-center">
+				<h1>Looking for legacy settings?</h1>
+				<p>Settings for the old site are on <a href="./legacy/Settings.html">this page</a>.</p>
+			</div>
+			</div>
+		</div>
+		</section>
+      <hr>
+      <footer class="text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+          <!-- idk if i actually have to include this copyright notice, but better to stay on the safe side, amirite? -->
+          <p> * <a href="Redirect.html?redirect=https://getbootstrap.com/" target="_blank">Bootstrap v4.4.1</a><br> * Copyright 2011-2019 The Bootstrap Authors<br> * Copyright 2011-2019 Twitter, Inc.<br> * Licensed under <a href="Redirect.html?redirect=https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a></p> 
+          <p>Hosted with GitHub Pages (github.io)</p>
+          <p><a href="Redirect.html?redirect=https://github.com/etangaming123/etangaming123.github.io" target="_blank">Open source website</a></p>
+          <p>// etangaming123</p>
+          </div>
+          </div>
+        </div>
+      </footer>
+      <script src="./js/search.js"></script> <!-- search script because uh yeah (this isnt part of bootstrap btw) -->
+      <script src="./js/settings.js"></script>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="./js/jquery-3.4.1.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="./js/popper.min.js"></script>
+      <script src="./js/bootstrap-4.4.1.js"></script>
+    </body>
+</html>

@@ -4,7 +4,13 @@ const subpages = [
     { name: "Site Info", url: "/SiteInfo.html", desc: "Information about this site!" },
     { name: "Trombone Champ Charts", url: "/TromboneChamp.html", desc: "My Trombone Champ Charts!" },
     { name: "Character List", url: "/Characters/List.html", desc: "A list of my characters!" },
-    { name: "Ether", url: "/Characters/Ether/Info.html", desc: "Ether's page!" }
+    { name: "Ether", url: "/Characters/Ether/Info.html", desc: "Ether's page!" },
+    { name: "Net", url: "/Characters/Net/Info.html", desc: "Net's page!" },
+    { name: "Eclipse", url: "/Characters/Eclipse/Info.html", desc: "Eclipse's page!" },
+    { name: "Esther", url: "/Characters/Esther/Info.html", desc: "Ether's page!" },
+    { name: "Cyn", url: "/Characters/Cyn/Info.html", desc: "Ether's page!" },
+    { name: "Rafisol [Internet Wizard]", url: "/Characters/Rafisol_IW/Info.html", desc: "Rafisol, the internet wizard's page!" },
+    { name: "Settings", url: "/Settings.html", desc: "Change your site settings!" },
 ];
 
     function handleSearch(event) {
@@ -40,4 +46,14 @@ const subpages = [
     // Show results as user types
     document.getElementById('searchInput').addEventListener('input', function() {
     handleSearch(new Event('submit'));
+});
+
+// might as well add this too cuz this script is linked in every page
+const etherpfp = document.getElementById("etherLogo");
+document.addEventListener("DOMContentLoaded", function() {
+    const defaultPfp = localStorage.getItem("defaultPfp");
+    values = {"default": "./images/characters/ether.png", "ollama": "./images/otherpfps/llamaburger.png", "rafisol": "./images/otherpfps/rafisol_quest.png", "rafisol_steam": "./images/otherpfps/rafisol_steam.png"};
+    if (defaultPfp) {
+        etherpfp.src = defaultPfp;
+    }
 });

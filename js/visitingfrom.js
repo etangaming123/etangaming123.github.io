@@ -5,9 +5,9 @@ const isqr = params.get('qr')
 const dymanicTextElement = document.getElementById("visitingfrom");
 const imageElement = document.getElementById("etherLogo");
 
-const visitsFrom = ["discord", "youtube", "github", "instagram", "bluesky", "steam", "roblox", "osu", "guilded", "twitter", "monkeytype", "ollama"] 
+const visitsFrom = ["discord", "youtube", "github", "instagram", "bluesky", "steam", "roblox", "osu", "guilded", "twitter", "monkeytype", "ollama", "raycast", "tiktok"] 
 
-const rafisolquest = ["discord", "osu", "guilded", "monkeytype"]
+const rafisolquest = ["discord", "osu", "guilded", "monkeytype", "raycast"]
 
 if (isqr && isqr === "true") {
     dymanicTextElement.textContent = `Did you like my qr code? :P` 

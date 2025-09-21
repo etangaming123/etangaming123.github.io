@@ -49,8 +49,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         return;
     }
 
-    redirectnotice.innerHTML = `You're about to be redirected to an external link:<br>${redirectparam}<br>Would you like to proceed? (press back on your browser if no, or use the topbar to go back!)`
-    gotobutton.innerHTML = `Go to ${redirectparam}`
+    redirectnotice.innerHTML = `You're about to be redirected to an external link:<br>${redirectparam}<br>Would you like to proceed?`
 
     gotobutton.addEventListener("click", function() {
         if (redirectparam) {
