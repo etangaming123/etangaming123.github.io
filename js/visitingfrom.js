@@ -1,6 +1,7 @@
 const params = new URLSearchParams(window.location.search); 
 const fromParam = params.get('from'); 
 const isqr = params.get('qr')
+const isnfc = params.get('nfc')
 
 const dymanicTextElement = document.getElementById("visitingfrom");
 const imageElement = document.getElementById("etherLogo");
@@ -11,6 +12,10 @@ const rafisolquest = ["discord", "osu", "guilded", "monkeytype", "raycast"]
 
 if (isqr && isqr === "true") {
     dymanicTextElement.textContent = `Did you like my qr code? :P` 
+}
+
+if (isnfc && isnfc === "true") {
+    dymanicTextElement.textContent = `Did you like my nfc tag? :P` 
 }
 
 if (fromParam && visitsFrom.includes(fromParam)) { 
