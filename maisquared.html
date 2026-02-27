@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>etan://maisquared/</title>
-        <!-- Bootstrap -->
-        <link href="./css/bootstrap-4.4.1.css" rel="stylesheet">
-        <link href="./css/style.css" rel="stylesheet">
-    </head>
-    <body>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="./Home.html">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="./About.html">About</a>
-          <a class="dropdown-item" href="./Links.html">Links</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="./SiteInfo.html">Site Info</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Creations</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="./TromboneChamp.html">Trombone Champ Charts</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="./Characters/List.html">Characters</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="./Settings.html">Settings [WIP]</a>
-        </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" id="searchForm" autocomplete="off" onsubmit="return handleSearch(event)">
-        <input class="form-control mr-sm-2" type="search" placeholder="Looking for smth?" aria-label="Search" id="searchInput">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <div id="searchResults"></div>
-          </div>
-        </div>
-      </nav>
-      <div class="jumbotron text-center mt-2">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>etan://maisquared</title>
+		<meta name="etangaming.xyz" content="etangaming123's maisquared charts">
+		<meta name="description" content="Custom charts for maisquared!">
+
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="http://etangaming.xyz/maisquared">
+		<meta property="og:title" content="etangaming.xyz > maisquared Charts">
+		<meta property="og:description" content="Custom charts for maisquared!">
+		<meta property="og:image" content="http://etangaming.xyz/images/otherpfps/rafisol_quest.png">
+		<!-- Bootstrap -->
+		<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="Home.html">etangaming123</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="./Home.html">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="./About.html">About</a>
+				<a class="dropdown-item" href="./Links.html">Links</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="./SiteInfo.html">Site Info</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Creations</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="./TromboneChamp.html">Trombone Champ Charts</a>
+				<a class="dropdown-item" href="./maisquared.html">maimai Custom Charts</a>
+				</div>
+			</li>
+            <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Misc</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="./maimai.html">maimai Stats</a>
+			<form class="form-inline my-2 my-lg-0" id="searchForm" autocomplete="off" onsubmit="return handleSearch(event)">
+			<input class="form-control mr-sm-2" type="search" placeholder="Looking for smth?" aria-label="Search" id="searchInput">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+			<div id="searchResults"></div>
+		</div>
+		</nav>
+		<section>
+		<div class="jumbotron text-center mt-2">
 			<div class="container">
 			<div class="row">
 				<div class="col-12" class="ether-logo-text-container">
-				<img src="./images/characters/ether.png" alt="Ether, a character I made!" id="etherLogo">
+				<img src="images/otherpfps/rafisol_quest.png" alt="Should display Rafisol most of the time." title="Should display Rafisol most of the time." id="RafisolIcon">
 				<div>
 					<h1 class="thebratfont" class="WRAPITUPBRO">maimai Custom Charts</h1>
 					<p class="WRAPITUPBRO">Custom charts for maimai!</p>
@@ -63,37 +70,36 @@
 			</div>
 			</div>
 		</div>
-      <hr>
-      <div class="col-12 text-center">
+	<hr>
+	<div class="col-12 text-center">
         <h2 class="text-center">How to Play</h2>
         <p>These charts can be played using <a href="./Redirect.html?redirect=https://github.com/2394425147/astrodx" target="_blank">AstroDX</a>. <a href="./Redirect.html?redirect=https://github.com/beer-psi/astrodx-guide" target="_blank">Check out this guide if you want to install AstroDX!</a></p>
-      </div>
-      <hr>
-      <div class="container">
+	</div>
+	<hr>
+	<div class="container">
         <div class="row text-center">
-          <div class="col-12 text-center">
+		<div class="col-12 text-center">
             <h2>Sorry!</h2>
             <p>As of now there isn't any charts. Check back soon though, I'm making one!</p>
         </div>
-      </div>
-      <hr>
-      <footer class="text-center">
+	</div>
+	<hr>
+	<footer class="text-center">
         <div class="container">
-          <div class="row">
+		<div class="row">
             <div class="col-12">
-          <!-- idk if i actually have to include this copyright notice, but better to stay on the safe side, amirite? -->
+		<!-- idk if i actually have to include this copyright notice, but better to stay on the safe side, amirite? -->
           <p> * <a href="Redirect.html?redirect=https://getbootstrap.com/" target="_blank">Bootstrap v4.4.1</a><br> * Copyright 2011-2019 The Bootstrap Authors<br> * Copyright 2011-2019 Twitter, Inc.<br> * Licensed under <a href="Redirect.html?redirect=https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a></p> 
-          <p>Hosted with GitHub Pages (github.io)</p>
-          <p><a href="Redirect.html?redirect=https://github.com/etangaming123/etangaming123.github.io" target="_blank">Open source website</a></p>
-          <p>// etangaming123</p>
-          </div>
-          </div>
+		<p>// etangaming123</p>
+		</div>
+		</div>
         </div>
-      </footer>
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="./js/jquery-3.4.1.min.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="./js/popper.min.js"></script>
-      <script src="./js/bootstrap-4.4.1.js"></script>
+	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="./js/jquery-3.4.1.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/search.js"></script> <!-- search script because uh yeah (this isnt part of bootstrap btw) -->
+	<script src="./js/popper.min.js"></script>
+	<script src="./js/bootstrap-4.4.1.js"></script>
     </body>
 </html>

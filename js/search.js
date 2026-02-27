@@ -1,16 +1,10 @@
 const subpages = [
-    { name: "Home", url: "/Home.html", desc: "The home of the website!" },
-    { name: "Links", url: "/Links.html", desc: "Links to my other accounts!" },
-    { name: "Site Info", url: "/SiteInfo.html", desc: "Information about this site!" },
-    { name: "Trombone Champ Charts", url: "/TromboneChamp.html", desc: "My Trombone Champ Charts!" },
-    { name: "Character List", url: "/Characters/List.html", desc: "A list of my characters!" },
-    { name: "Ether", url: "/Characters/Ether/Info.html", desc: "Ether's page!" },
-    { name: "Net", url: "/Characters/Net/Info.html", desc: "Net's page!" },
-    { name: "Eclipse", url: "/Characters/Eclipse/Info.html", desc: "Eclipse's page!" },
-    { name: "Esther", url: "/Characters/Esther/Info.html", desc: "Ether's page!" },
-    { name: "Cyn", url: "/Characters/Cyn/Info.html", desc: "Ether's page!" },
-    { name: "Rafisol [Internet Wizard]", url: "/Characters/Rafisol_IW/Info.html", desc: "Rafisol, the internet wizard's page!" },
-    { name: "Settings", url: "/Settings.html", desc: "Change your site settings!" },
+    { name: "Home", url: "./index.html", desc: "The home of the website!" },
+    { name: "Links", url: "./Links.html", desc: "Links to my other accounts!" },
+    { name: "Trombone Champ Charts", url: "./TromboneChamp.html", desc: "My Trombone Champ Charts!" },
+    { name: "maimai", url: "./maimai.html", desc: "My maimai stats!" },
+    { name: "maisquared", url: "./maisquared.html", desc: "Custom maisquared charts!" },
+    { name: "Message", url: "./Message.html", desc: "A resource for me to send messages to others." },
 ];
 
     function handleSearch(event) {

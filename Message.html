@@ -5,11 +5,18 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>etan://Message</title>
+		<meta name="etangaming.xyz" content="Message">
+		<meta name="description" content="You've got mail!">
+
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="http://etangaming.xyz/Message">
+		<meta property="og:title" content="etangaming.xyz > Message">
+		<meta property="og:description" content="You've got mail!">
+		<meta property="og:image" content="http://etangaming.xyz/images/otherpfps/rafisol_quest.png">
 		<!-- Bootstrap -->
 		<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-        <script defer src="js/getmessage.js"></script> <!-- script to load messages -->
-
+		<script src="./js/getmessage.js"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,10 +32,7 @@
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="./About.html">About</a>
 				<a class="dropdown-item" href="./Links.html">Links</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="./SiteInfo.html">Site Info</a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">
@@ -38,21 +42,11 @@
 				<a class="dropdown-item" href="./maisquared.html">maimai Custom Charts</a>
 				</div>
 			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="./Characters/List.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Characters</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="./Characters/List.html">Character List</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="./Characters/Ether/Info.html">Ether</a>
-				<a class="dropdown-item" href="./Characters/Net/Info.html">Net</a>
-				<a class="dropdown-item" href="./Characters/Eclipse/Info.html">Eclipse</a>
-				<a class="dropdown-item" href="./Characters/Esther/Info.html">Esther</a>
-				<a class="dropdown-item" href="./Characters/Cyn/Info.html">Cyn</a>
-				<a class="dropdown-item" href="./Characters/Ether/Info.html">Ether</a>
-				<a class="dropdown-item" href="./Characters/Rafisol_IW/Info.html">Rafisol [Internet Wizard]</a>
-
-			<li class="nav-item">
-				<a class="nav-link" href="./Settings.html">Settings</a>
+            <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Misc</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="./maimai.html">maimai Stats</a>
+                </li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0" id="searchForm" autocomplete="off" onsubmit="return handleSearch(event)">
 			<input class="form-control mr-sm-2" type="search" placeholder="Looking for smth?" aria-label="Search" id="searchInput">
@@ -66,7 +60,7 @@
 			<div class="container">
 			<div class="row">
 				<div class="col-12" class="ether-logo-text-container">
-				<img src="./images/otherpfps/rafisol_quest.png" alt="rafisol from puyo puyo quest" id="etherLogo">
+				<img src="./images/otherpfps/rafisol_quest.png" alt="Should display Rafisol most of the time." id="RafisolIcon" title="Should display Rafisol most of the time.">
 				<div>
 					<h1 class="thebratfont" class="WRAPITUPBRO">Message</h1>
 					<p class="WRAPITUPBRO">Please scroll down!</p>
@@ -106,8 +100,6 @@
 			<div class="col-12">
 				<!-- idk if i actually have to include this copyright notice, but better to stay on the safe side, amirite? -->
 				<p> * <a href="Redirect.html?redirect=https://getbootstrap.com/" target="_blank">Bootstrap v4.4.1</a><br> * Copyright 2011-2019 The Bootstrap Authors<br> * Copyright 2011-2019 Twitter, Inc.<br> * Licensed under <a href="Redirect.html?redirect=https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a></p> 
-				<p>Hosted with GitHub Pages (github.io)</p>
-				<p><a href="Redirect.html?redirect=https://github.com/etangaming123/etangaming123.github.io" target="_blank">Open source website</a></p>
 				<p>// etangaming123</p>
 			</div>
 			</div>

@@ -8,38 +8,37 @@
 		<!-- Bootstrap -->
 		<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="js/redirect.js"></script> <!-- ur gonna be redirected oh no scary!! -->
+		<script src="./js/redirect.js"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">Navbar</a>
+		<a class="navbar-brand" href="Home.html">etangaming123</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="Home.html">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="./Home.html">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Info</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="About.html">About</a>
-				<a class="dropdown-item" href="Links.html">Links</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="SiteInfo.html">Site Info</a>
+				<a class="dropdown-item" href="./Links.html">Links</a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Creations</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<a class="dropdown-item" href="./TromboneChamp.html">Trombone Champ Charts</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="Characters/List.html">Characters</a>
+				<a class="dropdown-item" href="./maisquared.html">maimai Custom Charts</a>
 				</div>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="Settings">Settings [WIP]</a>
+
+            <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Misc</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="./maimai.html">maimai Stats</a>
 			</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0" id="searchForm" autocomplete="off" onsubmit="return handleSearch(event)">
@@ -54,12 +53,11 @@
 			<div class="container">
 			<div class="row">
 				<div class="col-12" class="ether-logo-text-container">
-				<img src="images/characters/ether.png" alt="Ether." id="etherLogo">
+				<img src="images/otherpfps/rafisol_quest.png" alt="Should display Rafisol most of the time." title="Should display Rafisol most of the time." id="RafisolIcon">
 				<div>
 					<h1 class="thebratfont" class="WRAPITUPBRO">Redirect</h1> <!-- the apple did not turn yellow and green. -->
 					<p class="WRAPITUPBRO" id="redirectnotice">You're about to be redirected to an external link:<br>[Link]<br>Would you like to proceed?</p> <!-- w class name? -->
 					<p><a class="btn btn-primary btn-lg" role="button" id="gotobutton">Go to link</a></p>
-					<p><btn id="donttellmeagain" class="btn btn-primary btn-lg">Don't tell me again</btn> // <btn id="trustthisdomain" class="btn btn-primary btn-lg">Trust this domain</btn></p>
 					<p id="statustext"></p>
 				</div>
 				</div>
@@ -73,8 +71,6 @@
 			<div class="col-12">
 				<!--idk if i actually have to include this copyright notice, but better to stay on the safe side, amirite?-->
 				<p> * <a href="Redirect.html?redirect=https://getbootstrap.com/" target="_blank">Bootstrap v4.4.1</a><br> * Copyright 2011-2019 The Bootstrap Authors<br> * Copyright 2011-2019 Twitter, Inc.<br> * Licensed under <a href="Redirect.html?redirect=https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a></p> 
-				<p>Hosted with GitHub Pages (github.io)</p>
-          		<p><a href="Redirect.html?redirect=https://github.com/etangaming123/etangaming123.github.io" target="_blank">Open source website</a></p>
 				<p>// etangaming123</p>
 			</div>
 			</div>
