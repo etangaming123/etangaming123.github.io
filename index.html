@@ -182,7 +182,18 @@
 			<div class="row">
 			<div class="col-12 text-center">
 				<h1>Get in touch</h1>
-				<p><strong>Send an email to <a href="https://www.google.com/" target="_blank" id="waht">somewhere</a>!</strong><br>No spam or marketing, please!</strong><br>Alternatively, check out my social media accounts below.</p>
+				<p>Send an email to me using the form below! (will open your default email client)</p>
+				<form action="mailto:me@etangaming.xyz" method="get" enctype="text/plain">
+					Subject:<br>
+					<input type="text" name="subject" placeholder="Your Name"><br>
+					Email:<br>
+					<input type="email" name="email" placeholder="Your Email"><br>
+					Message:<br>
+					<textarea name="body" rows="5" cols="30" placeholder="Your Message"></textarea><br>
+					<input type="submit" value="Send" class="btn btn-primary">
+				</form>
+				<br>
+				<p>Alternatively, check out my social media accounts below.</p>
 				<button type="button" class="btn btn-success" onclick="window.location.href='./Links.html'">Links</button>
 			</div>
 			</div>
@@ -201,7 +212,6 @@
 		</div>
 		</footer>
 		<script src="js/search.js"></script> <!-- search script because uh yeah (this isnt part of bootstrap btw) -->
-		<script src="js/emailthingy.js"></script> <!-- the script that makes the email link work -->
 		<script src="js/visitingfrom.js"></script> <!-- remember the "i see you're visiting from [platform]" from the old website? -->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="js/jquery-3.4.1.min.js"></script>
