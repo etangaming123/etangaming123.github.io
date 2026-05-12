@@ -38,7 +38,7 @@ h5 {
 
 .col-md-4 {
     border: 3px solid transparent;
-    border-image: linear-gradient(to bottom, #00FF00, #00FFFF);
+    border-image: linear-gradient(to bottom, #57E1E6, #F395F6);
     border-image-slice: 1;
     padding: 25px;
 }
@@ -123,4 +123,8 @@ h5 {
 .navbar {
     background-image: linear-gradient(to right, #062E95, #381267);
     border: 3px solid #552B9D;
+}
+
+.friendpfp {
+    border-radius: 100%;
 }
