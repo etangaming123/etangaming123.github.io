@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>One second...</title>
+    <script>
+        const params = new URLSearchParams(window.location.search); // Get params
+        const redirectparam = params.get('redirect'); // Get specific param
+        if (redirectparam == null) {
+            window.location.href = "./index.html";
+        }
+        window.location.href = redirectparam;
+    </script>
+</head>
+</html>
