@@ -34,6 +34,18 @@ It's okay to have bad days! There's those times when you feel like absolute tras
 
 This is an ethic I struggle with the most, as I tend to drag other people down for my own mistakes.
 
+## Boundaries are everything.
+
+Sure, poking fun here and there is okay, but you gotta ask yourself - "are they okay with this?"
+
+And, if you feel like someone else is pushing your own boundaries, speak up! Whether it be a simple "hey dude I don't like that", or "YO STOP IT", you have power, and your boundaries should be respected, just like how you should respect others' own boundaries.
+
+If I'm doing stuff you don't like, please do ask me to stop!
+
 ## Ask for help if needed!
 
-If there's something you can't really do, or you're struggling a lot, there's help out there! Just remember to seek the most appropriate help. *You're never alone on this. There's others out there, reach a hand!*
+If there's something you can't really do, or you're struggling a lot, there's help out there! Just remember to seek the most appropriate help. 
+
+You're never alone on this. There's others out there, reach a hand!
+
+*Admittedly, I tend - not - to follow this one. But you, the reader, should.*
