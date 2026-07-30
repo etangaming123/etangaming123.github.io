@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="icon" href="images/otherpfps/rafisol_quest.png">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>etan://ethics</title>
+		<meta name="etangaming.xyz" content="etangaming123's ethics!">
+		<meta name="description" content="My ethics.">
+
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="http://etangaming.xyz/Ethics.html">
+		<meta property="og:title" content="etangaming.xyz > Ethics">
+		<meta property="og:description" content="My ethics.">
+		<meta property="og:image" content="http://etangaming.xyz/images/otherpfps/rafisol_quest.png">
+		<!-- Bootstrap -->
+		<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<script src="js/components.js"></script>
+	</head>
+	<body>
+		<site-header></site-header>
+		<section>
+		<div class="jumbotron text-center mt-2">
+			<div class="container">
+			<div class="row">
+				<div class="col-12" class="ether-logo-text-container">
+				<img src="images/otherpfps/rafisol_quest.png" alt="Should display Rafisol most of the time." title="Should display Rafisol most of the time." id="RafisolIcon">
+				<div>
+					<h1 class="thebratfont" class="WRAPITUPBRO darkbluetext">etangaming123</h1>
+					<p id="visitingfrom" class="darkbluetext">Ethics</p>
+					<p class="darkbluetext WRAPITUPBRO">What (i see is) right and what is wrong.</p>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		</section>
+		<section>
+		<div class="container">
+			<div class="row">
+			<div class="col-12 text-center" id="markdownContent">
+				<p class="text-center">Loading...</p>
+			</div>
+			</div>
+		</div>
+		</section>
+		<hr>
+		<section>
+		<div class="container">
+			<div class="row">
+			<div class="col-12 text-center">
+				<p>These ethics are also available in Ethics.md.</p>
+				<button type="button" class="btn btn-success" onclick="window.location.href='https://github.com/etangaming123/etangaming123.github.io/blob/main/Ethics.md'">Open Ethics.md</button>
+			</div>
+			</div>
+		</div>
+		</section>
+        <hr>
+		<site-footer></site-footer>
+		<script src="js/search.js"></script> <!-- search script because uh yeah (this isnt part of bootstrap btw) -->
+		<script src="js/marked.min.js"></script> <!-- markdown parser, renders Ethics.md below -->
+		<script>
+			marked.setOptions({ breaks: true, gfm: true });
+			fetch('Ethics.md')
+				.then(response => response.text())
+				.then(markdown => {
+					document.getElementById('markdownContent').innerHTML = marked.parse(markdown);
+				})
+				.catch(() => {
+					document.getElementById('markdownContent').innerHTML = '<p class="text-center">Couldn\'t load Ethics.md.</p>';
+				});
+		</script>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap-4.4.1.js"></script>
+	</body>
+	</html>
