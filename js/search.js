@@ -18,9 +18,11 @@ async function buildSearchIndex() {
             const res = await fetch(url);
             const html = await res.text();
             const doc = new DOMParser().parseFromString(html, 'text/html');
-            doc.querySelectorAll('script, style, nav, footer').forEach(el => el.remove());
+            // #rando and #visitingfrom hold static placeholder text that JS overwrites at runtime
+            // (rando.js/visitingfrom.js never ran here since we only fetched+parsed the HTML) — skip them
+            doc.querySelectorAll('script, style, nav, footer, #rando, #visitingfrom').forEach(el => el.remove());
             const rawTitle = doc.querySelector('title')?.textContent || url;
-            const name = rawTitle.replace(/^etan:\/\//, '').trim() || url;
+            const name = rawTitle.replace(/^etan:\/\//, '').trim() || (url === './index.html' ? 'Home' : url);
             const desc = doc.querySelector('meta[name="description"]')?.content || '';
             const text = doc.body ? doc.body.textContent.replace(/\s+/g, ' ').trim() : '';
             return { name, url, desc, text };
