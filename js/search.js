@@ -10,6 +10,23 @@ const searchablePages = [
     "./maisquared.html",
 ];
 
+// pages whose entry cards are rendered client-side by renderEntries.js from JSON
+// (not present in the raw HTML fetched below) — index the JSON directly too
+const pageEntrySources = {
+    "./TromboneChamp.html": "./js/data/tromboneEntries.json",
+    "./maisquared.html": "./js/data/maisquaredEntries.json",
+};
+
+async function fetchEntriesText(jsonPath) {
+    try {
+        const res = await fetch(jsonPath);
+        const entries = await res.json();
+        return entries.map(e => `${e.title} ${(e.desc || '').replace(/<[^>]+>/g, ' ')}`).join(' ');
+    } catch (err) {
+        return '';
+    }
+}
+
 let searchIndexPromise = null;
 
 async function buildSearchIndex() {
@@ -24,7 +41,12 @@ async function buildSearchIndex() {
             const rawTitle = doc.querySelector('title')?.textContent || url;
             const name = rawTitle.replace(/^etan:\/\//, '').trim() || (url === './index.html' ? 'Home' : url);
             const desc = doc.querySelector('meta[name="description"]')?.content || '';
-            const text = doc.body ? doc.body.textContent.replace(/\s+/g, ' ').trim() : '';
+            let text = doc.body ? doc.body.textContent.replace(/\s+/g, ' ').trim() : '';
+            const entrySource = pageEntrySources[url];
+            if (entrySource) {
+                const entriesText = await fetchEntriesText(entrySource);
+                text = `${text} ${entriesText}`.trim();
+            }
             return { name, url, desc, text };
         } catch (err) {
             return null;

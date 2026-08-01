@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Mesmerizer",
+    "img": "./images/trombonethumbnails/mesmerizer.jpeg",
+    "desc": "!! FLASHING LIGHTS WARNING !!<br><br>man i sure love getting hypnotised while playing the trombone",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3484655303" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/C4CGD9Ea6JI" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/1gJhbIRVO3W2fA3NimeG4NXXcXSh71Uh_?usp=drive_link" }
+    ]
+  },
+  {
+    "title": "M@GICAL☆CURE! LOVE ♥ SHOT!",
+    "img": "./images/trombonethumbnails/mcls.jpeg",
+    "desc": "MIKU MIKU BEAAAAAAMMMMMM<br><br>(lyrics included, have fun)",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3484661618" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/LcwZep2a_j0" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/1OxWUAOkHl2KxjQbJSAk7Pcqds8JBad1-?usp=sharing" }
+    ]
+  },
+  {
+    "title": "Candy Cookie Chocolate",
+    "img": "./images/trombonethumbnails/candycookiechocolate.jpeg",
+    "desc": "\"If I had a nickel for every time Miku and Teto got hypnotized in 2024, id have two nickels. Which isn’t a lot but it’s weird that it’s happened twice\"",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3484714787" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/h6rGo4K6JSc" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/1s3aHudZp-4bqckt8DVXu0ytlyyBsR9hP?usp=sharing" }
+    ]
+  },
+  {
+    "title": "Steve's Lava Chicken",
+    "img": "./images/trombonethumbnails/steveslavachicken.jpeg",
+    "desc": "(is movie soundtracks even a real song genre??)<br><br>the chicken is indeed tasty as hell",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3484714990" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/kqxYWV-FjKY" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/1dFrzotcDgeeul_sK5CSsAmchZImB8q5M?usp=drive_link" }
+    ]
+  },
+  {
+    "title": "TETORIS",
+    "img": "./images/trombonethumbnails/tetoris.jpeg",
+    "desc": "teto spin triple<br><br>literally unplayable (either that or i have skill issue)",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3484715154teto" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/QKThns-xJ9Y" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/18vK1lQ9Gp2y88_tTmDbPVuTcVM_gVOwn?usp=sharing" }
+    ]
+  },
+  {
+    "title": "Triple Baka",
+    "img": "./images/trombonethumbnails/triplebaka.jpeg",
+    "desc": "\"o o o o oo o o\" -teto<br><br>took way too long to chart",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3485790150" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/cGHB2JEj-W0" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/1HTJP09GK_fGofvZeqo-Z_WnORbWVq9zO?usp=sharing" }
+    ]
+  },
+  {
+    "title": "Monitoring",
+    "img": "./images/trombonethumbnails/monitoring.png",
+    "desc": "\"Muah!\"",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3553245587" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/0ZTBWM6MkZs" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/1w2gueJ5UvgcCfdeH96ML50HAbFispf92?usp=sharing" }
+    ]
+  },
+  {
+    "title": "Cubibibibibism",
+    "img": "./images/trombonethumbnails/cubibibibibism.png",
+    "desc": "nso mention<br><br>might be the hardest chart i've ever made",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3588510394" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/tqqVvbJizzU" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/1olnVO9fblIafaJwC7p6H8VWaWkS-q7R_?usp=sharing" }
+    ]
+  },
+  {
+    "title": "Override",
+    "img": "./images/trombonethumbnails/override.png",
+    "desc": "Those notes and those trombones I will override!",
+    "links": [
+      { "text": "Steam Workshop Item", "class": "btn-steam", "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3590425613" },
+      { "text": "YouTube Video", "class": "btn-youtube", "url": "https://youtu.be/lOhIMp8AeS4" },
+      { "text": "Chart Files", "class": "btn-primary", "url": "https://drive.google.com/drive/folders/11DJHWIDUIevAlPiNlgA_e3Z0KggeAJBc?usp=sharing" }
+    ]
+  }
+]

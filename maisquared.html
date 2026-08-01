@@ -43,11 +43,7 @@
 	</div>
 	<hr>
 	<div class="container">
-        <div class="row text-center">
-		<div class="col-12 text-center">
-            <h2>Sorry!</h2>
-            <p>As of now there isn't any charts. Check back soon though, I'm making one!</p>
-        </div>
+        <div id="maisquaredEntries"></div>
 	</div>
 	<hr>
 	<site-footer></site-footer>
@@ -57,5 +53,7 @@
 	<script src="js/search.js"></script> <!-- search script because uh yeah (this isnt part of bootstrap btw) -->
 	<script src="./js/popper.min.js"></script>
 	<script src="./js/bootstrap-4.4.1.js"></script>
+	<script src="js/renderEntries.js"></script>
+	<script>renderEntries('maisquaredEntries', './js/data/maisquaredEntries.json', '<div class="col-12 text-center"><h2>Sorry!</h2><p>As of now there isn\'t any charts. Check back soon though, I\'m making one!</p></div>');</script>
     </body>
 </html>
