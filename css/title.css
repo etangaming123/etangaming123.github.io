@@ -40,8 +40,10 @@
   margin: 0;
   font-family: var(--f-display);
   font-weight: 400;
-  font-size: clamp(64px, 19.5vw, 230px);
+  font-size: clamp(64px, 23vw, 230px);
   line-height: .86;
+  position: relative;
+  z-index: 2; /* sits over the player data plate */
   letter-spacing: -.02em;
   color: var(--a);
   text-shadow: .045em .045em 0 var(--deep);
@@ -72,6 +74,7 @@
 /* "player data" plate */
 .plate {
   --cut: 20px;
+  margin-top: -22px; /* tucks under the logo on phones */
   justify-self: end;
   width: min(100%, 440px);
   margin-left: 28px;
@@ -153,11 +156,11 @@
     column-gap: 4vw;
   }
   .t-top { grid-column: 1 / -1; }
-  .logo { font-size: clamp(80px, 8.6vw, 150px); white-space: nowrap; }
+  .logo { font-size: clamp(110px, 15.5vw, 280px); white-space: nowrap; }
   .t-main { display: contents; }
-  .logo { grid-column: 1; grid-row: 2; align-self: center; margin-top: 4vh; }
+  .logo { grid-column: 1 / -1; grid-row: 2; align-self: start; margin-top: 3vh; pointer-events: none; }
   .tagline { grid-column: 1; grid-row: 2; align-self: end; margin-bottom: 6vh; position: relative; z-index: 1; }
-  .plate { grid-column: 2; grid-row: 2; align-self: center; margin: 0 0 0 -40px; justify-self: start; }
+  .plate { grid-column: 2; grid-row: 2; align-self: center; margin: 16vh 0 0 -40px; justify-self: start; }
   .t-bottom { grid-column: 1 / -1; grid-row: 3; justify-content: flex-end; padding-right: 4vw; }
 }
 
