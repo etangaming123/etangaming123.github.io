@@ -46,7 +46,14 @@
   const items = [...list.children];
 
   /* ---------- selection ---------- */
-  function applyTheme(c) {
+  // each song gets its own streak angle / position / width / stripe spacing
+  const STREAKS = [[115, 58, 14, 26], [98, 40, 22, 20], [128, 66, 10, 34], [84, 30, 18, 24], [122, 52, 26, 30], [106, 62, 12, 18], [136, 44, 16, 28], [92, 70, 20, 22], [118, 36, 12, 32]];
+  function applyTheme(c, i) {
+    const [ang, s1, sw, gap] = STREAKS[i % STREAKS.length] || STREAKS[0];
+    root.style.setProperty('--ang', `${i == null ? 115 : ang}deg`);
+    root.style.setProperty('--s1', `${i == null ? 58 : s1}%`);
+    root.style.setProperty('--sw', `${i == null ? 14 : sw}%`);
+    root.style.setProperty('--gap', `${i == null ? 26 : gap}px`);
     root.style.setProperty('--a', c.a);
     root.style.setProperty('--b', c.b);
     root.style.setProperty('--ink', c.ink);
@@ -62,7 +69,7 @@
       items[i].classList.add('is-sel');
       items[i].setAttribute('aria-selected', 'true');
       list.setAttribute('aria-activedescendant', items[i].id);
-      applyTheme(s);
+      applyTheme(s, i);
       $('#ghost').textContent = s.jacket.text;
       $('#slug').textContent = s.id;
       $('#counter').innerHTML = `${pad(i + 1)}<small>/${pad(SONGS.length)}</small>`;

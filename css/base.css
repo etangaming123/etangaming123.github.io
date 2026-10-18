@@ -1,6 +1,10 @@
 /* tokens, reset, background, texture */
 @property --a   { syntax: '<color>'; inherits: true; initial-value: #DDAACC; }
 @property --b   { syntax: '<color>'; inherits: true; initial-value: #BB88EE; }
+@property --ang { syntax: '<angle>'; inherits: true; initial-value: 115deg; }
+@property --s1  { syntax: '<percentage>'; inherits: true; initial-value: 58%; }
+@property --sw  { syntax: '<percentage>'; inherits: true; initial-value: 14%; }
+@property --gap { syntax: '<length>'; inherits: true; initial-value: 26px; }
 @property --ink { syntax: '<color>'; inherits: true; initial-value: #DDAACC; }
 
 :root {
@@ -20,7 +24,8 @@
   --f-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
 
   color-scheme: dark;
-  transition: --a .4s ease, --b .4s ease, --ink .4s ease;
+  --ang: 115deg; --s1: 58%; --sw: 14%; --gap: 26px;
+  transition: --a .4s ease, --b .4s ease, --ink .4s ease, --ang .6s ease, --s1 .6s ease, --sw .6s ease, --gap .6s ease;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -53,8 +58,8 @@ a { color: inherit; }
   z-index: 0;
   overflow: hidden;
   background:
-    linear-gradient(115deg, transparent 0 58%, color-mix(in srgb, var(--a) 15%, transparent) 58% 72%, transparent 72% 78%, color-mix(in srgb, var(--b) 10%, transparent) 78% 83%, transparent 83%),
-    repeating-linear-gradient(115deg, transparent 0 26px, color-mix(in srgb, var(--b) 5%, transparent) 26px 28px),
+    linear-gradient(var(--ang), transparent 0 var(--s1), color-mix(in srgb, var(--a) 17%, transparent) var(--s1) calc(var(--s1) + var(--sw)), transparent calc(var(--s1) + var(--sw)) calc(var(--s1) + var(--sw) + 6%), color-mix(in srgb, var(--b) 12%, transparent) calc(var(--s1) + var(--sw) + 6%) calc(var(--s1) + var(--sw) + 11%), transparent calc(var(--s1) + var(--sw) + 11%)),
+    repeating-linear-gradient(var(--ang), transparent 0 var(--gap), color-mix(in srgb, var(--b) 6%, transparent) var(--gap) calc(var(--gap) + 2px)),
     var(--bg);
 }
 
