@@ -189,6 +189,36 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
 .j-rays    { background: repeating-conic-gradient(from 0deg at 50% 105%, var(--dark) 0 7deg, transparent 7deg 14deg), linear-gradient(0deg, var(--sa), var(--sb)); }
 .j-zig     { background: linear-gradient(135deg, var(--sb) 25%, transparent 25%) -10% 0 / 20% 20%, linear-gradient(225deg, var(--sb) 25%, transparent 25%) -10% 0 / 20% 20%, linear-gradient(45deg, var(--dark) 25%, transparent 25%) 0 0 / 20% 20%, var(--sa); }
 
+/* bolder covers: flat colour, one big shape */
+.j-letter { background: var(--sa); }
+.j-letter .jt {
+  left: -9cqw; bottom: -30cqw;
+  font-size: 150cqw;
+  transform: none;
+  color: var(--sb);
+  text-shadow: .035em .035em 0 var(--dark);
+}
+.j-block { background: var(--sa); }
+.j-block::before {
+  content: '';
+  position: absolute;
+  inset: 34% -12% 12% -12%;
+  background: repeating-linear-gradient(90deg, var(--sb) 0 13%, #051631 13% 17%);
+  transform: rotate(-9deg);
+}
+.j-disc { background: var(--sa); }
+.j-disc::before {
+  content: '';
+  position: absolute;
+  width: 118%;
+  aspect-ratio: 1;
+  right: -34%;
+  top: -32%;
+  border-radius: 50%;
+  background: var(--sb);
+  box-shadow: 0 0 0 5cqw var(--dark);
+}
+
 .card .jacket { width: 96px; }
 
 /* ---------- bottom bar (thumb zone) ---------- */

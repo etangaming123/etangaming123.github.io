@@ -3,7 +3,7 @@
   a / b   : the song's colour pair (jacket + accent + background tint)
   NOTE    : keep a, b and ink at 4.5:1 or better (a, b against #051631 dark text; ink as text on the dark bg)
   ink     : readable accent on dark bg (use the lighter colour if one is #552B9D)
-  jacket  : CSS-only cover. pattern = split | checker | chevron | stripes | grid | slash | rings | rays | zig
+  jacket  : CSS-only cover. pattern = split | letter | block | disc | checker | chevron | stripes | grid | slash | rings | rays | zig
             text = giant word on the cover
   chips   : tech / tags, shown as difficulty-style chips
   detail  : chart info panel. info = [label, value] stat plates, body = paragraphs,
@@ -19,7 +19,7 @@ const SONGS = [
     sub: 'I make things. I do things. I like things.',
     chips: ['Personal', 'Sleepless', 'What?'],
     a: '#DDAACC', b: '#BB88EE', ink: '#DDAACC',
-    jacket: { pattern: 'split', text: 'ABOUT' },
+    jacket: { pattern: 'letter', text: 'ABOUT' },
     detail: {
       info: [
         ["Name", "etan"],
@@ -109,7 +109,7 @@ const SONGS = [
     sub: 'Discord server - for local community, rhythm games, and a mix of both.',
     chips: ['Community', 'Local', 'Lurkers'],
     a: '#BB88EE', b: '#FFBB00', ink: '#DDAACC',
-    jacket: { pattern: 'stripes', text: 'LURK' },
+    jacket: { pattern: 'block', text: 'LURK' },
     detail: {
       info: [
         ["Platform", "Discord"],
@@ -188,7 +188,7 @@ const SONGS = [
     sub: 'Yet another maimai DX NET Discord Bot.',
     chips: ['maimai DX NET', 'Discord'],
     a: '#FBD796', b: '#B8DB7E', ink: '#57E1E6',
-    jacket: { pattern: 'rings', text: 'CIRCLE' },
+    jacket: { pattern: 'disc', text: 'CIRCLE' },
     detail: {
       info: [
         ["Game", "maimai DX NET"],
