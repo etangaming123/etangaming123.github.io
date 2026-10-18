@@ -73,15 +73,27 @@ body[data-detail="open"] .detail {
   opacity: .6;
 }
 
-.d-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 10px; margin: 0; }
+.d-stats { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px; margin: 0; }
 .stat {
   margin: 0;
+  flex: 1 1 130px;
+  min-width: 0;
   padding: 7px 22px 9px 12px;
   background: color-mix(in srgb, var(--a) 14%, var(--panel));
   border-left: 5px solid var(--a);
   clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
 }
-.stat:nth-child(even) { border-left-color: var(--b); margin-left: 8px; }
+/* uneven widths and offsets so the plates don't read as a grid */
+.stat:nth-child(4n+1) { flex-basis: 60%; }
+.stat:nth-child(4n+2) { flex-basis: 28%; margin-left: 12px; border-left-color: var(--b); }
+.stat:nth-child(4n+3) {
+  flex-basis: 36%;
+  padding: 7px 12px 9px 22px;
+  border-left: 0;
+  border-right: 5px solid var(--b);
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+}
+.stat:nth-child(4n+4) { flex-basis: 52%; margin-left: 26px; border-left-color: var(--b); }
 .stat dt { font-family: var(--f-ui); font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
 .stat dd { margin: 1px 0 0; font-family: var(--f-display); font-size: 15px; line-height: 1.2; overflow-wrap: anywhere; }
 
@@ -130,9 +142,15 @@ body[data-detail="open"] .key-open { display: none; }
   .d-hero { grid-template-columns: min(30vh, 220px) minmax(0, 1fr); gap: 28px; }
   .d-title { font-size: clamp(32px, 4vw, 62px); }
   .d-sub { font-size: 1.1em; }
-  .d-stats { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
   .stat dd { font-size: 17px; }
   .d-body { font-size: 1.05em; }
+}
+
+@media (max-width: 559px) {
+  .stat:nth-child(4n+1) { flex-basis: 54%; }
+  .stat:nth-child(4n+2) { flex-basis: 40%; margin-left: 0; }
+  .stat:nth-child(4n+3) { flex-basis: 40%; }
+  .stat:nth-child(4n+4) { flex-basis: 52%; margin-left: 14px; }
 }
 
 /* ---------- custom Discord widget ---------- */
