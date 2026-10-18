@@ -1,130 +1,80 @@
-/* cheats console */
-/* floating window: no scrim, page underneath stays usable */
+/* plain Command Prompt look. floating, draggable, non-modal */
 .con {
   position: fixed;
   z-index: 40;
   left: var(--cx, 8px);
   top: var(--cy, 56px);
-  width: min(620px, calc(100vw - 16px));
-  height: min(46dvh, 440px);
-}
-.con[hidden] { display: none; }
-
-.con-win {
-  --cut: 22px;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--a), var(--b));
-  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
-  filter: drop-shadow(8px 8px 0 var(--deep));
-  animation: con-in .22s cubic-bezier(.2, .9, .2, 1) both;
-}
-@keyframes con-in { from { opacity: 0; transform: translateY(18px) skewX(-2deg); } }
-
-.con-frame {
-  --cut: 20px;
+  width: min(640px, calc(100vw - 16px));
+  height: min(46dvh, 420px);
   display: flex;
   flex-direction: column;
-  height: calc(100% - 8px);
-  margin: 4px;
-  background: #061a36;
-  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  background: #0c0c0c;
+  border: 1px solid #767676;
+  box-shadow: 6px 8px 0 rgba(0, 0, 0, .5);
+  color: #cccccc;
+  font-family: Consolas, 'Lucida Console', 'Courier New', monospace;
 }
+.con[hidden] { display: none; }
 
 .con-bar {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  background: linear-gradient(100deg, var(--a), var(--b));
-  color: #051631;
-  font-family: var(--f-display);
-  font-size: 14px;
-  text-transform: uppercase;
-  cursor: grab;
+  background: #f0f0f0;
+  color: #000;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  cursor: default;
   touch-action: none;
   user-select: none;
 }
-.con.dragging .con-bar { cursor: grabbing; }
-.con.dragging .con-win { filter: drop-shadow(12px 14px 0 var(--deep)); }
-.con-bar:focus-visible { outline-offset: -4px; outline-color: #051631; }
-.con-title { padding: 9px 14px; letter-spacing: .02em; }
-.con-title i { font-family: var(--f-ui); font-style: normal; font-weight: 700; font-size: 11px; letter-spacing: .12em; opacity: .75; }
+.con-title { padding: 7px 12px; }
 .con-x {
   appearance: none;
-  display: grid;
-  place-items: center;
-  width: 56px;
+  width: 46px;
   border: 0;
-  background: #051631;
-  color: var(--ink);
-  clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+  background: none;
+  color: #000;
+  font-size: 13px;
+  line-height: 1;
 }
-.con-x svg { width: 16px; height: 16px; }
+.con-x:hover, .con-x:active { background: #e81123; color: #fff; }
+.con-bar:focus-visible { outline: 2px solid #000; outline-offset: -3px; }
+.con-bar:focus-visible, .con-x:focus-visible { outline-color: #000; }
 
 .con-log {
   flex: 1;
   min-height: 0;
-  padding: 12px 16px;
+  padding: 8px 10px 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  font-family: 'Share Tech Mono', ui-monospace, Menlo, monospace;
-  font-size: 14.5px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.25;
   scrollbar-width: thin;
-  scrollbar-color: var(--deep) transparent;
+  scrollbar-color: #777 #0c0c0c;
 }
-.ln { white-space: pre-wrap; overflow-wrap: anywhere; }
-.ln.cmd { color: var(--muted); }
-.ln.ok { color: var(--ink); }
-.ln.err { color: #F08A9B; }
-.ln.dim { color: var(--muted); }
-.ln.hl { color: #F2E6A8; }
+.ln { white-space: pre-wrap; overflow-wrap: anywhere; min-height: 1.25em; }
 
-.con-quick {
-  display: flex;
-  gap: 6px;
-  padding: 0 14px 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.con-quick button {
-  flex: none;
-  appearance: none;
-  min-height: 34px;
-  padding: 0 14px 0 10px;
-  border: 0;
-  border-left: 4px solid var(--ink);
-  background: color-mix(in srgb, var(--a) 16%, #030e20);
-  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
-  font-family: 'Share Tech Mono', ui-monospace, monospace;
-  font-size: 13px;
-  color: var(--text);
-}
-.con-quick button:active { background: var(--ink); color: #051631; }
-
-.con-form {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px 14px;
-  border-top: 3px solid color-mix(in srgb, var(--a) 40%, transparent);
-  background: #04122a;
-}
-.con-ps { flex: none; font-family: 'Share Tech Mono', ui-monospace, monospace; font-size: 14.5px; color: var(--ink); }
+.con-form { display: flex; align-items: center; gap: 0; padding: 0 10px 10px; }
+.con-ps { flex: none; font-size: 15px; line-height: 1.25; }
 .con-form input {
   flex: 1;
   min-width: 0;
-  padding: 6px 0;
+  padding: 0;
   border: 0;
   outline: 0;
   background: none;
-  caret-color: var(--ink);
-  color: var(--text);
-  font-family: 'Share Tech Mono', ui-monospace, monospace;
+  caret-color: #cccccc;
+  color: #cccccc;
+  font-family: inherit;
   font-size: 16px; /* >=16px stops iOS zooming on focus */
+  line-height: 1.25;
 }
+.con ::selection { background: #cccccc; color: #0c0c0c; }
+.con :focus-visible { outline: none; }
+.con .con-bar:focus-visible { outline: 2px solid #000; outline-offset: -3px; }
+.con-x:focus-visible { outline: 2px solid #000; outline-offset: -3px; }
 
 @media (min-width: 860px) {
-  .con { height: min(52dvh, 460px); }
-  .con-log { font-size: 15.5px; }
+  .con { height: min(52dvh, 440px); }
 }

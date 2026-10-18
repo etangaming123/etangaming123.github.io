@@ -6,7 +6,6 @@
   const log = $('#con-log');
   const form = $('#con-form');
   const input = $('#con-in');
-  const quick = $('#con-quick');
   const opener = $('#sh');
   const t0 = performance.now();
 
@@ -126,7 +125,7 @@
   function run(line) {
     line = line.trim();
     if (!line) return;
-    print(`$ ${line}`, 'cmd');
+    print(`C:\\guest>${line}`);
     history.push(line);
     hi = history.length;
     const [name, ...args] = line.split(/\s+/);
@@ -204,7 +203,7 @@
     if (!placed) place(); else apply();
     if (!booted) {
       booted = true;
-      print(['ETANGAMING123 console v0.1', "type 'help'. drag the title bar to move me. keep browsing, i'll stay.", ''], 'ok');
+      print(['etangaming123 SHell console', '(c) no one - 20xx', '', "type 'help'. drag the title bar to move this window. it stays open while you browse.", '']);
     }
     input.focus({ preventScroll: true });
   }
@@ -213,14 +212,6 @@
     con.hidden = true;
     if (restore && returnTo && returnTo.focus && document.contains(returnTo)) returnTo.focus();
   }
-
-  ['help', 'ls', 'lastseen', 'whois etan', 'goto home'].forEach((c) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = c;
-    b.addEventListener('click', () => { run(c); input.focus({ preventScroll: true }); });
-    quick.appendChild(b);
-  });
 
   opener.addEventListener('click', open);
   $('#con-x').addEventListener('click', () => close());

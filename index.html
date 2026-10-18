@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#051631">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@500;700&family=Dela+Gothic+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@500;700&family=Dela+Gothic+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/title.css">
   <link rel="stylesheet" href="css/select.css">
@@ -75,23 +75,16 @@
   </div>
 
   <!-- CONSOLE (floating, draggable, non-modal) -->
-  <div class="con" id="con" role="dialog" aria-modal="false" aria-label="Console" hidden>
-    <div class="con-win">
-      <div class="con-frame">
-        <div class="con-bar" id="con-bar" tabindex="0" aria-label="Console title bar. Drag, or use arrow keys, to move it.">
-          <span class="con-title">cheats.exe <i>// etan://console</i></span>
-          <button class="con-x" id="con-x" type="button" aria-label="Close console">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="3"/></svg>
-          </button>
-        </div>
-        <div class="con-log" id="con-log" role="log" aria-live="polite"></div>
-        <div class="con-quick" id="con-quick"></div>
-        <form class="con-form" id="con-form" autocomplete="off">
-          <label class="con-ps" for="con-in">guest@etan:~$</label>
-          <input id="con-in" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" enterkeyhint="send">
-        </form>
-      </div>
+  <div class="con" id="con" role="dialog" aria-modal="false" aria-label="Command Prompt" hidden>
+    <div class="con-bar" id="con-bar" tabindex="0" aria-label="Console title bar. Drag, or use arrow keys, to move it.">
+      <span class="con-title">Command Prompt</span>
+      <button class="con-x" id="con-x" type="button" aria-label="Close console">&#x2715;</button>
     </div>
+    <div class="con-log" id="con-log" role="log" aria-live="polite"></div>
+    <form class="con-form" id="con-form" autocomplete="off">
+      <label class="con-ps" for="con-in">C:\guest&gt;</label>
+      <input id="con-in" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" enterkeyhint="send">
+    </form>
   </div>
 
   <div class="fx" aria-hidden="true"></div>
