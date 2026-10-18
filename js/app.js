@@ -98,8 +98,10 @@
       </div>
       ${info ? `<section class="d-sec"><h3 class="d-h">Chart info</h3><dl class="d-stats">${info}</dl></section>` : ''}
       ${paras ? `<section class="d-sec"><h3 class="d-h">Notes</h3><div class="d-body">${paras}</div></section>` : ''}
+      ${d.widget ? '<section class="d-sec"><h3 class="d-h">Server widget</h3><div class="dw" id="dw"></div></section>' : ''}
       ${links ? `<section class="d-sec"><h3 class="d-h">Links</h3><div class="d-links">${links}</div></section>` : ''}
       <p class="d-hint">&larr; &rarr; next song &middot; Esc back</p>`;
+    if (d.widget && window.mountDiscordWidget) window.mountDiscordWidget($('#dw'), d.widget);
     dScroll.scrollTop = 0;
   }
 

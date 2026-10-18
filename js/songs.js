@@ -7,6 +7,7 @@
   chips   : tech / tags, shown as difficulty-style chips
   detail  : chart info panel. info = [label, value] stat plates, body = paragraphs,
             links = [{ label, href }] (opens in a new tab). Empty arrays are simply not shown.
+            widget = optional live Discord widget, loaded on click (needs widgets enabled on the server)
   TODO    : placeholder copy, replace freely
 */
 const SONGS = [
@@ -20,15 +21,21 @@ const SONGS = [
     detail: {
       info: [
         ["Name", "etan"],
-        ["Handle", "etangaming123"],
-        ["Class", "Builder"],
-        ["Base", "Sydney, AU"],
-        ["Sleep", "[NOT FOUND]"],
+        ["Also known as", "etangaming123 / etangamingxyz"],
+        ["Class", "Rhythm game casual, Python coder"],
+        ["Base", "Sydney, Australia"],
+        ["Build", "Jack of all trades, master of none"],
       ],
       body: [
-        "TODO: the real about-me. How you got into bots, rhythm games, what you do all day, whatever you want strangers to know.",
+        "I'm etan, etangaming123, etangamingxyz, \"the rafisol pfp\", or whatever you know me as.",
+        "Amateur coder: I make Python projects and upload some of them to GitHub. etan bot is the main one.",
+        "Content creator: sometimes I post gaming videos. You may have seen me playing maimai.",
+        "\"Gamer\": hence the \"gaming\" in etangaming123. Casual on rhythm games and stacker (Tetris, if you're not from here).",
+        "Get in touch: me [at] etangaming [dot] xyz. Spam, marketing and \"we'll help you grow your business!\" get ignored. Hellos are welcome.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "GitHub", href: "https://github.com/etangaming123" },
+      ],
     },
   },
   {
@@ -40,15 +47,19 @@ const SONGS = [
     jacket: { pattern: 'checker', text: 'GAMES' },
     detail: {
       info: [
-        ["Main", "Arcade rhythm games"],
-        ["Input", "Tapping buttons"],
-        ["Favourite", "TODO"],
+        ["Main", "maimai DX"],
+        ["Also", "TETR.IO"],
+        ["CiRCLE code", "QRT6RPB9"],
         ["Backlog", "Infinite"],
       ],
       body: [
-        "TODO: which games, what ratings, what you're grinding right now, cabinet locations if you want people to find you.",
+        "Casual on various rhythm games and stacker. I tap buttons on arcade game.",
+        "Friend me on maimai DX NET and join my CiRCLE (team) with code QRT6RPB9. You have to be logged in to maimai DX NET for the friend link to work.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "TETR.IO", href: "https://ch.tetr.io/u/bug" },
+        { label: "Steam", href: "https://steamcommunity.com/id/etangaming123" },
+      ],
     },
   },
   {
@@ -60,14 +71,26 @@ const SONGS = [
     jacket: { pattern: 'chevron', text: 'SOCIAL' },
     detail: {
       info: [
+        ["Discord", "@etangaming123"],
+        ["Bluesky", "@bsky.etangaming.xyz"],
+        ["Everywhere else", "@etangaming123"],
         ["Upload schedule", "Cooked"],
-        ["Reliability", "Low"],
-        ["Platforms", "TODO"],
       ],
       body: [
-        "TODO: where to find you, and what to expect when you get there.",
+        "Every account listed here is confirmed mine. If you see one of these, it's me. Not all of my accounts are listed, though.",
+        "I can't DM on Bluesky (age restrictions, sorry). Instagram: @etangamingxyz is public, @etangaming123 is private and I only accept people I know irl.",
+        "YouTube is for videos I couldn't be bothered making longer.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "YouTube", href: "https://youtube.com/@etangaming123" },
+        { label: "TikTok", href: "https://tiktok.com/@etangaming123" },
+        { label: "Instagram", href: "https://instagram.com/etangamingxyz" },
+        { label: "Twitter", href: "https://twitter.com/etangaming123" },
+        { label: "Bluesky", href: "https://bsky.app/profile/bsky.etangaming.xyz" },
+        { label: "GitHub", href: "https://github.com/etangaming123" },
+        { label: "Steam", href: "https://steamcommunity.com/id/etangaming123" },
+        { label: "Ollama", href: "https://ollama.com/etangaming123" },
+      ],
     },
   },
   {
@@ -80,14 +103,20 @@ const SONGS = [
     detail: {
       info: [
         ["Platform", "Discord"],
-        ["Topic", "Local community + rhythm games"],
-        ["Members", "TODO"],
-        ["Vibe", "Lurk-friendly"],
+        ["Where", "Hurstville, NSW"],
+        ["For", "Study, gym, arcade"],
+        ["Topics", "Hurstville + rhythm games"],
       ],
       body: [
-        "TODO: who it's for, how to join, the rules of lurking.",
+        "A Discord server for people who hang around Hurstville, New South Wales, Australia, for whatever reason: studying in the library, tutoring, hitting the gym, or rotting in the arcade.",
+        "Your one stop for Hurstville and rhythm games. The only public Discord server I'll ever make.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "Join the server", href: "https://discord.gg/hurstville" },
+        { label: "HVL webpage", href: "https://hvl.etangaming.xyz" },
+        { label: "hvlbot source", href: "https://github.com/etangaming123/hvlbot" },
+      ],
+      widget: { type: 'discord', id: '1477464211981603040', invite: 'https://discord.gg/hurstville' },
     },
   },
   {
@@ -102,12 +131,21 @@ const SONGS = [
         ["Platform", "Discord"],
         ["Language", "Python"],
         ["Source", "Open"],
-        ["Status", "Online-ish"],
+        ["Works", "Almost everywhere"],
       ],
       body: [
-        "TODO: the actual feature list, how to invite it, how to host it, where the repo lives.",
+        "A funny Discord bot you add to your account and use almost anywhere in Discord. Profile picture by Shoebill Studios.",
+        "Fun commands: 8ball, coinflip, predictions and more.",
+        "\"Useful\" commands: a URL cleaner, so messy links get cleaned up and stop tracing back to you.",
+        "Cosmetic commands: a profile editor. Write an about me, add your social links, send it to your friends.",
+        "tl;dr of the terms: no personal data collected unless you give it, and no responsibility for damages from using the bot.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "Add to Discord", href: "https://discord.com/oauth2/authorize?client_id=1505906056222605352" },
+        { label: "Website", href: "https://etanbot.etangaming.xyz" },
+        { label: "GitHub", href: "https://github.com/etangaming123/etanbot" },
+        { label: "Report an issue", href: "https://github.com/etangaming123/etanbot/issues" },
+      ],
     },
   },
   {
@@ -120,14 +158,18 @@ const SONGS = [
     detail: {
       info: [
         ["Platform", "Discord"],
+        ["Language", "Python"],
         ["Does", "Cleans + fixes links"],
-        ["Targets", "Tracking params, broken embeds"],
         ["Side effects", "Cleaner chats"],
       ],
       body: [
-        "TODO: which sites it supports, an example of before/after, how to add it.",
+        "A Discord bot that automatically cleans links in messages.",
+        "Strips the tracking junk and fixes broken embeds, so what lands in chat is the link and nothing else.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "Website", href: "https://alc.etangaming.xyz" },
+        { label: "GitHub", href: "https://github.com/etangaming123/automaticlinkcleaner" },
+      ],
     },
   },
   {
@@ -141,12 +183,16 @@ const SONGS = [
       info: [
         ["Game", "maimai DX NET"],
         ["Platform", "Discord"],
-        ["Type", "Bot"],
+        ["Language", "Python"],
+        ["Aka", "mai bot 2.0"],
       ],
       body: [
-        "TODO: what it does (scores? ratings? recommendations?), commands, invite link.",
+        "Yet another maimai DX NET Discord bot. Think of it as a homemade mimi xd / mai bot 2.0.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "Website", href: "https://cc.etangaming.xyz" },
+        { label: "GitHub", href: "https://github.com/etangaming123/circlechiffon" },
+      ],
     },
   },
   {
@@ -159,13 +205,17 @@ const SONGS = [
     detail: {
       info: [
         ["Type", "Web app"],
-        ["Category", "Messaging"],
+        ["Language", "JavaScript"],
+        ["Hosting", "Self-hostable"],
         ["Inspired by", "Discord (lovingly)"],
       ],
       body: [
-        "TODO: what's real, what's a joke, a screenshot, a link to try it.",
+        "A web-based messaging app, built for selfhosting. A parody of Discord.",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "Try it", href: "https://nightcord.etangaming.xyz" },
+        { label: "GitHub", href: "https://github.com/etangaming123/nightcord" },
+      ],
     },
   },
   {
@@ -178,13 +228,15 @@ const SONGS = [
     detail: {
       info: [
         ["Platform", "Discord"],
+        ["Language", "Python"],
         ["Made for", "Catulus' Cat Tree"],
-        ["Type", "Bot"],
       ],
       body: [
-        "TODO: what it does for the server, features, who Catulus is (optional).",
+        "The Discord bot for Catulus' Cat Tree!",
       ],
-      links: [], // { label: 'GitHub', href: 'https://...' }
+      links: [
+        { label: "GitHub", href: "https://github.com/etangaming123/katsune" },
+      ],
     },
   },
 ];
