@@ -98,9 +98,11 @@
       </div>
       ${info ? `<section class="d-sec"><h3 class="d-h">Chart info</h3><dl class="d-stats">${info}</dl></section>` : ''}
       ${paras ? `<section class="d-sec"><h3 class="d-h">Notes</h3><div class="d-body">${paras}</div></section>` : ''}
+      ${d.stats ? `<section class="d-sec"><h3 class="d-h">${esc(d.stats.label || 'Stats')}</h3><div class="mm" id="mm"></div></section>` : ''}
       ${d.widget ? '<section class="d-sec"><h3 class="d-h">Server widget</h3><div class="dw" id="dw"></div></section>' : ''}
       ${links ? `<section class="d-sec"><h3 class="d-h">Links</h3><div class="d-links">${links}</div></section>` : ''}
       <p class="d-hint">&larr; &rarr; next song &middot; Esc back</p>`;
+    if (d.stats && window.mountStats) { window.mountStats($('#mm'), d.stats); if (detailOpen) window.kickStats(dScroll); }
     if (d.widget && window.mountDiscordWidget) window.mountDiscordWidget($('#dw'), d.widget);
     dScroll.scrollTop = 0;
   }
@@ -112,6 +114,7 @@
     detailEl.inert = !open;
     list.inert = open && !wide.matches;
     $('#home .lbl').textContent = open ? 'Back' : 'Home';
+    if (open && window.kickStats) window.kickStats(dScroll);
     if (focus) (open ? dScroll : list).focus({ preventScroll: true });
   }
   wide.addEventListener('change', () => { list.inert = detailOpen && !wide.matches; });

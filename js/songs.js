@@ -7,6 +7,7 @@
   chips   : tech / tags, shown as difficulty-style chips
   detail  : chart info panel. info = [label, value] stat plates, body = paragraphs,
             links = [{ label, href }] (opens in a new tab). Empty arrays are simply not shown.
+            stats  = optional live stat card from a plain-text gist (KEY: value lines)
             widget = optional live Discord widget, loaded on click (needs widgets enabled on the server)
   TODO    : placeholder copy, replace freely
 */
@@ -56,6 +57,7 @@ const SONGS = [
         "Casual on various rhythm games and stacker. I tap buttons on arcade game.",
         "Friend me on maimai DX NET and join my CiRCLE (team) with code QRT6RPB9. You have to be logged in to maimai DX NET for the friend link to work.",
       ],
+      stats: { label: 'maimai DX stats', url: 'https://gist.githubusercontent.com/etangaming123/43e1c2ee943cca54945b0e018823ccfb/raw/' },
       links: [
         { label: "TETR.IO", href: "https://ch.tetr.io/u/bug" },
         { label: "Steam", href: "https://steamcommunity.com/id/etangaming123" },
@@ -108,8 +110,9 @@ const SONGS = [
         ["Topics", "Hurstville + rhythm games"],
       ],
       body: [
-        "A Discord server for people who hang around Hurstville, New South Wales, Australia, for whatever reason: studying in the library, tutoring, hitting the gym, or rotting in the arcade.",
-        "Your one stop for Hurstville and rhythm games. The only public Discord server I'll ever make.",
+        "Your one stop for Hurstville & Rhythm Games.",
+        "Hurstville Lurkers is a Discord server / community, formerly for those who go to Hurstville often, now focusing more on Rhythm Games and their audience!",
+        "Meet up with friends in Hurstville, or somewhere else! Find others who play rhythm games, like maimai or Project SEKAI!"
       ],
       links: [
         { label: "Join the server", href: "https://discord.gg/hurstville" },
@@ -137,8 +140,7 @@ const SONGS = [
         "A funny Discord bot you add to your account and use almost anywhere in Discord. Profile picture by Shoebill Studios.",
         "Fun commands: 8ball, coinflip, predictions and more.",
         "\"Useful\" commands: a URL cleaner, so messy links get cleaned up and stop tracing back to you.",
-        "Cosmetic commands: a profile editor. Write an about me, add your social links, send it to your friends.",
-        "tl;dr of the terms: no personal data collected unless you give it, and no responsibility for damages from using the bot.",
+        "Cosmetic commands: a profile editor. Write an about me, add your social links, send it to your friends."
       ],
       links: [
         { label: "Add to Discord", href: "https://discord.com/oauth2/authorize?client_id=1505906056222605352" },

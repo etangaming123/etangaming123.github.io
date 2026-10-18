@@ -203,7 +203,7 @@
     if (!placed) place(); else apply();
     if (!booted) {
       booted = true;
-      print(['etangaming123 SHell console', '(c) no one - 20xx', '', "type 'help'. drag the title bar to move this window. it stays open while you browse.", '']);
+      print(['etangaming123 Shell console', '(c) no one - 20xx', '', "type 'help' for commands."]);
     }
     input.focus({ preventScroll: true });
   }
