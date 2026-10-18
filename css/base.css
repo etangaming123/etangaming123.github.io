@@ -101,3 +101,25 @@ a { color: inherit; }
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- glimmer: quick left-to-right sweep (decorative; also fires on focus/tap) ---------- */
+:is(.btn, .key, .tagline, .s-label, .card-in, .con-x) { position: relative; overflow: hidden; }
+:is(.btn, .key, .tagline, .s-label, .card-in, .con-x)::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -60%;
+  width: 34%;
+  background: linear-gradient(100deg, transparent, rgba(240, 232, 248, .3) 50%, transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  :is(.btn, .key, .tagline, .s-label, .card-in, .con-x):hover::after { left: 135%; transition: left .5s ease; }
+}
+:is(.btn, .key, .con-x):focus-visible::after,
+:is(.btn, .key, .con-x):active::after { left: 135%; transition: left .5s ease; }
+
+@keyframes glimmer { from { left: -60%; } to { left: 135%; } }
+.song.is-sel .card-in::after { animation: glimmer .6s ease .08s 1 both; }
