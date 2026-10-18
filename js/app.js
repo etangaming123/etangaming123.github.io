@@ -168,7 +168,27 @@
   addEventListener('resize', () => { if (view === 'select') { scrollToItem(sel, true); } });
 
   /* ---------- routing ---------- */
+  // Jumping routes mid-transition can strand a screen half-visible. Snap every
+  // running transition to its end, then (after the new ones should be done)
+  // force each screen's visibility to match its inert state.
+  let settleTimer;
+  function resetTransitions() {
+    clearTimeout(settleTimer);
+    for (const el of [titleView, selectView, detailEl]) {
+      el.getAnimations().forEach((a) => a.finish());
+      el.style.visibility = '';
+    }
+  }
+  function settle() {
+    settleTimer = setTimeout(() => {
+      titleView.style.visibility = titleView.inert ? 'hidden' : '';
+      selectView.style.visibility = selectView.inert ? 'hidden' : '';
+      detailEl.style.visibility = detailEl.inert ? 'hidden' : '';
+    }, 700);
+  }
+
   function route() {
+    resetTransitions();
     const [id, sub] = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
     const i = SONGS.findIndex((s) => s.id === id);
     if (i < 0) {
@@ -181,6 +201,7 @@
       applyTheme(DEFAULT);
       $('#ghost').textContent = 'ETAN';
       document.title = 'etan://home';
+      settle();
       return;
     }
     const entering = view !== 'select';
@@ -193,6 +214,7 @@
     setDetail(sub === 'info');
     if (entering && sub !== 'info') list.focus({ preventScroll: true });
     measure();
+    settle();
   }
   addEventListener('hashchange', route);
 
