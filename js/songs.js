@@ -7,6 +7,7 @@
   chips   : tech / tags, shown as difficulty-style chips
   detail  : chart info panel. info = [label, value] stat plates, body = paragraphs,
             links = [{ label, href }] (opens in a new tab). Empty arrays are simply not shown.
+            list   = { label, items: [[name, tagline, optional href]] } short rows for lesser games
             stats  = optional live stat card from a plain-text gist (KEY: value lines)
             widget = optional live Discord widget, loaded on click (needs widgets enabled on the server)
   TODO    : placeholder copy, replace freely
@@ -49,17 +50,27 @@ const SONGS = [
     detail: {
       info: [
         ["Main", "maimai DX"],
-        ["Also", "TETR.IO"],
+        ["Cabinet", "Arcade"],
         ["CiRCLE code", "QRT6RPB9"],
         ["Backlog", "Infinite"],
       ],
       body: [
-        "Casual on various rhythm games and stacker. I tap buttons on arcade game.",
+        "maimai DX is the main one. Everything else is a side quest.",
         "Friend me on maimai DX NET and join my CiRCLE (team) with code QRT6RPB9. You have to be logged in to maimai DX NET for the friend link to work.",
       ],
+      list: {
+        label: 'Side quests',
+        items: [
+          // [name, tagline, optional link]
+          ['TETR.IO', 'I stack blocks, sometimes.', 'https://ch.tetr.io/u/bug'],
+          ['Denshattack!', 'DENSHATTACK!!!'],
+          ['Project SEKAI', 'bum rhythm game'],
+          ['Arcaea', 'finger [Content Deleted]'],
+          ['Phigros', 'Phigros'],
+        ],
+      },
       stats: { label: 'maimai DX stats', url: 'https://gist.githubusercontent.com/etangaming123/43e1c2ee943cca54945b0e018823ccfb/raw/' },
       links: [
-        { label: "TETR.IO", href: "https://ch.tetr.io/u/bug" },
         { label: "Steam", href: "https://steamcommunity.com/id/etangaming123" },
       ],
     },

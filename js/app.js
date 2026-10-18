@@ -99,6 +99,7 @@
       ${info ? `<section class="d-sec"><h3 class="d-h">Chart info</h3><dl class="d-stats">${info}</dl></section>` : ''}
       ${paras ? `<section class="d-sec"><h3 class="d-h">Notes</h3><div class="d-body">${paras}</div></section>` : ''}
       ${d.stats ? `<section class="d-sec"><h3 class="d-h">${esc(d.stats.label || 'Stats')}</h3><div class="mm" id="mm"></div></section>` : ''}
+      ${d.list ? `<section class="d-sec"><h3 class="d-h">${esc(d.list.label || 'Also')}</h3><ul class="d-list">${d.list.items.map(([n, t, h]) => `<li>${h ? `<a class="d-li-n" href="${esc(h)}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>` : `<span class="d-li-n">${esc(n)}</span>`}<span class="d-li-t">${esc(t)}</span></li>`).join('')}</ul></section>` : ''}
       ${d.widget ? '<section class="d-sec"><h3 class="d-h">Server widget</h3><div class="dw" id="dw"></div></section>' : ''}
       ${links ? `<section class="d-sec"><h3 class="d-h">Links</h3><div class="d-links">${links}</div></section>` : ''}
       <p class="d-hint">&larr; &rarr; next song &middot; Esc back</p>`;
