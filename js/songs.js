@@ -1,6 +1,7 @@
 /*
   All site content lives here. Add a song = add one object.
   a / b   : the song's colour pair (jacket + accent + background tint)
+  NOTE    : keep a, b and ink at 4.5:1 or better (a, b against #051631 dark text; ink as text on the dark bg)
   ink     : readable accent on dark bg (use the lighter colour if one is #552B9D)
   jacket  : CSS-only cover. pattern = split | checker | chevron | stripes | grid | slash | rings | rays | zig
             text = giant word on the cover
@@ -134,7 +135,7 @@ const SONGS = [
     title: 'etan bot',
     sub: 'Open source Discord bot that has a bunch of features.',
     chips: ['Discord', 'Python', 'Online-ish'],
-    a: '#8649D7', b: '#c5fb31', ink: '#57E1E6',
+    a: '#A56BEA', b: '#c5fb31', ink: '#57E1E6',
     jacket: { pattern: 'grid', text: 'BOT' },
     detail: {
       info: [
@@ -162,7 +163,7 @@ const SONGS = [
     title: 'Automatic link cleaner',
     sub: 'Cleans and fixes links in Discord messages.',
     chips: ['Links', 'Embeds', '?tracker=somecode'],
-    a: '#0000EE', b: '#551A8B', ink: '#dc3545',
+    a: '#6B7BFF', b: '#9B6BFF', ink: '#FF6B6B',
     jacket: { pattern: 'slash', text: 'CLEAN' },
     detail: {
       info: [
@@ -209,7 +210,7 @@ const SONGS = [
     title: 'Nightcord',
     sub: 'Parody of Discord.',
     chips: ['Messaging', 'Web App'],
-    a: '#884499', b: '#DDAACC', ink: '#CCAA88',
+    a: '#B06CC4', b: '#DDAACC', ink: '#CCAA88',
     jacket: { pattern: 'rays', text: 'NIGHT' },
     detail: {
       info: [
@@ -232,7 +233,7 @@ const SONGS = [
     title: 'Katsune',
     sub: 'Discord bot made for Catulus\' Cat Tree.',
     chips: ['Discord', 'Catulus'],
-    a: '#FF0000', b: '#FF0000', ink: '#FF0000',
+    a: '#FF4D4D', b: '#FF8A5A', ink: '#FF6B6B',
     jacket: { pattern: 'zig', text: 'KATSUNE' },
     detail: {
       info: [
