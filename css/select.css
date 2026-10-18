@@ -30,7 +30,7 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
 .s-label {
   flex: none;
   padding: 3px 18px 3px 12px;
-  background: repeating-linear-gradient(-45deg, var(--a) 0 6px, var(--b) 6px 12px);
+  background: linear-gradient(100deg, var(--a), var(--b));
   color: #051631;
   font-size: 12px;
   letter-spacing: .18em;
@@ -116,7 +116,7 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
   overflow: hidden;
 }
 
-.chips { display: flex; gap: 5px; margin-top: 4px; overflow: hidden; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; max-height: 24px; overflow: hidden; }
 .chip {
   flex: none;
   padding: 2px 12px 2px 8px;
@@ -166,7 +166,7 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
   left: 7cqw;
   bottom: 5cqw;
   font-family: var(--f-display);
-  font-size: calc(min(42cqw, 165cqw / var(--len)));
+  font-size: calc(min(32cqw, 92cqw / var(--len)));
   line-height: 1;
   color: #051631;
   text-shadow: .05em .05em 0 rgba(236, 226, 243, .85);
