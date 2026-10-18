@@ -5,6 +5,7 @@
   ink     : readable accent on dark bg (use the lighter colour if one is #552B9D)
   jacket  : CSS-only cover. pattern = split | letter | block | disc | checker | chevron | stripes | grid | slash | rings | rays | zig
             text = giant word on the cover
+            image = optional path to your own square artwork, e.g. 'assets/jackets/katsune.png'. When set, it replaces the CSS cover (pattern/text are ignored)
   chips   : tech / tags, shown as difficulty-style chips
   detail  : chart info panel. info = [label, value] stat plates, body = paragraphs,
             links = [{ label, href }] (opens in a new tab). Empty arrays are simply not shown.

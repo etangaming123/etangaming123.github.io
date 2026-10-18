@@ -219,6 +219,9 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
   box-shadow: 0 0 0 5cqw var(--dark);
 }
 
+/* your own artwork (jacket.image): square image, bottom-right corner is cut by the clip-path */
+.j-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
 .card .jacket { width: 96px; }
 
 /* ---------- bottom bar (thumb zone) ---------- */

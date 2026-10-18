@@ -26,8 +26,9 @@
   const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>';
 
   /* ---------- build ---------- */
-  const jacket = (s) =>
-    `<div class="jacket j-${s.jacket.pattern}" style="--len:${s.jacket.text.length}"><span class="jt">${esc(s.jacket.text)}</span></div>`;
+  const jacket = (s) => s.jacket.image
+    ? `<div class="jacket j-img"><img src="${esc(s.jacket.image)}" alt="" decoding="async"></div>`
+    : `<div class="jacket j-${s.jacket.pattern}" style="--len:${s.jacket.text.length}"><span class="jt">${esc(s.jacket.text)}</span></div>`;
   const chips = (s) => `<div class="chips">${s.chips.map((c) => `<span class="chip">${esc(c)}</span>`).join('')}</div>`;
   const vars = (s) => `--sa:${s.a};--sb:${s.b};--si:${s.ink}`;
 
