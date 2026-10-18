@@ -160,3 +160,20 @@
   .plate { grid-column: 2; grid-row: 2; align-self: center; margin: 0 0 0 -40px; justify-self: start; }
   .t-bottom { grid-column: 1 / -1; grid-row: 3; justify-content: flex-end; padding-right: 4vw; }
 }
+
+/* the "Sh" in Shit: looks like part of the sentence, quietly isn't */
+.sh {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline dotted rgba(5, 22, 49, .4);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+.sh:hover { color: var(--deep); text-decoration-color: var(--deep); }
+.sh:focus-visible { outline: 3px solid #051631; outline-offset: 2px; }

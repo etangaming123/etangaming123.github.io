@@ -1,0 +1,127 @@
+/* cheats console */
+body.con-open { overflow: hidden; }
+
+.con {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px 12px max(12px, env(safe-area-inset-bottom));
+  background: rgba(3, 12, 28, .62);
+}
+.con[hidden] { display: none; }
+
+.con-win {
+  --cut: 22px;
+  width: min(100%, 700px);
+  height: min(66dvh, 520px);
+  background: linear-gradient(135deg, var(--a), var(--b));
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  filter: drop-shadow(8px 8px 0 var(--deep));
+  animation: con-in .22s cubic-bezier(.2, .9, .2, 1) both;
+}
+@keyframes con-in { from { opacity: 0; transform: translateY(18px) skewX(-2deg); } }
+
+.con-frame {
+  --cut: 20px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 8px);
+  margin: 4px;
+  background: #061a36;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+
+.con-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  background: linear-gradient(100deg, var(--a), var(--b));
+  color: #051631;
+  font-family: var(--f-display);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.con-title { padding: 9px 14px; letter-spacing: .02em; }
+.con-title i { font-family: var(--f-ui); font-style: normal; font-weight: 700; font-size: 11px; letter-spacing: .12em; opacity: .75; }
+.con-x {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  border: 0;
+  background: #051631;
+  color: var(--ink);
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+}
+.con-x svg { width: 16px; height: 16px; }
+
+.con-log {
+  flex: 1;
+  min-height: 0;
+  padding: 12px 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-family: 'Share Tech Mono', ui-monospace, Menlo, monospace;
+  font-size: 14.5px;
+  line-height: 1.5;
+  scrollbar-width: thin;
+  scrollbar-color: var(--deep) transparent;
+}
+.ln { white-space: pre-wrap; overflow-wrap: anywhere; }
+.ln.cmd { color: var(--muted); }
+.ln.ok { color: var(--ink); }
+.ln.err { color: #F08A9B; }
+.ln.dim { color: var(--muted); }
+.ln.hl { color: #F2E6A8; }
+
+.con-quick {
+  display: flex;
+  gap: 6px;
+  padding: 0 14px 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.con-quick button {
+  flex: none;
+  appearance: none;
+  min-height: 34px;
+  padding: 0 14px 0 10px;
+  border: 0;
+  border-left: 4px solid var(--ink);
+  background: color-mix(in srgb, var(--a) 16%, #030e20);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  font-family: 'Share Tech Mono', ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--text);
+}
+.con-quick button:active { background: var(--ink); color: #051631; }
+
+.con-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 14px;
+  border-top: 3px solid color-mix(in srgb, var(--a) 40%, transparent);
+  background: #04122a;
+}
+.con-ps { flex: none; font-family: 'Share Tech Mono', ui-monospace, monospace; font-size: 14.5px; color: var(--ink); }
+.con-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  caret-color: var(--ink);
+  color: var(--text);
+  font-family: 'Share Tech Mono', ui-monospace, monospace;
+  font-size: 16px; /* >=16px stops iOS zooming on focus */
+}
+
+@media (min-width: 860px) {
+  .con { align-items: center; padding-bottom: 12vh; padding-right: 8vw; }
+  .con-log { font-size: 15.5px; }
+}
