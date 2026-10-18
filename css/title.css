@@ -1,0 +1,161 @@
+/* title / attract screen */
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  padding: clamp(16px, 5vw, 56px);
+  padding-bottom: max(clamp(16px, 5vw, 56px), env(safe-area-inset-bottom));
+  overflow-y: auto;
+}
+
+/* big diagonal slab behind everything */
+.title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--a) 26%, transparent), color-mix(in srgb, var(--b) 12%, transparent));
+  clip-path: polygon(46% 0, 100% 0, 100% 62%, 64% 100%, 34% 100%);
+  pointer-events: none;
+}
+
+.t-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.t-top b { color: var(--ink); font-weight: 700; }
+
+.t-main { display: grid; gap: 26px; align-content: center; flex: 1; }
+
+.logo {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(76px, 25vw, 230px);
+  line-height: .86;
+  letter-spacing: -.02em;
+  color: var(--a);
+  text-shadow: .045em .045em 0 var(--deep);
+}
+.logo i {
+  font-style: normal;
+  color: var(--b);
+  display: inline-block;
+  transform: translateY(-.07em);
+  text-shadow: .045em .045em 0 var(--deep);
+}
+
+.tagline {
+  justify-self: start;
+  margin: 0;
+  padding: 8px 22px 8px 16px;
+  transform: skewX(-9deg) translateX(8px);
+  background: linear-gradient(90deg, var(--a), var(--b));
+  color: #051631;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: clamp(18px, 4.6vw, 30px);
+  line-height: 1.15;
+  box-shadow: 6px 6px 0 var(--deep);
+}
+.tagline span { display: inline-block; transform: skewX(9deg); }
+
+/* "player data" plate */
+.plate {
+  --cut: 20px;
+  justify-self: end;
+  width: min(100%, 440px);
+  margin-left: 28px;
+  background: linear-gradient(135deg, var(--a), var(--b));
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+.plate-in {
+  --cut: 18px;
+  margin: 4px;
+  padding: 16px 18px 18px 20px;
+  background: var(--panel);
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+.plate h2 {
+  margin: 0 0 10px;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.plate dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 16px;
+  margin: 0;
+}
+.plate dt {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 3px;
+}
+.plate dd { margin: 0; }
+.plate p { margin: 14px 0 0; color: var(--text); }
+.todo { color: var(--muted); font-style: italic; }
+
+/* start button */
+.t-bottom { display: flex; justify-content: flex-start; padding-bottom: 4px; }
+
+.btn-wrap {
+  display: inline-block;
+  filter: drop-shadow(7px 7px 0 var(--deep));
+  transition: transform .12s ease, filter .12s ease;
+}
+.btn-wrap:active, .btn-wrap:has(.btn:active) {
+  transform: translate(4px, 4px);
+  filter: drop-shadow(3px 3px 0 var(--deep));
+}
+.btn-wrap:focus-within { outline: 3px solid var(--ink); outline-offset: 8px; }
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 0 44px 0 24px;
+  background: linear-gradient(100deg, var(--a), var(--b));
+  color: #051631;
+  font-family: var(--f-display);
+  font-size: clamp(18px, 5vw, 26px);
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 26px) 100%, 0 100%);
+}
+.btn:focus-visible { outline: none; }
+.btn svg { width: 28px; height: 28px; flex: none; }
+
+@media (min-width: 860px) {
+  .title {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    column-gap: 4vw;
+  }
+  .t-top { grid-column: 1 / -1; }
+  .t-main { display: contents; }
+  .logo { grid-column: 1; grid-row: 2; align-self: center; margin-top: 4vh; }
+  .tagline { grid-column: 1; grid-row: 2; align-self: end; margin-bottom: 6vh; position: relative; z-index: 1; }
+  .plate { grid-column: 2; grid-row: 2; align-self: center; margin: 0 0 0 -40px; justify-self: start; }
+  .t-bottom { grid-column: 1 / -1; grid-row: 3; justify-content: flex-end; padding-right: 4vw; }
+}
