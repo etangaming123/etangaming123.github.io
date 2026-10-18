@@ -18,6 +18,12 @@
   let lockTimer;
   let hashTimer;
   let frame = 0;
+  let detailOpen = false;
+  let pushedDetail = false;
+  const detailEl = $('#detail');
+  const dScroll = $('#d-scroll');
+  const wide = matchMedia('(min-width: 860px)');
+  const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>';
 
   /* ---------- build ---------- */
   const jacket = (s) =>
@@ -61,6 +67,7 @@
       $('#slug').textContent = s.id;
       $('#counter').innerHTML = `${pad(i + 1)}<small>/${pad(SONGS.length)}</small>`;
       document.title = `etan://${s.id}`;
+      renderDetail(s, i);
       preview.style.cssText = vars(s);
       preview.innerHTML = `
         <div class="pv-jacket">${jacket(s)}</div>
@@ -71,6 +78,51 @@
     }
     if (scroll) scrollToItem(i, instant);
     if (hash) writeHash(s.id);
+  }
+
+  function renderDetail(s, i) {
+    const d = s.detail || {};
+    const info = (d.info || []).map(([k, v]) => `<div class="stat"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+    const paras = (d.body || []).map((t) => `<p>${esc(t)}</p>`).join('');
+    const links = (d.links || []).map((l) => `<a class="d-link" href="${esc(l.href)}" target="_blank" rel="noopener noreferrer">${esc(l.label)}${arrow}</a>`).join('');
+    detailEl.style.cssText = vars(s);
+    dScroll.innerHTML = `
+      <div class="d-hero">
+        <div class="d-jacket">${jacket(s)}</div>
+        <div class="d-head">
+          <span class="d-no">NO. ${pad(i + 1)} / ${pad(SONGS.length)}</span>
+          <h2 class="d-title">${esc(s.title)}</h2>
+          <p class="d-sub">${esc(s.sub)}</p>
+          ${chips(s)}
+        </div>
+      </div>
+      ${info ? `<section class="d-sec"><h3 class="d-h">Chart info</h3><dl class="d-stats">${info}</dl></section>` : ''}
+      ${paras ? `<section class="d-sec"><h3 class="d-h">Notes</h3><div class="d-body">${paras}</div></section>` : ''}
+      ${links ? `<section class="d-sec"><h3 class="d-h">Links</h3><div class="d-links">${links}</div></section>` : ''}
+      <p class="d-hint">&larr; &rarr; next song &middot; Esc back</p>`;
+    dScroll.scrollTop = 0;
+  }
+
+  function setDetail(open, { focus = true } = {}) {
+    if (open === detailOpen) return;
+    detailOpen = open;
+    body.dataset.detail = open ? 'open' : '';
+    detailEl.inert = !open;
+    list.inert = open && !wide.matches;
+    $('#home .lbl').textContent = open ? 'Back' : 'Home';
+    if (focus) (open ? dScroll : list).focus({ preventScroll: true });
+  }
+  wide.addEventListener('change', () => { list.inert = detailOpen && !wide.matches; });
+
+  function openDetail() {
+    if (detailOpen) return;
+    pushedDetail = true;
+    location.hash = `#/${SONGS[sel].id}/info`;
+  }
+  function closeDetail() {
+    if (!detailOpen) return;
+    if (pushedDetail) history.back();
+    else location.hash = `#/${SONGS[sel].id}`;
   }
 
   function scrollToItem(i, instant) {
@@ -86,7 +138,8 @@
   function writeHash(id) {
     clearTimeout(hashTimer);
     hashTimer = setTimeout(() => {
-      if (view === 'select' && location.hash !== `#/${id}`) history.replaceState(null, '', `#/${id}`);
+      const h = `#/${id}${detailOpen ? '/info' : ''}`;
+      if (view === 'select' && location.hash !== h) history.replaceState(null, '', h);
     }, 140);
   }
 
@@ -110,13 +163,15 @@
 
   /* ---------- routing ---------- */
   function route() {
-    const id = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+    const [id, sub] = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
     const i = SONGS.findIndex((s) => s.id === id);
     if (i < 0) {
       view = 'title';
       body.dataset.view = 'title';
       selectView.inert = true;
       titleView.inert = false;
+      pushedDetail = false;
+      setDetail(false, { focus: false });
       applyTheme(DEFAULT);
       $('#ghost').textContent = 'ETAN';
       document.title = 'etan://home';
@@ -128,7 +183,9 @@
     titleView.inert = true;
     selectView.inert = false;
     select(i, { scroll: true, instant: true, hash: false });
-    if (entering) list.focus({ preventScroll: true });
+    if (sub !== 'info') pushedDetail = false;
+    setDetail(sub === 'info');
+    if (entering && sub !== 'info') list.focus({ preventScroll: true });
     measure();
   }
   addEventListener('hashchange', route);
@@ -139,23 +196,29 @@
     if (!li) return;
     const i = +li.dataset.i;
     if (i !== sel) select(i, { scroll: true });
-    // TODO(next step): clicking the selected song opens its chart info panel
+    else openDetail();
   });
   $('#prev').addEventListener('click', () => select(sel - 1, { scroll: true }));
   $('#next').addEventListener('click', () => select(sel + 1, { scroll: true }));
+  $('#open').addEventListener('click', openDetail);
+  $('#home').addEventListener('click', (e) => { if (detailOpen) { e.preventDefault(); closeDetail(); } });
 
   addEventListener('keydown', (e) => {
     if (document.activeElement?.closest?.('#con') || view !== 'select' || e.altKey || e.ctrlKey || e.metaKey) return;
     const go = (n) => { e.preventDefault(); select(n, { scroll: true }); };
+    const d = detailOpen; // in the panel, up/down/page keys scroll it; left/right switch song
+    const typing = !['BODY', 'UL'].includes(document.activeElement?.tagName) && !document.activeElement?.matches?.('.d-scroll');
     switch (e.key) {
-      case 'ArrowDown': case 'ArrowRight': case 'j': go(sel + 1); break;
-      case 'ArrowUp': case 'ArrowLeft': case 'k': go(sel - 1); break;
-      case 'PageDown': go(sel + 3); break;
-      case 'PageUp': go(sel - 3); break;
-      case 'Home': go(0); break;
-      case 'End': go(SONGS.length - 1); break;
-      case 'Escape': e.preventDefault(); location.hash = '#/'; break;
-      case 'Enter': /* TODO(next step): open detail panel */ break;
+      case 'ArrowRight': case 'j': go(sel + 1); break;
+      case 'ArrowLeft': case 'k': go(sel - 1); break;
+      case 'ArrowDown': if (!d) go(sel + 1); break;
+      case 'ArrowUp': if (!d) go(sel - 1); break;
+      case 'PageDown': if (!d) go(sel + 3); break;
+      case 'PageUp': if (!d) go(sel - 3); break;
+      case 'Home': if (!d) go(0); break;
+      case 'End': if (!d) go(SONGS.length - 1); break;
+      case 'Escape': e.preventDefault(); if (d) closeDetail(); else location.hash = '#/'; break;
+      case 'Enter': if (!d && !typing) { e.preventDefault(); openDetail(); } break;
     }
   });
 
