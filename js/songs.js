@@ -232,7 +232,7 @@ const SONGS = [
     id: 'katsune',
     title: 'Katsune',
     sub: 'Discord bot made for Catulus\' Cat Tree.',
-    chips: ['Discord', 'Catulus'],
+    chips: ['Discord', 'Python', 'Catulus', 'Cats?'],
     a: '#FF4D4D', b: '#FF8A5A', ink: '#FF6B6B',
     jacket: { pattern: 'zig', text: 'KATSUNE' },
     detail: {
@@ -240,12 +240,17 @@ const SONGS = [
         ["Platform", "Discord"],
         ["Language", "Python"],
         ["Made for", "Catulus' Cat Tree"],
+        ["Source", "Open"],
+        ["Vibe", "Cat tree, but make it a bot"],
       ],
       body: [
         "The Discord bot for Catulus' Cat Tree!",
+        "Built for one community instead of everywhere, so it only has to be good at one place. Less \"a bot for everyone\", more \"a bot for the cats\".",
+        "Open source, written in Python. Poke around the code or report a bug on GitHub.",
       ],
       links: [
         { label: "GitHub", href: "https://github.com/etangaming123/katsune" },
+        { label: "Report an issue", href: "https://github.com/etangaming123/katsune/issues" },
       ],
     },
   },
