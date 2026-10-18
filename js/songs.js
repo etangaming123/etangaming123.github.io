@@ -43,23 +43,20 @@ const SONGS = [
   {
     id: 'games',
     title: 'Games',
-    sub: 'I tap buttons on arcade game.',
-    chips: ['Rhythm', 'Backlog', 'TODO'],
+    sub: 'My name has "gaming" dude',
+    chips: ['Rhythm', 'Casual', '[quote]niche[endquote]'],
     a: '#57E1E6', b: '#F395F6', ink: '#94E649',
     jacket: { pattern: 'checker', text: 'GAMES' },
     detail: {
       info: [
         ["Main", "maimai DX"],
         ["Cabinet", "Arcade"],
-        ["CiRCLE code", "QRT6RPB9"],
-        ["Backlog", "Infinite"],
       ],
       body: [
-        "maimai DX is the main one. Everything else is a side quest.",
-        "Friend me on maimai DX NET and join my CiRCLE (team) with code QRT6RPB9. You have to be logged in to maimai DX NET for the friend link to work.",
+        "I LOVE maimai. for more than the game, I've met a whole bunch of cool people at my local arcade :)",
       ],
       list: {
-        label: 'Side quests',
+        label: 'Other games',
         items: [
           // [name, tagline, optional link]
           ['TETR.IO', 'I stack blocks, sometimes.', 'https://ch.tetr.io/u/bug'],
