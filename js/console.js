@@ -42,11 +42,19 @@
   const todoCount = () => (JSON.stringify(SONGS).match(/TODO/g) || []).length;
 
   const CMDS = {
-    help: { pub: 1, run: () => print([
-      'help: list commands',
-      'todo: the rest of this command :)'
-    ]) },
-    goto: { pub: 1, run: (a) => {
+    help: { pub: 1, desc: 'list commands, or describe one: help [command]', run: (a) => {
+      const name = (a[0] || '').toLowerCase();
+      if (name) {
+        const c = CMDS[name];
+        if (c && (c.pub || c.desc)) print(`${name}: ${c.desc}`);
+        else print(`help: no help for '${a[0]}'. try 'help'.`, 'err');
+        return;
+      }
+      const pub = Object.keys(CMDS).filter((k) => CMDS[k].pub && Object.keys(CMDS).find((j) => CMDS[j] === CMDS[k]) === k);
+      const w = Math.max(...pub.map((k) => k.length)) + 2;
+      print(['commands:', ...pub.map((k) => `  ${k.padEnd(w)}${CMDS[k].desc}`), '', "aliases: pages=ls, man/?=help, quit=exit, cls=clear, hi=hello", 'tip: Tab completes, Up/Down recalls history, Ctrl+L clears.'], 'dim');
+    } },
+    goto: { pub: 1, desc: 'jump to a page: goto [page]', run: (a) => {
       const r = resolve(a.join(' '));
       if (r.id) {
         print(`catching a train to etan://${r.id === 'home' ? 'home' : r.id} ...`, 'ok');
@@ -55,10 +63,10 @@
       else if (r.none) print(['usage: goto [page]', `pages: ${PAGES.join(', ')}`], 'dim');
       else print(`404: no such chart "${a.join(' ')}". try 'ls'.`, 'err');
     } },
-    ls: { pub: 1, run: () => print(PAGES.map((p, i) => `${String(i).padStart(2, '0')}  etan://${p}`)) },
-    whois: { pub: 1, run: () => print('Access denied. [Insufficient permissions]', 'err') },
-    whoami: { pub: 1, run: () => print(['visitor', 'permissions: '], 'ok') },
-    lastseen: { pub: 1, run: () => print(pick([
+    ls: { pub: 1, desc: 'list every page', run: () => print(PAGES.map((p, i) => `${String(i).padStart(2, '0')}  etan://${p}`)) },
+    whois: { pub: 1, desc: 'who runs this place?', run: () => print('Access denied. [Insufficient permissions]', 'err') },
+    whoami: { pub: 1, desc: 'show current user', run: () => print(['guest', 'permissions: read-only. look, don\'t touch.'], 'ok') },
+    lastseen: { pub: 1, desc: 'when was etan last seen?', run: () => print(pick([
       'last seen: 4 minutes ago, resizing a div by 2px.',
       'last seen: staring at the backlog. the backlog stared back.',
       'last seen: pushing to main. regrets pending.',
@@ -68,18 +76,18 @@
       'last seen: asleep. probably. check discord.',
       'last seen: 2 minutes ago, asking Fable 5.1 on Ultracode with dangerous permissions "who is json?"'
     ]), 'ok') },
-    status: { pub: 1, run: () => print([
-      'PLAYER ....... etan',
+    status: { pub: 1, desc: 'player stats', run: () => print([
+      'PLAYER ....... guest',
       'CLASS ........ builder of bots, tools, questionable web pages',
       'STATUS ....... empty',
       'SLEEP ........ few hours?',
       `TODOs ........ ${todoCount()} and counting`,
     ], 'ok') },
-    todo: { pub: 1, run: () => {
+    todo: { pub: 1, desc: 'count the TODOs left', run: () => {
       const n = todoCount();
       print(n ? [`${n} TODO${n > 1 ? 's' : ''} left in songs.js.`, 'no pressure.'] : ['zero TODOs. who are you and what did you do with etan?'], n ? 'hl' : 'ok');
     } },
-    fortune: { pub: 1, run: () => print(pick([
+    fortune: { pub: 1, desc: 'get your fortune', run: () => print(pick([
       'your next commit will contain exactly one typo.',
       'a rhythm game will eat your evening. you will say it was worth it.',
       'the bug is in the line you were sure was fine.',
@@ -87,16 +95,16 @@
       'you will lose a combo to a single stray note. as is tradition.',
       'someone in the server is about to say "wait, is the bot down?"',
     ]), 'hl') },
-    credits: { pub: 1, run: () => print([
+    credits: { pub: 1, desc: 'who made this', run: () => print([
       'design + code ... Claude 😁😁😁',
       'fonts ........... Dela Gothic One, Chakra Petch, Atkinson Hyperlegible, Share Tech Mono',
       'frameworks ...... none. we do not talk about frameworks.',
       'real arcade games harmed ... 0',
     ]) },
-    date: { pub: 1, run: () => print(new Date().toString()) },
-    uptime: { pub: 1, run: () => { const s = Math.round((performance.now() - t0) / 1000); print(`you have wasted ${s} second${s === 1 ? '' : 's'} here. thank you.`); } },
-    clear: { pub: 1, run: () => { log.textContent = ''; } },
-    exit: { pub: 1, run: () => close() },
+    date: { pub: 1, desc: 'print the date and time', run: () => print(new Date().toString()) },
+    uptime: { pub: 1, desc: 'time spent here', run: () => { const s = Math.round((performance.now() - t0) / 1000); print(`you have wasted ${s} second${s === 1 ? '' : 's'} here. thank you.`); } },
+    clear: { pub: 1, desc: 'clear the screen', run: () => { log.textContent = ''; } },
+    exit: { pub: 1, desc: 'close the console', run: () => close() },
 
     // hidden
     sudo: { run: () => print(['guest is not in the sudoers file.', 'this incident will be reported. (to nobody. it is a static site.)'], 'err') },
@@ -203,7 +211,7 @@
     if (!placed) place(); else apply();
     if (!booted) {
       booted = true;
-      print(['etangaming123 Shell console', '(c) no one - 20xx', '', "type 'help' for commands."]);
+      print(['etangaming123 Shell console', '(c) no one - 20xx', '', 'logged in as guest.', "type 'help' for commands."]);
     }
     input.focus({ preventScroll: true });
   }
