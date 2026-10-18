@@ -127,8 +127,9 @@
   }
   function closeDetail() {
     if (!detailOpen) return;
-    if (pushedDetail) history.back();
-    else location.hash = `#/${SONGS[sel].id}`;
+    clearTimeout(hashTimer); // a pending replaceState would rewrite the hash back to /info
+    // always land on the list with the current song, never via history (the song may have changed in the panel)
+    location.hash = `#/${SONGS[sel].id}`;
   }
 
   function scrollToItem(i, instant) {
@@ -188,6 +189,7 @@
   }
 
   function route() {
+    clearTimeout(hashTimer);
     resetTransitions();
     const [id, sub] = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
     const i = SONGS.findIndex((s) => s.id === id);
