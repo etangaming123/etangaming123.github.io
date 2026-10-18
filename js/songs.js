@@ -10,7 +10,6 @@
             list   = { label, items: [[name, tagline, optional href]] } short rows for lesser games
             stats  = optional live stat card from a plain-text gist (KEY: value lines)
             widget = optional live Discord widget, loaded on click (needs widgets enabled on the server)
-  TODO    : placeholder copy, replace freely
 */
 const SONGS = [
   {
@@ -44,7 +43,7 @@ const SONGS = [
     id: 'games',
     title: 'Games',
     sub: 'My name has "gaming" dude',
-    chips: ['Rhythm', 'Casual', '[quote]niche[endquote]'],
+    chips: ['Rhythm', 'Casual', 'Niche'],
     a: '#57E1E6', b: '#F395F6', ink: '#94E649',
     jacket: { pattern: 'checker', text: 'GAMES' },
     detail: {
@@ -107,7 +106,7 @@ const SONGS = [
     id: 'hurstville-lurkers',
     title: 'Hurstville Lurkers',
     sub: 'Discord server - for local community, rhythm games, and a mix of both.',
-    chips: ['Community', 'Local', 'TODO'],
+    chips: ['Community', 'Local', 'Lurkers'],
     a: '#BB88EE', b: '#FFBB00', ink: '#DDAACC',
     jacket: { pattern: 'stripes', text: 'LURK' },
     detail: {
