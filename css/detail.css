@@ -211,6 +211,12 @@ body[data-detail="open"] .key-open { display: none; }
   font-weight: 700;
   font-size: 12px;
 }
+.dw-vcs { display: grid; gap: 8px; margin-bottom: 8px; }
+.dw-vc { border-left: 4px solid var(--b); background: var(--edge); padding: 4px 10px 4px 9px; }
+.dw-vch { display: flex; justify-content: space-between; gap: 8px; font-family: var(--f-ui); font-weight: 700; font-size: 12px; }
+.dw-vcn { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dw-vcc { color: var(--muted); }
+.dw-vcm { margin: 2px 0 0; padding: 0; list-style: none; }
 .dw-members {
   margin: 0;
   padding: 0 6px 0 0;

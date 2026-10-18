@@ -11,7 +11,7 @@
   const safeImg = (u) => typeof u === 'string' && u.startsWith('https://cdn.discordapp.com/');
 
   function loading(box) {
-    box.replaceChildren(el('p', 'dw-msg', 'Phoning Discord...'));
+    box.replaceChildren(el('p', 'dw-msg', 'Just a sec...'));
   }
 
   function failed(box, cfg, why) {
@@ -51,38 +51,56 @@
       head.append(join);
     }
 
+    const memberItem = (m, inVc) => {
+      const li = el('li', 'dw-m');
+      const av = el('span', 'dw-av');
+      if (safeImg(m.avatar_url)) {
+        const img = new Image();
+        img.alt = ''; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer'; img.src = m.avatar_url;
+        av.append(img);
+      }
+      const dot = el('i', `dw-dot s-${/^(online|idle|dnd)$/.test(m.status) ? m.status : 'online'}`);
+      dot.title = m.status || '';
+      av.append(dot);
+      const who = el('span', 'dw-who');
+      who.append(el('span', 'dw-un', m.nick || m.username || '?'));
+      const sub = inVc
+        ? [m.self_deaf || m.deaf ? 'Deafened' : (m.self_mute || m.mute ? 'Muted' : ''), m.game?.name ? `Playing ${m.game.name}` : ''].filter(Boolean).join(' · ')
+        : m.game?.name ? `Playing ${m.game.name}` : (m.channel_id && chans.get(m.channel_id)) ? `In ${chans.get(m.channel_id)}` : '';
+      if (sub) who.append(el('span', 'dw-sub', sub));
+      li.append(av, who);
+      return li;
+    };
+
     const sec = (label) => el('h5', 'dw-h', label);
     const parts = [head];
 
     if (voice.length) {
       parts.push(sec('Voice channels'));
-      const ul = el('ul', 'dw-chans');
-      voice.sort((a, b) => a.position - b.position).forEach((c) => ul.append(el('li', '', c.name)));
-      parts.push(ul);
+      voice.sort((a, b) => a.position - b.position);
+      const inVc = (c) => members.filter((m) => m.channel_id === c.id);
+      const wrap = el('div', 'dw-vcs');
+      const idle = el('ul', 'dw-chans');
+      for (const c of voice) {
+        const here = inVc(c);
+        if (!here.length) { idle.append(el('li', '', c.name)); continue; }
+        const box2 = el('div', 'dw-vc');
+        const h = el('div', 'dw-vch');
+        h.append(el('span', 'dw-vcn', c.name), el('span', 'dw-vcc', String(here.length)));
+        const ul = el('ul', 'dw-vcm');
+        here.forEach((m) => ul.append(memberItem(m, true)));
+        box2.append(h, ul);
+        wrap.append(box2);
+      }
+      if (wrap.children.length) parts.push(wrap);
+      if (idle.children.length) parts.push(idle);
     }
 
     parts.push(sec(`Online - ${members.length}`));
     if (!members.length) parts.push(el('p', 'dw-msg', 'Nobody visible right now. Spooky.'));
     else {
       const ul = el('ul', 'dw-members');
-      for (const m of members) {
-        const li = el('li', 'dw-m');
-        const av = el('span', 'dw-av');
-        if (safeImg(m.avatar_url)) {
-          const img = new Image();
-          img.alt = ''; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer'; img.src = m.avatar_url;
-          av.append(img);
-        }
-        const dot = el('i', `dw-dot s-${/^(online|idle|dnd)$/.test(m.status) ? m.status : 'online'}`);
-        dot.title = m.status || '';
-        av.append(dot);
-        const who = el('span', 'dw-who');
-        who.append(el('span', 'dw-un', m.nick || m.username || '?'));
-        const sub = m.game?.name ? `Playing ${m.game.name}` : (m.channel_id && chans.get(m.channel_id)) ? `In ${chans.get(m.channel_id)}` : '';
-        if (sub) who.append(el('span', 'dw-sub', sub));
-        li.append(av, who);
-        ul.append(li);
-      }
+      for (const m of members) ul.append(memberItem(m, false));
       parts.push(ul);
     }
 
@@ -117,7 +135,7 @@
     if (cache[cfg.id]) return load(box, cfg);
     const btn = el('button', 'dw-load', 'Load live server widget');
     btn.type = 'button';
-    const note = el('p', 'dw-note', 'Fetches the member list from Discord when you click. Nothing is requested before that.');
+    const note = el('p', 'dw-note', 'grabs online server members - contacts discord api!');
     btn.addEventListener('click', () => load(box, cfg));
     box.replaceChildren(btn, note);
   };

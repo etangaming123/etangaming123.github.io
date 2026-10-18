@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>etan://home</title>
   <meta name="description" content="I make Shit on the internet.">
-  <meta name="theme-color" content="#051631">
+  <meta name="theme-color" content="#DDAACC">
+	<meta property="og:title" content="etan://home">
+	<meta property="og:description" content="I make Shit on the internet.">
+	<meta property="og:image" content="https://etangaming.xyz/assets/jackets/about-me.png">
+	<meta property="og:url" content="https://etangaming.xyz/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@500;700&family=Dela+Gothic+One&display=swap" rel="stylesheet">
@@ -14,6 +18,7 @@
   <link rel="stylesheet" href="css/select.css">
   <link rel="stylesheet" href="css/detail.css">
   <link rel="stylesheet" href="css/console.css">
+  <link rel="icon" href="assets/jackets/about-me.png">
 </head>
 <body data-view="title">
   <div class="bg" aria-hidden="true"><div class="ghost" id="ghost">ETAN</div></div>
@@ -27,6 +32,7 @@
 
     <div class="t-main">
       <h1 class="logo">etan<i>://</i></h1>
+      <p class="from" id="from" hidden></p>
       <p class="tagline"><span>I make <button type="button" class="sh" id="sh" aria-haspopup="dialog" aria-label="Sh (opens the cheats console)">Sh</button>it on the internet.</span></p>
 
       <section class="plate" aria-label="Player data">
@@ -34,11 +40,11 @@
           <h2>Player data</h2>
           <dl>
             <dt>Name</dt><dd>etan <span class="todo">(@etangaming123/etangamingxyz)</span></dd>
-            <dt>Class</dt><dd>Builder of bots, tools and questionable web pages</dd>
+            <dt>Class</dt><dd>Making random content on the web, or playing various games.</dd>
             <dt>Base</dt><dd class="todo">Sydney, Australia.</dd>
-            <dt>Status</dt><dd>¯\_(ツ)_/¯</dd>
+            <dt>Status</dt><dd>Dying</dd>
           </dl>
-          <p>Random bullshit GO!!!</p>
+          <p>I'm etangaming123 - rhythm game casual, general (vibe) coder, etc.<br>Welcome to hell - that is, my website.</p>
         </div>
       </section>
     </div>
@@ -46,7 +52,7 @@
     <div class="t-bottom">
       <span class="btn-wrap">
         <a class="btn" href="#/about-me" id="start">
-          Click to learn more
+          Let's do this!
           <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 4l10 10L3 24M14 4l10 10-10 10" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="miter"/></svg>
         </a>
       </span>
@@ -88,7 +94,7 @@
     </div>
     <div class="con-log" id="con-log" role="log" aria-live="polite"></div>
     <form class="con-form" id="con-form" autocomplete="off">
-      <label class="con-ps" for="con-in">C:\guest&gt;</label>
+      <label class="con-ps" for="con-in">C:\visitor&gt;</label>
       <input id="con-in" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" enterkeyhint="send">
     </form>
   </div>
@@ -98,6 +104,7 @@
   <script src="js/songs.js"></script>
   <script src="js/widget.js"></script>
   <script src="js/stats.js"></script>
+  <script src="js/from.js"></script>
   <script src="js/app.js"></script>
   <script src="js/console.js"></script>
 </body>

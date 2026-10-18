@@ -293,6 +293,17 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
     opacity: .55;
   }
   .pv-jacket .jacket { width: 100%; box-shadow: 0 0 0 5px var(--panel); }
+  .pv-jacket, .pv-title { cursor: pointer; }
+  .pv-jacket .jacket { transition: transform .18s; }
+  .pv-jacket:hover .jacket { transform: translate(-4px, -4px); }
+  .pv-open {
+    position: absolute; right: 0; bottom: 0; z-index: 1;
+    padding: 8px 18px; font-family: var(--f-ui); font-weight: 700; font-size: 15px;
+    letter-spacing: .14em; text-transform: uppercase;
+    background: var(--ink); color: var(--panel);
+    transition: padding .18s;
+  }
+  .pv-jacket:hover .pv-open { padding-inline: 26px; }
   .pv-title { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(30px, 4.2vw, 64px); line-height: 1; color: var(--ink); text-shadow: .05em .05em 0 var(--deep); }
   .pv-sub { margin: 0; max-width: 34ch; font-size: 1.1em; color: var(--text); }
   .pv-chips .chip { font-size: 13px; padding: 3px 16px 3px 10px; }

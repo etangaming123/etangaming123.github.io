@@ -71,6 +71,18 @@
 }
 .tagline span { display: inline-block; transform: skewX(9deg); }
 
+/* "hello from [platform]" line under the logo */
+.from {
+  margin: 10px 0 0 14px;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: clamp(14px, 3.6vw, 20px);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.from[hidden] { display: none; }
+
 /* "player data" plate */
 .plate {
   --cut: 20px;
@@ -159,6 +171,7 @@
   .logo { font-size: clamp(110px, 15.5vw, 280px); white-space: nowrap; }
   .t-main { display: contents; }
   .logo { grid-column: 1 / -1; grid-row: 2; align-self: start; margin-top: 3vh; pointer-events: none; }
+  .from { grid-column: 1; grid-row: 2; align-self: start; margin: calc(3vh + clamp(110px, 15.5vw, 280px) * .9 + 14px) 0 0 28px; position: relative; z-index: 1; }
   .tagline { grid-column: 1; grid-row: 2; align-self: end; margin-bottom: 6vh; position: relative; z-index: 1; }
   .plate { grid-column: 2; grid-row: 2; align-self: center; margin: 16vh 0 0 -40px; justify-self: start; }
   .t-bottom { grid-column: 1 / -1; grid-row: 3; justify-content: flex-end; padding-right: 4vw; }

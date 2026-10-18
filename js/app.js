@@ -78,11 +78,11 @@
       renderDetail(s, i);
       preview.style.cssText = vars(s);
       preview.innerHTML = `
-        <div class="pv-jacket">${jacket(s)}</div>
+        <div class="pv-jacket" role="button" tabindex="-1" aria-label="Open info for ${esc(s.title)}">${jacket(s)}<span class="pv-open">Info &rsaquo;</span></div>
         <h2 class="pv-title">${esc(s.title)}</h2>
         <p class="pv-sub">${esc(s.sub)}</p>
         <div class="pv-chips">${chips(s)}</div>
-        <p class="pv-hint"><kbd>&uarr;</kbd> <kbd>&darr;</kbd> browse &middot; <kbd>Esc</kbd> home</p>`;
+        <p class="pv-hint"><kbd>&uarr;</kbd> <kbd>&darr;</kbd> browse &middot; <kbd>Enter</kbd> / click jacket for info &middot; <kbd>Esc</kbd> home</p>`;
     }
     if (scroll) scrollToItem(i, instant);
     if (hash) writeHash(s.id);
@@ -236,6 +236,7 @@
     if (i !== sel) select(i, { scroll: true });
     else openDetail();
   });
+  preview.addEventListener('click', (e) => { if (e.target.closest('.pv-jacket, .pv-title')) openDetail(); });
   $('#prev').addEventListener('click', () => select(sel - 1, { scroll: true }));
   $('#next').addEventListener('click', () => select(sel + 1, { scroll: true }));
   $('#open').addEventListener('click', openDetail);

@@ -57,7 +57,7 @@
     } },
     ls: { pub: 1, run: () => print(PAGES.map((p, i) => `${String(i).padStart(2, '0')}  etan://${p}`)) },
     whois: { pub: 1, run: () => print('Access denied. [Insufficient permissions]', 'err') },
-    whoami: { pub: 1, run: () => print(['guest (player 2)', 'permissions: look, tap, do not touch'], 'ok') },
+    whoami: { pub: 1, run: () => print(['visitor', 'permissions: '], 'ok') },
     lastseen: { pub: 1, run: () => print(pick([
       'last seen: 4 minutes ago, resizing a div by 2px.',
       'last seen: staring at the backlog. the backlog stared back.',
