@@ -109,6 +109,8 @@ body[data-detail="open"] .detail {
 .d-link:nth-child(even) { margin-left: 10px; }
 
 .d-hint { margin: 26px 0 0; font-family: var(--f-ui); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+/* keyboard hint: only where there is a keyboard-sized screen */
+@media (max-width: 859px), (pointer: coarse) { .d-hint { display: none; } }
 
 /* bar: Info key only when the panel is closed, Home becomes Back when open */
 .key-open { background: linear-gradient(100deg, var(--a), var(--b)); color: #051631; box-shadow: none; padding: 0 16px; }
