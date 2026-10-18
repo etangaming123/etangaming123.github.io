@@ -1,22 +1,19 @@
 /* cheats console */
-body.con-open { overflow: hidden; }
-
+/* floating window: no scrim, page underneath stays usable */
 .con {
   position: fixed;
-  inset: 0;
   z-index: 40;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 12px 12px max(12px, env(safe-area-inset-bottom));
-  background: rgba(3, 12, 28, .62);
+  left: var(--cx, 8px);
+  top: var(--cy, 56px);
+  width: min(620px, calc(100vw - 16px));
+  height: min(46dvh, 440px);
 }
 .con[hidden] { display: none; }
 
 .con-win {
   --cut: 22px;
-  width: min(100%, 700px);
-  height: min(66dvh, 520px);
+  width: 100%;
+  height: 100%;
   background: linear-gradient(135deg, var(--a), var(--b));
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
   filter: drop-shadow(8px 8px 0 var(--deep));
@@ -43,7 +40,13 @@ body.con-open { overflow: hidden; }
   font-family: var(--f-display);
   font-size: 14px;
   text-transform: uppercase;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
 }
+.con.dragging .con-bar { cursor: grabbing; }
+.con.dragging .con-win { filter: drop-shadow(12px 14px 0 var(--deep)); }
+.con-bar:focus-visible { outline-offset: -4px; outline-color: #051631; }
 .con-title { padding: 9px 14px; letter-spacing: .02em; }
 .con-title i { font-family: var(--f-ui); font-style: normal; font-weight: 700; font-size: 11px; letter-spacing: .12em; opacity: .75; }
 .con-x {
@@ -122,6 +125,6 @@ body.con-open { overflow: hidden; }
 }
 
 @media (min-width: 860px) {
-  .con { align-items: center; padding-bottom: 12vh; padding-right: 8vw; }
+  .con { height: min(52dvh, 460px); }
   .con-log { font-size: 15.5px; }
 }

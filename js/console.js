@@ -44,26 +44,14 @@
 
   const CMDS = {
     help: { pub: 1, run: () => print([
-      'available cheats:',
-      '  goto [page]    warp to a page (try: goto bot)',
-      '  ls             list every page',
-      '  whois [user]   look somebody up',
-      '  whoami         who, me?',
-      '  lastseen       where has etan been',
-      '  status         player data',
-      '  todo           how unfinished is this site',
-      '  fortune        a prophecy, probably wrong',
-      '  credits        who made this',
-      '  date / uptime  the usual',
-      '  clear / exit   tidy up / leave',
-      '',
-      'there are more. i am not telling you where.',
+      'help: list commands',
+      'todo: the rest of this command :)'
     ]) },
     goto: { pub: 1, run: (a) => {
       const r = resolve(a.join(' '));
       if (r.id) {
-        print(`warping to etan://${r.id === 'home' ? 'home' : r.id} ...`, 'ok');
-        setTimeout(() => { close(false); location.hash = r.id === 'home' ? '#/' : `#/${r.id}`; }, 380);
+        print(`catching a train to etan://${r.id === 'home' ? 'home' : r.id} ...`, 'ok');
+        setTimeout(() => { location.hash = r.id === 'home' ? '#/' : `#/${r.id}`; }, 250);
       } else if (r.many) print(`ambiguous. did you mean: ${r.many.join(', ')}?`, 'err');
       else if (r.none) print(['usage: goto [page]', `pages: ${PAGES.join(', ')}`], 'dim');
       else print(`404: no such chart "${a.join(' ')}". try 'ls'.`, 'err');
@@ -79,12 +67,13 @@
       'last seen: three tabs deep in a rabbit hole nobody asked about.',
       'last seen: "just one more credit".',
       'last seen: asleep. probably. check discord.',
+      'last seen: 2 minutes ago, asking Fable 5.1 on Ultracode with dangerous permissions "who is json?"'
     ]), 'ok') },
     status: { pub: 1, run: () => print([
-      'PLAYER ....... Etan',
+      'PLAYER ....... etan',
       'CLASS ........ builder of bots, tools, questionable web pages',
-      'STATUS ....... online. probably.',
-      'SLEEP ........ [NOT FOUND]',
+      'STATUS ....... empty',
+      'SLEEP ........ few hours?',
       `TODOs ........ ${todoCount()} and counting`,
     ], 'ok') },
     todo: { pub: 1, run: () => {
@@ -100,7 +89,7 @@
       'someone in the server is about to say "wait, is the bot down?"',
     ]), 'hl') },
     credits: { pub: 1, run: () => print([
-      'design + code ... etan',
+      'design + code ... Claude 😁😁😁',
       'fonts ........... Dela Gothic One, Chakra Petch, Atkinson Hyperlegible, Share Tech Mono',
       'frameworks ...... none. we do not talk about frameworks.',
       'real arcade games harmed ... 0',
@@ -123,7 +112,7 @@
     secret: { run: () => print('Access denied. [Insufficient permissions]', 'err') },
     hello: { run: () => print(pick(['hi.', 'hello, player 2.', 'o/', 'sup. try "help".'])) },
     echo: { run: (a) => print(a.join(' ')) },
-    reboot: { run: () => { print('rebooting arcade...', 'ok'); setTimeout(() => { close(false); location.hash = '#/'; }, 500); } },
+    reboot: { run: () => { print('rebooting arcade...', 'ok'); setTimeout(() => { location.hash = '#/'; }, 400); } },
     matrix: { run: () => print(['wake up, player 2...', 'the combo has you.', 'follow the white notes.'], 'ok') },
     bot: { run: () => print('etan bot: online-ish. ask it nicely.', 'ok') },
   };
@@ -159,23 +148,70 @@
     } else if (hits.length > 1) print(hits.join('  '), 'dim');
   }
 
-  /* ---------- open / close ---------- */
+  /* ---------- open / close / drag ---------- */
+  const bar = $('#con-bar');
+  const pos = { x: 0, y: 0 };
+  let placed = false;
+  let drag = null;
+
+  const apply = () => {
+    const w = con.offsetWidth, h = con.offsetHeight;
+    pos.x = Math.round(Math.min(Math.max(pos.x, 0), Math.max(0, innerWidth - w)));
+    pos.y = Math.round(Math.min(Math.max(pos.y, 0), Math.max(0, innerHeight - h)));
+    con.style.setProperty('--cx', pos.x + 'px');
+    con.style.setProperty('--cy', pos.y + 'px');
+  };
+  const save = () => { try { sessionStorage.setItem('etan-con', JSON.stringify(pos)); } catch (e) { /* no storage, fine */ } };
+  function place() {
+    let saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem('etan-con')); } catch (e) { /* ignore */ }
+    if (saved && Number.isFinite(saved.x)) Object.assign(pos, saved);
+    else if (innerWidth >= 860) { pos.x = innerWidth - con.offsetWidth - 36; pos.y = innerHeight - con.offsetHeight - 36; }
+    else { pos.x = (innerWidth - con.offsetWidth) / 2; pos.y = 56; }
+    apply();
+    placed = true;
+  }
+
+  bar.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button') || e.button > 0) return;
+    drag = { dx: e.clientX - pos.x, dy: e.clientY - pos.y };
+    bar.setPointerCapture(e.pointerId);
+    con.classList.add('dragging');
+  });
+  bar.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    pos.x = e.clientX - drag.dx;
+    pos.y = e.clientY - drag.dy;
+    apply();
+  });
+  const drop = () => { if (drag) { drag = null; con.classList.remove('dragging'); save(); } };
+  bar.addEventListener('pointerup', drop);
+  bar.addEventListener('pointercancel', drop);
+  bar.addEventListener('keydown', (e) => {
+    const step = e.shiftKey ? 96 : 24;
+    const d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
+    if (!d) return;
+    e.preventDefault();
+    pos.x += d[0]; pos.y += d[1];
+    apply(); save();
+  });
+  addEventListener('resize', () => { if (!con.hidden) apply(); });
+
   function open() {
-    if (!con.hidden) return;
+    if (!con.hidden) { input.focus(); return; }
     returnTo = document.activeElement;
     con.hidden = false;
-    body.classList.add('con-open');
+    if (!placed) place(); else apply();
     if (!booted) {
       booted = true;
-      print(['ETAN//BEAT cheat console v0.1', "type 'help'. or tap a shortcut below.", ''], 'ok');
+      print(['ETANGAMING123 console v0.1', "type 'help'. drag the title bar to move me. keep browsing, i'll stay.", ''], 'ok');
     }
-    input.focus();
+    input.focus({ preventScroll: true });
   }
   function close(restore = true) {
     if (con.hidden) return;
     con.hidden = true;
-    body.classList.remove('con-open');
-    if (restore && returnTo && returnTo.focus) returnTo.focus();
+    if (restore && returnTo && returnTo.focus && document.contains(returnTo)) returnTo.focus();
   }
 
   ['help', 'ls', 'lastseen', 'whois etan', 'goto home'].forEach((c) => {
@@ -188,7 +224,6 @@
 
   opener.addEventListener('click', open);
   $('#con-x').addEventListener('click', () => close());
-  con.addEventListener('click', (e) => { if (e.target === con) close(); });
   form.addEventListener('submit', (e) => { e.preventDefault(); run(input.value); input.value = ''; });
 
   con.addEventListener('keydown', (e) => {
@@ -196,14 +231,8 @@
     if (e.target === input) {
       if (e.key === 'ArrowUp') { e.preventDefault(); if (hi > 0) input.value = history[--hi]; }
       else if (e.key === 'ArrowDown') { e.preventDefault(); input.value = hi < history.length - 1 ? history[++hi] : ((hi = history.length), ''); }
-      else if (e.key === 'Tab' && !e.shiftKey) { e.preventDefault(); complete(); }
+      else if (e.key === 'Tab' && !e.shiftKey && input.value.trim()) { e.preventDefault(); complete(); }
       else if (e.key === 'l' && e.ctrlKey) { e.preventDefault(); log.textContent = ''; }
-    }
-    if (e.key === 'Tab') { // keep focus inside the window
-      const f = [...con.querySelectorAll('button, input')].filter((x) => !x.disabled);
-      const first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last && e.target !== input) { e.preventDefault(); first.focus(); }
     }
   });
 

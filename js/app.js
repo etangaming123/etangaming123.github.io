@@ -145,7 +145,7 @@
   $('#next').addEventListener('click', () => select(sel + 1, { scroll: true }));
 
   addEventListener('keydown', (e) => {
-    if (body.classList.contains('con-open') || view !== 'select' || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (document.activeElement?.closest?.('#con') || view !== 'select' || e.altKey || e.ctrlKey || e.metaKey) return;
     const go = (n) => { e.preventDefault(); select(n, { scroll: true }); };
     switch (e.key) {
       case 'ArrowDown': case 'ArrowRight': case 'j': go(sel + 1); break;
