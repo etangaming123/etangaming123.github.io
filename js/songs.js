@@ -12,15 +12,30 @@
             list   = { label, items: [[name, tagline, optional href]] } short rows for lesser games
             stats  = optional live stat card from a plain-text gist (KEY: value lines)
             widget = optional live Discord widget, loaded on click (needs widgets enabled on the server)
+            blocks = optional rich content, rendered in order after Notes. Each is { type, ... }:
+              { type:'banner',  image, alt?, caption?, height?:'short'|'tall' }   full-width image band
+              { type:'heading', text }                                            section heading (same style as "Notes")
+              { type:'sub',     text }                                            subheading
+              { type:'text',    paras:[...] }                                     paragraphs
+              { type:'media',   image, alt?, caption?, side:'left'|'right', paras:[...] }   image beside text
+              { type:'quote',   text, cite? }
+              { type:'gallery', images:[{ src, alt?, caption? }] }
+              { type:'divider' }
+              { type:'markdown', src }                                            renders a .md file from this repo (e.g. content/ethics.md)
+              { type:'section', name }                                            place a built-in section here: info | notes | stats | list | widget | links
+              { type:'message' }                                                  gist-backed Messages loader (see messages.js)
+            Text in blocks supports **bold**, *italic* and [label](https://link). Author these in editor.html.
 */
 const SONGS = [
   {
-    id: 'about-me',
-    title: 'About me',
-    sub: 'I make things. I do things. I like things.',
-    chips: ['Profile', 'Creating', 'Gaming'],
-    a: '#57E1E6', b: '#F395F6', ink: '#94E649',
-    jacket: { pattern: 'letter', text: 'ABOUT', image: 'assets/jackets/about-me.png' },
+    id: "about-me",
+    title: "About me",
+    sub: "I make things. I do things. I like things.",
+    chips: ["Profile", "Creating", "Gaming"],
+    a: "#57E1E6",
+    b: "#F395F6",
+    ink: "#94E649",
+    jacket: { pattern: "letter", text: "ABOUT", image: "assets/jackets/about-me.png" },
     detail: {
       info: [
         ["Name", "etan"],
@@ -29,90 +44,185 @@ const SONGS = [
         ["Base", "Sydney, Australia"],
         ["Build", "Jack of all trades, master of none"],
       ],
-      body: [
-        "I'm etan, etangaming123, etangamingxyz, \"the rafisol pfp\", or whatever you know me as.",
-        "Amateur coder: I make Python projects and upload some of them to GitHub. etan bot is the main one.",
-        "Content creator: sometimes I post gaming videos. You may have seen me playing maimai.",
-        "\"Gamer\": hence the \"gaming\" in etangaming123. Casual on rhythm games and stacker (Tetris).",
-        "Need an email? Check out me [at] etangaming [dot] xyz. Spam, marketing and \"we'll help you grow your business!\" get ignored. Hellos are welcome.",
-      ],
+      body: ["I'm etan, etangaming123, etangamingxyz, \"the rafisol pfp\", or whatever you know me as."],
       links: [
         { label: "GitHub", href: "https://github.com/etangaming123" },
+      ],
+      blocks: [
+        {
+          type: "banner",
+          image: "assets/uploads/rafisolbannerstatic.png",
+          alt: "rafisol",
+          caption: "rafisol",
+          height: "short",
+        },
+        {
+          type: "text",
+          paras: ["Amateur coder: I make Python projects and upload some of them to GitHub.", "Content creator: sometimes I post gaming videos. You may have seen me playing maimai.", "\"Gamer\": hence the \"gaming\" in etangaming123. Casual on rhythm games, stacker (Tetris), and some other random games on Steam."],
+        },
+        { type: "divider" },
+        {
+          type: "text",
+          paras: ["...by the way, it's etan, or ETAN, not Etan, eTan, or any other capitalisation style. It's either all lowercase, or all uppercase."],
+        },
+        { type: "divider" },
+        {
+          type: "text",
+          paras: ["If you want to contact me directly, you can do so via email.", "Before sending me anything, please be straightforward, address me by name (etan), and respect my inbox. DO NOT EVEN CONSIDER sending me emails if you are a LLM / Spam Bot / Scammer / \"we saw ur website and would like to promote...\" / etc.", "A hello is fine.", ">> me [at] etangaming [dot] xyz <<"],
+        },
       ],
     },
   },
   {
-    id: 'personal',
-    title: 'Personal',
-    sub: 'Who I am, more like.',
-    chips: ['Personal', 'Sleepless', 'What?'],
-    a: '#DDAACC', b: '#BB88EE', ink: '#DDAACC',
-    jacket: { pattern: 'letter', text: 'ABOUT', image: 'assets/jackets/personal.png' },
+    id: "personal",
+    title: "Personal",
+    sub: "Who I am, more like.",
+    chips: ["Personal", "Sleepless", "What?"],
+    a: "#DDAACC",
+    b: "#BB88EE",
+    ink: "#DDAACC",
+    jacket: { pattern: "letter", text: "ABOUT", image: "assets/jackets/personal.png" },
     detail: {
       info: [
         ["Character", "Mizuki Akiyama"],
-        ["From the hit game", "Project SEKAI: Colorful Stage!"],
+        ["From the hit game", "Project SEKAI"],
         ["Professional at", "Procrastinating"],
-        ["Self Deprication", "at its finest"]
+        ["Self Deprication", "at its finest"],
       ],
-      body: [
-        "mizuki just like me fr",
-        "maybe kangel, ame... nah i'm not a larp",
-        "I'm not really known on the internet for anything in particular, just a person who posts random stuff online. Content creation or poorly made code.",
-        "...by the way, it's etan, or ETAN, not Etan, eTan, or any other capitalisation style. It's either all lowercase, or all uppercase.",
-      ],
+      body: ["mizuki just like me fr"],
       links: [
-        { label: "GitHub", href: "https://github.com/etangaming123" },
         { label: "The more personal site", href: "https://etan.etangaming.xyz/" },
         { label: "The old site (bootstrap)", href: "https://bootstrap.etangaming.xyz/" },
-        { label: "The even older site", href: "https://legacy.etangaming.xyz/" }
+        { label: "The even older site", href: "https://legacy.etangaming.xyz/" },
+      ],
+      blocks: [
+        {
+          type: "banner",
+          image: "assets/uploads/mizuki_2024.png",
+          alt: "mizuki (2024 birthday card)",
+          caption: "mizuki (2024 birthday card)",
+          height: "short",
+        },
+        { type: "divider" },
+        {
+          type: "text",
+          paras: ["maybe kangel, ame... nah i'm not a larp", "I'm not really known on the internet for anything in particular, just a person who posts random stuff online. Content creation or poorly made code.", "irl i'm just some chud who talks about rhythm games, project sekai, needy streamer overload... if i even talk, that is. otherwise i'm just rotting at the arcade playing maimai with miku merch (shirt and handbag cuz why not)."],
+        },
+        { type: "divider" },
+        {
+          type: "banner",
+          image: "assets/uploads/mizuki_mafu5.png",
+          alt: "mizuki (wanted to say it in person)",
+          caption: "mizuki (wanted to say it in person)",
+          height: "short",
+        },
       ],
     },
   },
   {
-    id: 'games',
-    title: 'Games',
-    sub: 'My name has "gaming" dude',
-    chips: ['Rhythm', 'Casual', 'Niche'],
-    a: '#57E1E6', b: '#F395F6', ink: '#FFBB00',
-    jacket: { pattern: 'checker', text: 'GAMES', image: 'assets/jackets/games.png' },
+    id: "rui",
+    title: "Rui",
+    sub: "A close friend of mine <3",
+    chips: ["platonic", "friendship", "close"],
+    a: "#BB88EE",
+    b: "#DDAACC",
+    ink: "#BB88EE",
+    jacket: { pattern: "checker", text: "RUI", image: "assets/uploads/rui.png" },
+    detail: {
+      info: [
+        ["First Seen", "5th August, 2025"],
+        ["First Added", "22nd Feburary, 2026"],
+        ["I swear", "It's platonic"],
+        ["started from", "maimaiでらっくす"],
+      ],
+      body: ["hi 🥺🥺🥺"],
+      blocks: [
+        {
+          type: "banner",
+          image: "assets/uploads/mizurui.png",
+          alt: "mizuki and rui",
+          caption: "mizuki and rui",
+          height: "short",
+        },
+        { type: "heading", text: "todo" },
+        {
+          type: "text",
+          paras: ["i'll write the backstory later i swear"],
+        },
+      ],
+      links: [
+        { label: "also go check out hvl", href: "https://hvl.etangaming.xyz" },
+      ],
+    },
+  },
+  {
+    id: "ethics",
+    title: "Ethics",
+    sub: "Rules I (at least try to) follow.",
+    chips: ["Personal", "Honest", "Kind"],
+    a: "#B8DB7E",
+    b: "#57E1E6",
+    ink: "#B8DB7E",
+    jacket: { pattern: "stripes", text: "ETHICS", image: "assets/uploads/ethics.png" },
+    detail: {
+      info: [
+        ["Why", "A rough past"],
+        ["Status", "Trying my best"],
+        ["Copying", "yeah copy it sure"],
+      ],
+      blocks: [
+        { type: "markdown", src: "content/ethics.md" },
+      ],
+      body: ["ethics page cuz i've had a rough past."],
+      links: [],
+    },
+  },
+  {
+    id: "games",
+    title: "Games",
+    sub: "My name has \"gaming\" dude",
+    chips: ["Rhythm", "Casual", "Niche"],
+    a: "#57E1E6",
+    b: "#F395F6",
+    ink: "#FFBB00",
+    jacket: { pattern: "checker", text: "GAMES", image: "assets/jackets/games.png" },
     detail: {
       info: [
         ["Main", "maimai DX"],
         ["Cabinet", "Arcade"],
       ],
-      body: [
-        "I LOVE maimai. for more than the game, I've met a whole bunch of cool people at my local arcade :)",
-        "I also play a whole other variety of games - mainly rhythm games, but also some sick ass games like Denshattack!",
-        "Roblox is my guilty pleasure. The platform is shit, but some games, like Super Bomb Survival, and REDLINER, are actually kinda cool.",
-        "And I play Minecraft with a close friend <3 (hi!)"
-      ],
+      body: ["I LOVE maimai. for more than the game, I've met a whole bunch of cool people at my local arcade :)", "I also play a whole other variety of games - mainly rhythm games, but also some sick ass games like Denshattack!", "Roblox is my guilty pleasure. The platform is shit, but some games, like Super Bomb Survival, and REDLINER, are actually kinda cool.", "And I play Minecraft with a close friend <3 (hi!)"],
       list: {
-        label: 'Other games',
+        label: "Other games",
         items: [
-          // [name, tagline, optional link]
-          ['TETR.IO', 'I stack blocks, sometimes.', 'https://ch.tetr.io/u/bug'],
-          ['Denshattack!', 'DENSHATTACK!!!'],
-          ['Project SEKAI', 'bum rhythm game'],
-          ['Arcaea', 'finger [Content Deleted]'],
-          ['Phigros', 'Phigros'],
+          ["TETR.IO", "I stack blocks, sometimes.", "https://ch.tetr.io/u/bug"],
+          ["Denshattack!", "DENSHATTACK!!!"],
+          ["Project SEKAI", "bum rhythm game"],
+          ["Arcaea", "finger [Content Deleted]"],
+          ["Phigros", "Phigros"],
         ],
       },
-      stats: { label: 'maimai DX stats', url: 'https://gist.githubusercontent.com/etangaming123/43e1c2ee943cca54945b0e018823ccfb/raw/' },
+      stats: {
+        label: "maimai DX stats",
+        url: "https://gist.githubusercontent.com/etangaming123/43e1c2ee943cca54945b0e018823ccfb/raw/",
+      },
       links: [
         { label: "Steam", href: "https://steamcommunity.com/id/etangaming123" },
         { label: "TETR.IO", href: "https://ch.tetr.io/u/bug" },
         { label: "Roblox", href: "https://www.roblox.com/users/332642702/profile" },
       ],
+      blocks: [],
     },
   },
   {
-    id: 'social-media',
-    title: 'Social media',
-    sub: 'Cooked upload schedule.',
-    chips: ['Links', 'Procrastination'],
-    a: '#E46883', b: '#FAE85A', ink: '#81FCFD',
-    jacket: { pattern: 'chevron', text: 'SOCIAL', image: 'assets/jackets/social-media.png' },
+    id: "social-media",
+    title: "Social media",
+    sub: "Cooked upload schedule.",
+    chips: ["Links", "Procrastination"],
+    a: "#E46883",
+    b: "#FAE85A",
+    ink: "#81FCFD",
+    jacket: { pattern: "chevron", text: "SOCIAL", image: "assets/jackets/social-media.png" },
     detail: {
       info: [
         ["Discord", "@etangaming123"],
@@ -120,11 +230,7 @@ const SONGS = [
         ["Everywhere else", "@etangaming123"],
         ["Upload schedule", "Cooked"],
       ],
-      body: [
-        "Every account listed here is confirmed mine. If you see one of these, it's me. Not all of my accounts are listed, though.",
-        "I can't DM on Bluesky (age restrictions, sorry). Instagram: @etangamingxyz is public, @etangaming123 is private and I only accept people I know irl.",
-        "YouTube is for videos I couldn't be bothered making longer.",
-      ],
+      body: ["Every account listed here is confirmed mine. If you see one of these, it's me. Not all of my accounts are listed, though.", "I can't DM on Bluesky (age restrictions, sorry). Instagram: @etangamingxyz is public, @etangaming123 is private and I only accept people I know irl.", "YouTube is for videos I couldn't be bothered making longer."],
       links: [
         { label: "YouTube", href: "https://youtube.com/@etangaming123" },
         { label: "TikTok", href: "https://tiktok.com/@etangaming123" },
@@ -135,67 +241,94 @@ const SONGS = [
     },
   },
   {
-    id: 'hurstville-lurkers',
-    title: 'Hurstville Lurkers',
-    sub: 'Discord server - for local community, rhythm games, and a mix of both.',
-    chips: ['Community', 'Local', 'Lurkers'],
-    a: '#BB88EE', b: '#FFBB00', ink: '#DDAACC',
-    jacket: { pattern: 'block', text: 'LURK', image: 'assets/jackets/hurstville-lurkers.png' },
+    id: "messages",
+    title: "Messages",
+    sub: "You've got mail!",
+    chips: ["Mail", "Gists", "Hello?"],
+    a: "#F395F6",
+    b: "#FBD796",
+    ink: "#FBD796",
+    jacket: { pattern: "rings", text: "MAIL" },
+    detail: {
+      info: [
+        ["Used for", "Sending you stuff"],
+        ["Powered by", "GitHub gists"],
+        ["You need", "A message ID"],
+      ],
+      blocks: [
+        {
+          type: "text",
+          paras: ["Sometimes I need to send someone a longer note than a DM allows. It lives in a gist, you get the ID, and it shows up here."],
+        },
+        { type: "message" },
+      ],
+      body: [],
+      links: [],
+    },
+  },
+  {
+    id: "hurstville-lurkers",
+    title: "Hurstville Lurkers",
+    sub: "Discord server - for local community, rhythm games, and a mix of both.",
+    chips: ["Community", "Local", "Lurkers"],
+    a: "#BB88EE",
+    b: "#FFBB00",
+    ink: "#DDAACC",
+    jacket: { pattern: "block", text: "LURK", image: "assets/jackets/hurstville-lurkers.png" },
     detail: {
       info: [
         ["Platform", "Discord"],
         ["Where", "Hurstville, NSW"],
-        ["For", "Study, gym, arcade"],
         ["Topics", "Hurstville + rhythm games"],
       ],
-      body: [
-        "Your one stop for Hurstville & Rhythm Games.",
-        "Hurstville Lurkers is a Discord server / community, formerly for those who go to Hurstville often, now focusing more on Rhythm Games and their audience!",
-        "Meet up with friends in Hurstville, or somewhere else! Find others who play rhythm games, like maimai or Project SEKAI!"
-      ],
+      body: ["Your one stop for Hurstville & Rhythm Games.", "Hurstville Lurkers is a Discord server / community, formerly for those who go to Hurstville often, now focusing more on Rhythm Games and their audience!", "Meet up with friends in Hurstville, or somewhere else! Find others who play rhythm games, like maimai or Project SEKAI!"],
       links: [
         { label: "Join the server", href: "https://discord.gg/2HTKBdp25w" },
         { label: "HVL webpage", href: "https://hvl.etangaming.xyz" },
         { label: "hvlbot source", href: "https://github.com/etangaming123/hvlbot" },
       ],
-      widget: { type: 'discord', id: '1477464211981603040', invite: 'https://discord.gg/hurstville' },
+      widget: { type: "discord", id: "1477464211981603040", invite: "https://discord.gg/hurstville" },
+      blocks: [],
     },
   },
   {
-    id: 'etan-bot',
-    title: 'etan bot',
-    sub: 'Open source Discord bot that has a bunch of features.',
-    chips: ['Discord', 'Python', 'Online-ish'],
-    a: '#A56BEA', b: '#c5fb31', ink: '#57E1E6',
-    jacket: { pattern: 'grid', text: 'BOT', image: 'assets/jackets/etan-bot.png' },
+    id: "etan-bot",
+    title: "etan bot",
+    sub: "Open source Discord bot that has a bunch of features.",
+    chips: ["Discord", "Python", "Online-ish"],
+    a: "#A56BEA",
+    b: "#c5fb31",
+    ink: "#57E1E6",
+    jacket: { pattern: "grid", text: "BOT", image: "assets/jackets/etan-bot.png" },
     detail: {
       info: [
         ["Platform", "Discord"],
         ["Language", "Python"],
         ["Source", "Open"],
-        ["Works", "Almost everywhere"],
+        ["Works", "Almost everywhere on Discord"],
       ],
-      body: [
-        "A funny Discord bot you add to your account and use almost anywhere in Discord. Profile picture by Shoebill Studios.",
-        "Fun commands: 8ball, coinflip, predictions and more.",
-        "\"Useful\" commands: a URL cleaner, so messy links get cleaned up and stop tracing back to you.",
-        "Cosmetic commands: a profile editor. Write an about me, add your social links, send it to your friends."
-      ],
+      body: ["A funny Discord bot you add to your account and use almost anywhere in Discord. Profile picture by Shoebill Studios.", "Fun commands: 8ball, coinflip, predictions and more.", "\"Useful\" commands: a URL cleaner, so messy links get cleaned up and stop tracing back to you.", "Cosmetic commands: a profile editor. Write an about me, add your social links, send it to your friends."],
       links: [
-        { label: "Add to Discord", href: "https://discord.com/oauth2/authorize?client_id=1505906056222605352" },
+        {
+          label: "Add to Discord",
+          href: "https://discord.com/oauth2/authorize?client_id=1505906056222605352",
+        },
         { label: "Website", href: "https://etanbot.etangaming.xyz" },
         { label: "GitHub", href: "https://github.com/etangaming123/etanbot" },
         { label: "Report an issue", href: "https://github.com/etangaming123/etanbot/issues" },
       ],
+      blocks: [],
     },
   },
   {
-    id: 'automatic-link-cleaner',
-    title: 'Automatic link cleaner',
-    sub: 'Cleans and fixes links in Discord messages.',
-    chips: ['Links', 'Embeds', '?tracker=somecode'],
-    a: '#6B7BFF', b: '#9B6BFF', ink: '#FF6B6B',
-    jacket: { pattern: 'slash', text: 'CLEAN', image: 'assets/jackets/automatic-link-cleaner.png' },
+    id: "automatic-link-cleaner",
+    title: "Automatic link cleaner",
+    sub: "Cleans and fixes links in Discord messages.",
+    chips: ["Links", "Embeds", "?tracker=somecode"],
+    a: "#6B7BFF",
+    b: "#9B6BFF",
+    ink: "#FF6B6B",
+    jacket: { pattern: "slash", text: "CLEAN", image: "assets/jackets/automatic-link-cleaner.png" },
     detail: {
       info: [
         ["Platform", "Discord"],
@@ -203,23 +336,23 @@ const SONGS = [
         ["Does", "Cleans + fixes links"],
         ["Side effects", "Cleaner chats"],
       ],
-      body: [
-        "A Discord bot that automatically cleans links in messages.",
-        "Strips the tracking junk and fixes broken embeds, so what lands in chat is the link and nothing else.",
-      ],
+      body: ["A Discord bot that automatically cleans links in messages.", "Strips the tracking junk and fixes broken embeds, so what lands in chat is the link and nothing else.", "Also has optional settings for posting embed links (e.g fixupx, oginstagram, etc.)"],
       links: [
         { label: "Website", href: "https://alc.etangaming.xyz" },
         { label: "GitHub", href: "https://github.com/etangaming123/automaticlinkcleaner" },
       ],
+      blocks: [],
     },
   },
   {
-    id: 'circle-chiffon',
-    title: 'CiRCLE Chiffon',
-    sub: 'Yet another maimai DX NET Discord Bot.',
-    chips: ['maimai DX NET', 'Discord'],
-    a: '#FBD796', b: '#B8DB7E', ink: '#57E1E6',
-    jacket: { pattern: 'disc', text: 'CIRCLE', image: 'assets/jackets/circle-chiffon.png' },
+    id: "circle-chiffon",
+    title: "CiRCLE Chiffon",
+    sub: "Yet another maimai DX NET Discord Bot.",
+    chips: ["maimai DX NET", "Discord"],
+    a: "#FBD796",
+    b: "#B8DB7E",
+    ink: "#57E1E6",
+    jacket: { pattern: "disc", text: "CIRCLE", image: "assets/jackets/circle-chiffon.png" },
     detail: {
       info: [
         ["Game", "maimai DX NET"],
@@ -227,22 +360,23 @@ const SONGS = [
         ["Language", "Python"],
         ["Aka", "mai bot 2.0"],
       ],
-      body: [
-        "Yet another maimai DX NET Discord bot. Think of it as a homemade mimi xd / mai bot 2.0.",
-      ],
+      body: ["Yet another maimai DX NET Discord bot. Think of it as a homemade mimi xd / mai bot 2.0.", "A Discord bot for maimai DX NET, SEGA's web service for the arcade rhythm game maimai DX. Link your SEGA ID account and view your profile, recent plays, best 50, CiRCLE (team), etc. (or just use other bots lmfao)", "Open source and self-hostable, so you can use CiRCLE Chiffon without giving away your SEGA ID details to others!"],
       links: [
         { label: "Website", href: "https://cc.etangaming.xyz" },
         { label: "GitHub", href: "https://github.com/etangaming123/circlechiffon" },
       ],
+      blocks: [],
     },
   },
   {
-    id: 'nightcord',
-    title: 'Nightcord',
-    sub: 'Parody of Discord.',
-    chips: ['Messaging', 'Web App'],
-    a: '#B06CC4', b: '#DDAACC', ink: '#CCAA88',
-    jacket: { pattern: 'rays', text: 'NIGHT', image: 'assets/jackets/nightcord.png' },
+    id: "nightcord",
+    title: "Nightcord",
+    sub: "Parody of Discord.",
+    chips: ["Messaging", "Web App"],
+    a: "#B06CC4",
+    b: "#DDAACC",
+    ink: "#CCAA88",
+    jacket: { pattern: "rays", text: "NIGHT", image: "assets/jackets/nightcord.png" },
     detail: {
       info: [
         ["Type", "Web app"],
@@ -250,37 +384,35 @@ const SONGS = [
         ["Hosting", "Self-hostable"],
         ["Inspired by", "Discord (lovingly)"],
       ],
-      body: [
-        "A web-based messaging app, built for selfhosting. A parody of Discord.",
-      ],
+      body: ["A web-based messaging app, built for selfhosting. A parody of Discord.", "Made for friends, an alternative to Discord for when it isn't available for whatever reason."],
       links: [
         { label: "Website", href: "https://nightcord.etangaming.xyz" },
         { label: "GitHub", href: "https://github.com/etangaming123/nightcord" },
       ],
+      blocks: [],
     },
   },
   {
-    id: 'katsune',
-    title: 'Katsune',
-    sub: 'Discord bot made for Catulus\' Cat Tree.',
-    chips: ['Discord', 'Python', 'Catulus', 'Cats?'],
-    a: '#FF4D4D', b: '#FF8A5A', ink: '#FF6B6B',
-    jacket: { pattern: 'zig', text: 'KATSUNE', image: 'assets/jackets/katsune.png' },
+    id: "katsune",
+    title: "Katsune",
+    sub: "Discord bot made for Catulus' Cat Tree.",
+    chips: ["Discord", "Python", "Catulus", "Cats?"],
+    a: "#FF4D4D",
+    b: "#FF8A5A",
+    ink: "#FF6B6B",
+    jacket: { pattern: "zig", text: "KATSUNE", image: "assets/jackets/katsune.png" },
     detail: {
       info: [
         ["Platform", "Discord"],
         ["Language", "Python"],
         ["Made for", "Catulus' Cat Tree"],
       ],
-      body: [
-        "The Discord bot for Catulus' Cat Tree!",
-        "The very first Discord bot I made, with a ton of features dedicated to Catulus' Discord server!",
-        "It's old, and its code is not that well written, but I'm still proud of it - how far I've come since then."
-      ],
+      body: ["The Discord bot for Catulus' Cat Tree!", "The very first Discord bot I made, with a ton of features dedicated to Catulus' Discord server!", "It's old, and its code is not that well written, but I'm still proud of it - how far I've come since then."],
       links: [
         { label: "GitHub", href: "https://github.com/etangaming123/katsune" },
         { label: "Report an issue", href: "https://github.com/etangaming123/katsune/issues" },
       ],
+      blocks: [],
     },
   },
 ];

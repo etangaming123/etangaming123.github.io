@@ -9,8 +9,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
 
   const DEFAULT = { a: '#DDAACC', b: '#BB88EE', ink: '#DDAACC' };
-  const pad = (n) => String(n).padStart(2, '0');
-  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const { esc, pad, jacket, chips, vars } = window.SiteRender;
 
   let sel = 0;
   let view = 'title';
@@ -23,15 +22,8 @@
   const detailEl = $('#detail');
   const dScroll = $('#d-scroll');
   const wide = matchMedia('(min-width: 860px)');
-  const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>';
 
   /* ---------- build ---------- */
-  const jacket = (s) => s.jacket.image
-    ? `<div class="jacket j-img"><img src="${esc(s.jacket.image)}" alt="" decoding="async"></div>`
-    : `<div class="jacket j-${s.jacket.pattern}" style="--len:${s.jacket.text.length}"><span class="jt">${esc(s.jacket.text)}</span></div>`;
-  const chips = (s) => `<div class="chips">${s.chips.map((c) => `<span class="chip">${esc(c)}</span>`).join('')}</div>`;
-  const vars = (s) => `--sa:${s.a};--sb:${s.b};--si:${s.ink}`;
-
   list.innerHTML = SONGS.map((s, i) => `
     <li class="song" id="song-${s.id}" role="option" aria-selected="false" data-i="${i}" style="${vars(s)}">
       <div class="card"><div class="card-in">
@@ -60,7 +52,7 @@
     root.style.setProperty('--ink', c.ink);
   }
 
-  function select(i, { scroll = false, instant = false, hash = true } = {}) {
+  function select(i, { scroll = false, instant = false, hash = true, arg = '' } = {}) {
     i = Math.max(0, Math.min(SONGS.length - 1, i));
     const s = SONGS[i];
     if (i !== sel || instant) {
@@ -75,7 +67,7 @@
       $('#slug').textContent = s.id;
       $('#counter').innerHTML = `${pad(i + 1)}<small>/${pad(SONGS.length)}</small>`;
       document.title = `etan://${s.id}`;
-      renderDetail(s, i);
+      renderDetail(s, i, arg);
       preview.style.cssText = vars(s);
       preview.innerHTML = `
         <div class="pv-jacket" role="button" tabindex="-1" aria-label="Open info for ${esc(s.title)}">${jacket(s)}<span class="pv-open">Info &rsaquo;</span></div>
@@ -88,37 +80,38 @@
     if (hash) writeHash(s.id);
   }
 
-  function renderDetail(s, i) {
-    const d = s.detail || {};
-    const info = (d.info || []).map(([k, v]) => `<div class="stat"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
-    const paras = (d.body || []).map((t) => `<p>${esc(t)}</p>`).join('');
-    const links = (d.links || []).map((l) => `<a class="d-link" href="${esc(l.href)}" target="_blank" rel="noopener noreferrer">${esc(l.label)}${arrow}</a>`).join('');
+  function renderDetail(s, i, messageId = '') {
     detailEl.style.cssText = vars(s);
-    dScroll.innerHTML = `
-      <div class="d-hero">
-        <div class="d-jacket">${jacket(s)}</div>
-        <div class="d-head">
-          <span class="d-no">NO. ${pad(i + 1)} / ${pad(SONGS.length)}</span>
-          <h2 class="d-title">${esc(s.title)}</h2>
-          <p class="d-sub">${esc(s.sub)}</p>
-          ${chips(s)}
-        </div>
-      </div>
-      ${info ? `<section class="d-sec"><h3 class="d-h">Chart info</h3><dl class="d-stats">${info}</dl></section>` : ''}
-      ${paras ? `<section class="d-sec"><h3 class="d-h">Notes</h3><div class="d-body">${paras}</div></section>` : ''}
-      ${d.stats ? `<section class="d-sec"><h3 class="d-h">${esc(d.stats.label || 'Stats')}</h3><div class="mm" id="mm"></div></section>` : ''}
-      ${d.list ? `<section class="d-sec"><h3 class="d-h">${esc(d.list.label || 'Also')}</h3><ul class="d-list">${d.list.items.map(([n, t, h]) => `<li>${h ? `<a class="d-li-n" href="${esc(h)}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>` : `<span class="d-li-n">${esc(n)}</span>`}<span class="d-li-t">${esc(t)}</span></li>`).join('')}</ul></section>` : ''}
-      ${d.widget ? '<section class="d-sec"><h3 class="d-h">Server widget</h3><div class="dw" id="dw"></div></section>' : ''}
-      ${links ? `<section class="d-sec"><h3 class="d-h">Links</h3><div class="d-links">${links}</div></section>` : ''}
-      <p class="d-hint">&larr; &rarr; next song &middot; Esc back</p>`;
-    if (d.stats && window.mountStats) { window.mountStats($('#mm'), d.stats); if (detailOpen) window.kickStats(dScroll); }
-    if (d.widget && window.mountDiscordWidget) window.mountDiscordWidget($('#dw'), d.widget);
+    dScroll.innerHTML = window.SiteRender.detailHTML(s, i, SONGS.length);
+    window.SiteRender.mount(dScroll, s, { messageId, active: detailOpen });
     dScroll.scrollTop = 0;
   }
+
+  const fullBtn = $('#d-full');
+  let fullOn = false;
+  function setFull(on, { instant = false } = {}) {
+    on = on && detailOpen;
+    if (on === fullOn) return;
+    fullOn = on;
+    // morph the panel between its docked and fullscreen boxes where supported
+    if (!instant && document.startViewTransition && !reduce.matches) {
+      document.documentElement.classList.add('vt-full');
+      const t = document.startViewTransition(() => applyFull(on));
+      t.finished.finally(() => document.documentElement.classList.remove('vt-full'));
+    } else applyFull(on);
+  }
+  function applyFull(on) {
+    body.dataset.full = on ? '1' : '';
+    fullBtn.setAttribute('aria-pressed', on);
+    fullBtn.setAttribute('aria-label', on ? 'Exit fullscreen' : 'Fullscreen panel');
+    for (const el of [$('.s-head'), list, preview, $('.s-bar')]) el.inert = on || (el === list && detailOpen && !wide.matches);
+  }
+  fullBtn.addEventListener('click', () => { setFull(!fullOn); fullBtn.focus({ preventScroll: true }); });
 
   function setDetail(open, { focus = true } = {}) {
     if (open === detailOpen) return;
     detailOpen = open;
+    if (!open) setFull(false);
     body.dataset.detail = open ? 'open' : '';
     detailEl.inert = !open;
     list.inert = open && !wide.matches;
@@ -126,7 +119,7 @@
     if (open && window.kickStats) window.kickStats(dScroll);
     if (focus) (open ? dScroll : list).focus({ preventScroll: true });
   }
-  wide.addEventListener('change', () => { list.inert = detailOpen && !wide.matches; });
+  wide.addEventListener('change', () => { list.inert = !!body.dataset.full || (detailOpen && !wide.matches); });
 
   function openDetail() {
     if (detailOpen) return;
@@ -199,7 +192,7 @@
   function route() {
     clearTimeout(hashTimer);
     resetTransitions();
-    const [id, sub] = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
+    const [id, sub, arg = ''] = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
     const i = SONGS.findIndex((s) => s.id === id);
     if (i < 0) {
       view = 'title';
@@ -219,9 +212,12 @@
     body.dataset.view = 'select';
     titleView.inert = true;
     selectView.inert = false;
-    select(i, { scroll: true, instant: true, hash: false });
+    select(i, { scroll: true, instant: true, hash: false, arg });
     if (sub !== 'info') pushedDetail = false;
     setDetail(sub === 'info');
+    try { // Message.html redirects set this: open the panel already fullscreen, no morph
+      if (sessionStorage.getItem('etan-fs')) { sessionStorage.removeItem('etan-fs'); if (sub === 'info') setFull(true, { instant: true }); }
+    } catch (e) {}
     if (entering && sub !== 'info') list.focus({ preventScroll: true });
     measure();
     settle();
@@ -243,7 +239,7 @@
   $('#home').addEventListener('click', (e) => { if (detailOpen) { e.preventDefault(); closeDetail(); } });
 
   addEventListener('keydown', (e) => {
-    if (document.activeElement?.closest?.('#con') || view !== 'select' || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (document.activeElement?.closest?.('#con') || document.activeElement?.matches?.('input, textarea, select') || view !== 'select' || e.altKey || e.ctrlKey || e.metaKey) return;
     const go = (n) => { e.preventDefault(); select(n, { scroll: true }); };
     const d = detailOpen; // in the panel, up/down/page keys scroll it; left/right switch song
     const typing = !['BODY', 'UL'].includes(document.activeElement?.tagName) && !document.activeElement?.matches?.('.d-scroll');
@@ -256,7 +252,8 @@
       case 'PageUp': if (!d) go(sel - 3); break;
       case 'Home': if (!d) go(0); break;
       case 'End': if (!d) go(SONGS.length - 1); break;
-      case 'Escape': e.preventDefault(); if (d) closeDetail(); else location.hash = '#/'; break;
+      case 'f': if (d) { e.preventDefault(); setFull(!fullOn); } break;
+      case 'Escape': e.preventDefault(); if (fullOn) setFull(false); else if (d) closeDetail(); else location.hash = '#/'; break;
       case 'Enter': if (!d && !typing) { e.preventDefault(); openDetail(); } break;
     }
   });

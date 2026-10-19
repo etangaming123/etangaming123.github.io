@@ -1,0 +1,11 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>etan://messages</title>
+<meta name="robots" content="noindex">
+<script>
+  // old links: Message.html?id=<gist id>  ->  /#/messages/info/<gist id>
+  var id = (new URLSearchParams(location.search).get('id') || '').replace(/[^0-9a-z]/gi, '');
+  if (id) try { sessionStorage.setItem('etan-fs', '1'); } catch (e) {}
+  location.replace('/#/messages' + (id ? '/info/' + id : ''));
+</script>
+<noscript><a href="/#/messages">Continue to etan://messages</a></noscript>
