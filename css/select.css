@@ -30,8 +30,21 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
   font-weight: 700;
   text-transform: uppercase;
 }
-.s-brand { font-size: 15px; letter-spacing: .1em; text-transform: none; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-brand { position: fixed; z-index: 3; top: 14px; left: 16px; max-width: 58vw; pointer-events: none; font-family: var(--f-ui); font-weight: 700; font-size: 15px; letter-spacing: .1em; text-transform: none; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .s-brand b { color: var(--ink); }
+body[data-full="1"] .s-brand { visibility: hidden; }
+.cursor {
+  display: inline-block;
+  width: .6em;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: -.17em;
+  background: var(--ink);
+  animation: blink 1.06s steps(1) infinite;
+}
+.typing .cursor { animation: none; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
 .s-label {
   flex: none;
   padding: 3px 18px 3px 12px;
@@ -60,7 +73,6 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
 
 .song {
   scroll-snap-align: center;
-  scroll-snap-stop: always;
   padding: 7px 14px;
   cursor: pointer;
   --ad: 1;
@@ -268,7 +280,7 @@ body[data-view="select"] .title { opacity: 0; transform: translateX(-4%); visibi
 @media (min-width: 860px) {
   .select { grid-template-columns: minmax(460px, 44%) 1fr; }
   .s-head { grid-column: 1 / -1; padding: 22px 36px 8px; }
-  .s-brand { font-size: 20px; }
+  .s-brand { font-size: 20px; top: 22px; left: 36px; }
   .list { grid-column: 1; grid-row: 2; padding: 38dvh 0; }
   .s-bar { grid-column: 1; grid-row: 3; padding-inline: 24px; }
   .song { padding-inline: 24px; }

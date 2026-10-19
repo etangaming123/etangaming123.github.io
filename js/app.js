@@ -52,7 +52,29 @@
     root.style.setProperty('--ink', c.ink);
   }
 
-  function select(i, { scroll = false, instant = false, hash = true, arg = '' } = {}) {
+  // slugs type themselves: backspace the old text, then type the new
+  function makeTyper(el) {
+    let timer = 0;
+    return (to) => {
+      const box = el.parentNode;
+      clearTimeout(timer);
+      box.classList.remove('typing');
+      if (!el.dataset.on || reduce.matches) { el.dataset.on = '1'; el.textContent = to; return; } // first paint is instant
+      box.classList.add('typing'); // holds the cursor solid while moving
+      const step = () => {
+        const cur = el.textContent;
+        if (!to.startsWith(cur)) el.textContent = cur.slice(0, -1);
+        else if (cur.length < to.length) el.textContent = to.slice(0, cur.length + 1);
+        else return box.classList.remove('typing');
+        timer = setTimeout(step, 28);
+      };
+      step();
+    };
+  }
+  const typeSlug = makeTyper($('#slug'));
+
+  let heavyTimer;
+  function select(i, { scroll = false, instant = false, hash = true, arg = '', defer = false } = {}) {
     i = Math.max(0, Math.min(SONGS.length - 1, i));
     const s = SONGS[i];
     if (i !== sel || instant) {
@@ -64,17 +86,22 @@
       list.setAttribute('aria-activedescendant', items[i].id);
       applyTheme(s, i);
       $('#ghost').textContent = s.jacket.text;
-      $('#slug').textContent = s.id;
+      typeSlug(s.id);
       $('#counter').innerHTML = `${pad(i + 1)}<small>/${pad(SONGS.length)}</small>`;
       document.title = `etan://${s.id}`;
-      renderDetail(s, i, arg);
-      preview.style.cssText = vars(s);
-      preview.innerHTML = `
+      const heavy = () => {
+        renderDetail(s, i, arg);
+        preview.style.cssText = vars(s);
+        preview.innerHTML = `
         <div class="pv-jacket" role="button" tabindex="-1" aria-label="Open info for ${esc(s.title)}">${jacket(s)}<span class="pv-open">Info &rsaquo;</span></div>
         <h2 class="pv-title">${esc(s.title)}</h2>
         <p class="pv-sub">${esc(s.sub)}</p>
         <div class="pv-chips">${chips(s)}</div>
         <p class="pv-hint"><kbd>&uarr;</kbd> <kbd>&darr;</kbd> browse &middot; <kbd>Enter</kbd> / click jacket for info &middot; <kbd>Esc</kbd> home</p>`;
+      };
+      clearTimeout(heavyTimer);
+      // mid-scroll: keep frames cheap, rebuild the panels once scrolling pauses
+      if (defer) heavyTimer = setTimeout(heavy, 90); else heavy();
     }
     if (scroll) scrollToItem(i, instant);
     if (hash) writeHash(s.id);
@@ -163,7 +190,7 @@
       el.style.setProperty('--ad', Math.min(d / half, 1.3).toFixed(3));
       if (d < bestD) { bestD = d; best = i; }
     });
-    if (!lock && best !== sel) select(best);
+    if (!lock && best !== sel) select(best, { defer: true });
   }
   const queue = () => { if (!frame) frame = requestAnimationFrame(measure); };
   list.addEventListener('scroll', queue, { passive: true });
@@ -203,6 +230,7 @@
       setDetail(false, { focus: false });
       applyTheme(DEFAULT);
       $('#ghost').textContent = 'ETAN';
+      typeSlug('home');
       document.title = 'etan://home';
       settle();
       return;

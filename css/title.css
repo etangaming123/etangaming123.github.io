@@ -32,6 +32,8 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+.brand-gap { flex: none; width: 9.5em; } /* room for the fixed etan:// brand */
+.t-top > :last-child { text-align: right; }
 .t-top b { color: var(--ink); font-weight: 700; }
 
 .t-main { display: grid; gap: 26px; align-content: center; flex: 1; }

@@ -23,10 +23,13 @@
 <body data-view="title">
   <div class="bg" aria-hidden="true"><div class="ghost" id="ghost">ETAN</div></div>
 
+  <!-- shared header: one brand + slug for every view, so it types between them -->
+  <div class="s-brand" id="brand"><b>etan://</b><span id="slug">home</span><i class="cursor" aria-hidden="true"></i></div>
+
   <!-- TITLE -->
   <main class="view title" id="title">
     <div class="t-top">
-      <span><b>etan://</b>home</span>
+      <span class="brand-gap" aria-hidden="true"></span>
       <span>etangaming123 &middot; credits: 1</span>
     </div>
 
@@ -62,7 +65,7 @@
   <!-- SONG SELECT -->
   <div class="view select" id="select" inert>
     <header class="s-head">
-      <div class="s-brand"><b>etan://</b><span id="slug">about-me</span></div>
+      <div class="brand-gap" aria-hidden="true"></div>
       <div class="s-label">Select song</div>
     </header>
 
