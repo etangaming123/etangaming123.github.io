@@ -1,0 +1,85 @@
+/* settings panel + message save buttons (js/settings.js, js/messages.js) */
+.d-scroll > * { zoom: var(--ts, 1); }
+
+.setbox { display: grid; gap: 26px; }
+.set-group > .b-sub { margin-top: 0; }
+.set-row {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px 14px 14px;
+  background: var(--edge);
+  border-left: 4px solid var(--a);
+}
+.set-row:nth-of-type(even) { border-left-color: var(--b); margin-left: 12px; }
+.set-name { font-family: var(--f-ui); font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.set-desc { margin: 0; font-size: .92em; color: var(--muted); }
+.set-group > .set-desc { margin-bottom: 10px; }
+.set-empty { margin: 0; padding: 12px 14px; background: var(--edge); border-left: 4px solid var(--b); color: var(--muted); }
+.set-status:empty { display: none; }
+.set-warn { font-family: var(--f-ui); font-weight: 700; letter-spacing: .08em; color: #F08A9B; }
+
+/* segmented choice (real radios underneath) */
+.seg { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.seg label { position: relative; }
+.seg input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.seg span {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  background: var(--panel);
+  box-shadow: inset 0 0 0 2px var(--ink);
+  transform: skewX(-8deg);
+  font-family: var(--f-display);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.seg input:checked + span { background: var(--ink); color: #051631; box-shadow: none; }
+.seg input:focus-visible + span { outline: 3px solid var(--text); outline-offset: 3px; }
+
+/* sliders */
+.set-slider { display: grid; grid-template-columns: 1fr auto; gap: 0 12px; align-items: center; }
+.set-sl-l { font-family: var(--f-ui); font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.set-sl-o { font-family: var(--f-display); font-size: 14px; color: var(--ink); min-width: 4ch; text-align: right; }
+.set-slider input { grid-column: 1 / -1; width: 100%; min-height: 40px; margin: 0; accent-color: var(--ink); }
+
+.set-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 4px; }
+.set-box { margin-bottom: 4px; }
+.set-id { font-family: var(--f-ui); font-weight: 700; letter-spacing: .04em; color: var(--ink); overflow-wrap: anywhere; }
+
+/* tables stack into cards on narrow screens */
+.set-table { width: 100%; border-collapse: collapse; }
+.set-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.set-table tr { display: grid; gap: 4px; padding: 10px 14px; margin-bottom: 8px; background: var(--edge); border-left: 4px solid var(--a); }
+.set-table tr:nth-child(even) { border-left-color: var(--b); }
+.set-table td { display: block; padding: 0; font-size: .92em; }
+.set-table td[data-label]:not([data-label=""])::before {
+  content: attr(data-label);
+  display: inline-block;
+  min-width: 8ch;
+  margin-right: 8px;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.set-recent, .msg-recent { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.set-recent li { display: grid; gap: 4px; padding: 10px 14px; background: var(--edge); border-left: 4px solid var(--b); }
+.set-when { font-size: .85em; color: var(--muted); }
+.msg-recent { margin-top: 12px; }
+.msg-recent-h { font-family: var(--f-ui); font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+.msg-acts { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 12px; }
+.msg-status:empty { display: none; }
+
+@media (min-width: 700px) {
+  .set-table thead { position: static; width: auto; height: auto; clip-path: none; }
+  .set-table tr { display: table-row; padding: 0; margin: 0; background: none; border: 0; }
+  .set-table td, .set-table th { display: table-cell; padding: 8px 10px; vertical-align: middle; background: var(--edge); border-bottom: 4px solid var(--panel); text-align: left; }
+  .set-table th { font-family: var(--f-ui); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); background: none; border: 0; }
+  .set-table td::before { content: none !important; }
+  .set-table .set-acts { margin: 0; justify-content: flex-end; }
+}

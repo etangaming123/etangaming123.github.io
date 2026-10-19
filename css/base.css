@@ -99,13 +99,13 @@ a { color: inherit; }
   overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition-duration: .01ms !important;
-    animation: none !important;
-    scroll-behavior: auto !important;
-  }
+/* set by js/settings.js: Reduced motion = on, or sync + the system asks for it */
+:root[data-reduce="1"] *, :root[data-reduce="1"] *::before, :root[data-reduce="1"] *::after {
+  transition-duration: .01ms !important;
+  animation: none !important;
+  scroll-behavior: auto !important;
 }
+:root[data-grain="off"] .fx { display: none; }
 
 /* ---------- glimmer: quick left-to-right sweep (decorative; also fires on focus/tap) ---------- */
 :is(.btn, .key, .tagline, .s-label, .card-in) { position: relative; overflow: hidden; }

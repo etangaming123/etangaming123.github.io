@@ -49,6 +49,8 @@
         return `<div class="b-md" data-md="${esc(b.src)}"><p class="msg-note">Loading...</p></div>`;
       case 'message':
         return '<div class="msgbox" data-msg></div>';
+      case 'settings':
+        return '<div class="setbox" data-settings></div>';
       default:
         return '';
     }
@@ -136,6 +138,7 @@
     const dw = root.querySelector('#dw');
     if (d.widget && dw && window.mountDiscordWidget) window.mountDiscordWidget(dw, d.widget);
     root.querySelectorAll('[data-md]').forEach(loadMd);
+    root.querySelectorAll('[data-settings]').forEach((el) => { if (window.mountSettings) window.mountSettings(el); });
     root.querySelectorAll('[data-msg]').forEach((el) => { if (window.mountMessages) window.mountMessages(el, messageId); });
   }
 

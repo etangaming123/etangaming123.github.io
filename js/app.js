@@ -6,7 +6,7 @@
   const selectView = $('#select');
   const titleView = $('#title');
   const preview = $('#preview');
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const reduce = { get matches() { return window.Settings.reduced(); } }; // Settings > Reduced motion (or the system)
 
   const DEFAULT = { a: '#DDAACC', b: '#BB88EE', ink: '#DDAACC' };
   const { esc, pad, jacket, chips, vars } = window.SiteRender;
@@ -59,7 +59,7 @@
       const box = el.parentNode;
       clearTimeout(timer);
       box.classList.remove('typing');
-      if (!el.dataset.on || reduce.matches) { el.dataset.on = '1'; el.textContent = to; return; } // first paint is instant
+      if (!el.dataset.on || reduce.matches || !window.Settings.get('typing')) { el.dataset.on = '1'; el.textContent = to; return; } // first paint is instant
       box.classList.add('typing'); // holds the cursor solid while moving
       const step = () => {
         const cur = el.textContent;
@@ -264,6 +264,11 @@
   $('#prev').addEventListener('click', () => select(sel - 1, { scroll: true }));
   $('#next').addEventListener('click', () => select(sel + 1, { scroll: true }));
   $('#open').addEventListener('click', openDetail);
+  $('#settings').addEventListener('click', () => {
+    if (detailOpen && SONGS[sel].id === 'settings') return closeDetail();
+    pushedDetail = true;
+    location.hash = '#/settings/info';
+  });
   $('#home').addEventListener('click', (e) => { if (detailOpen) { e.preventDefault(); closeDetail(); } });
 
   addEventListener('keydown', (e) => {

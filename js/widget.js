@@ -132,7 +132,7 @@
 
   // box is an empty element inside the detail panel
   window.mountDiscordWidget = (box, cfg) => {
-    if (cache[cfg.id]) return load(box, cfg);
+    if (cache[cfg.id] || window.Settings?.get('autoload')) return load(box, cfg);
     const btn = el('button', 'dw-load', 'Load live server widget');
     btn.type = 'button';
     const note = el('p', 'dw-note', 'grabs online server members - contacts discord api!');

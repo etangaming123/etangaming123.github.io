@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/title.css">
   <link rel="stylesheet" href="css/select.css">
   <link rel="stylesheet" href="css/detail.css">
+  <link rel="stylesheet" href="css/settings.css">
   <link rel="stylesheet" href="css/console.css">
   <link rel="icon" href="assets/jackets/about-me.png">
 </head>
@@ -81,6 +82,8 @@
     <nav class="s-bar" aria-label="Song select controls">
       <a class="key key-home" href="#/" id="home"><span>
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M11 3L4 10l7 7" fill="none" stroke="currentColor" stroke-width="3.5"/></svg><b class="lbl">Home</b></span></a>
+      <button class="key" id="settings" type="button" aria-label="Settings"><span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 5h16M2 10h16M2 15h16" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M12 2h4v6h-4zM4 7h4v6H4zM10 12h4v6h-4z" fill="currentColor"/></svg></span></button>
       <button class="key" id="prev" type="button" aria-label="Previous song"><span>
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 14l7-8 7 8" fill="none" stroke="currentColor" stroke-width="3.5"/></svg></span></button>
       <output class="counter" id="counter" aria-live="polite">01<small>/09</small></output>
@@ -106,6 +109,7 @@
   <div class="fx" aria-hidden="true"></div>
 
   <script src="js/songs.js"></script>
+  <script src="js/settings.js"></script>
   <script src="js/render.js"></script>
   <script src="js/widget.js"></script>
   <script src="js/stats.js"></script>
