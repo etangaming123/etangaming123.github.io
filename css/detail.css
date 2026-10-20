@@ -22,7 +22,7 @@ body[data-detail="open"] .detail {
   appearance: none;
   position: absolute;
   top: 10px;
-  right: 14px;
+  right: 66px;
   z-index: 3;
   width: 44px;
   height: 44px;
@@ -38,18 +38,19 @@ body[data-detail="open"] .detail {
 .d-full:active { background: var(--ink); }
 .d-full:focus-visible { outline: 3px solid var(--ink); outline-offset: -5px; }
 .d-full svg { width: 20px; height: 20px; }
+.d-close { right: 14px; }
 .d-full .i-exit, body[data-full="1"] .d-full .i-enter { display: none; }
 body[data-full="1"] .d-full .i-exit { display: block; }
 /* fullscreen = the panel's own grid area grows over the list (and header on phones) */
 body[data-full="1"] .detail { grid-column: 1 / -1; grid-row: 1 / span 2; z-index: 3; }
-body[data-full="1"] .d-scroll { padding: 26px 66px 40px 16px; }
+body[data-full="1"] .d-scroll { padding: 26px 118px 40px 16px; }
 
 .d-scroll {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  padding: 22px 66px 28px 16px;
+  padding: 22px 118px 28px 16px;
   outline: none;
   scrollbar-width: thin;
   scrollbar-color: var(--a) transparent;
@@ -166,8 +167,8 @@ body[data-detail="open"] .key-open { display: none; }
 @media (min-width: 860px) {
   body[data-full="1"] .detail { grid-column: 1 / -1; grid-row: 2 / span 2; }
   .detail { grid-column: 2; grid-row: 2 / span 2; border-top-width: 0; border-left: 6px solid var(--a); padding-bottom: 0; }
-  .d-scroll { padding: 34px 5vw 48px 3vw; }
-  body[data-full="1"] .d-scroll { padding: 48px 6vw 64px; }
+  .d-scroll { padding: 34px max(5vw, 118px) 48px 3vw; }
+  body[data-full="1"] .d-scroll { padding: 48px max(6vw, 118px) 64px 6vw; }
   .d-hero { grid-template-columns: min(30vh, 220px) minmax(0, 1fr); gap: 28px; }
   .d-title { font-size: clamp(32px, 4vw, 62px); }
   .d-sub { font-size: 1.1em; }

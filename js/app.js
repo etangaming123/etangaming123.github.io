@@ -135,6 +135,8 @@
   }
   fullBtn.addEventListener('click', () => { setFull(!fullOn); fullBtn.focus({ preventScroll: true }); });
 
+  $('#d-close').addEventListener('click', () => closeDetail());
+
   function setDetail(open, { focus = true } = {}) {
     if (open === detailOpen) return;
     detailOpen = open;
