@@ -44,6 +44,8 @@
       if (kv && !/^https?$/i.test(kv[1])) {
         const key = kv[1].replace(/でらっくす/g, 'DX').trim();
         const val = kv[2].trim();
+        const pc = val.match(/^(\d+)\s*total,?\s*with\s*(\d+)\s*during\b/i);
+        if (pc) { out.stats.push({ key, val: pc[1] }, { key: `${key} (current ver.)`, val: pc[2] }); continue; }
         if (/^version$/i.test(key)) out.version = val;
         else if (/^last updated/i.test(key)) out.updated = val;
         else if (/rating/i.test(key) && !out.rating) out.rating = { key, val };
@@ -60,11 +62,17 @@
   function render(box, cfg, raw, when) {
     const d = parse(raw);
     const parts = [];
+    // the plate line without a [tag] is the player's display name
+    const di = d.plates.findIndex((p) => !p.tag);
+    const dname = di >= 0 ? d.plates.splice(di, 1)[0].name : '';
 
     const head = el('div', 'mm-head');
     const t = el('div', 'mm-titles');
     t.append(el('span', 'mm-kicker', d.version || 'Player card'));
-    t.append(el('h4', 'mm-title', d.headline || 'Stats'));
+    const ttl = el('h4', 'mm-title', dname || d.headline || 'Stats');
+    if (dname) ttl.append(el('span', 'mm-dn', 'Display name'));
+    t.append(ttl);
+    if (dname && d.headline) t.append(el('p', 'mm-quote', `\u201C${d.headline}\u201D`));
     head.append(t);
     if (d.tag) head.append(el('span', 'mm-date', d.tag));
     parts.push(head);
