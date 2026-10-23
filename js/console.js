@@ -64,7 +64,7 @@
       else print(`404: no such chart "${a.join(' ')}". try 'ls'.`, 'err');
     } },
     ls: { pub: 1, desc: 'list every page', run: () => print(PAGES.map((p, i) => `${String(i).padStart(2, '0')}  etan://${p}`)) },
-    whois: { pub: 1, desc: 'who runs this place?', run: () => print('Access denied. [Insufficient permissions]', 'err') },
+    whois: { pub: 1, desc: 'who runs this place?', run: () => print('access denied. [insufficient permissions]', 'err') },
     whoami: { pub: 1, desc: 'show current user', run: () => print(['guest', 'permissions: read-only. look, don\'t touch.'], 'ok') },
     lastseen: { pub: 1, desc: 'when was etan last seen?', run: () => print(pick([
       'last seen: 4 minutes ago, resizing a div by 2px.',
@@ -74,11 +74,12 @@
       'last seen: three tabs deep in a rabbit hole nobody asked about.',
       'last seen: "just one more credit".',
       'last seen: asleep. probably. check discord.',
-      'last seen: 2 minutes ago, asking Fable 5.1 on Ultracode with dangerous permissions "who is json?"'
+      'last seen: 2 minutes ago, asking Fable 5.1 on Ultracode with dangerous permissions "who is json?"',
+      'last seen: 3 hours ago, [redacted]',
     ]), 'ok') },
     status: { pub: 1, desc: 'player stats', run: () => print([
       'PLAYER ....... guest',
-      'CLASS ........ builder of bots, tools, questionable web pages',
+      'CLASS ........ idk what you do bro',
       'STATUS ....... empty',
       'SLEEP ........ few hours?',
       `TODOs ........ ${todoCount()} and counting`,
@@ -108,18 +109,18 @@
 
     // hidden
     sudo: { run: () => print(['guest is not in the sudoers file.', 'this incident will be reported. (to nobody. it is a static site.)'], 'err') },
-    rm: { run: () => print('nice try. nothing deleted. there is barely anything here to delete.', 'err') },
+    rm: { run: () => print('deleting guest c drive...', 'err') },
     ping: { run: (a) => print(`pong${a[0] ? ` from ${a[0]}` : ''} (eventually)`, 'ok') },
     sleep: { run: () => print(['sleep: command not found', 'sleep: also not found on user.'], 'err') },
     coffee: { run: () => print(['brewing...', 'error: 418 i am a teapot'], 'hl') },
     rating: { run: () => print('rating: [REDACTED]. it is lower than you think. and higher than it was last week.', 'hl') },
     backlog: { run: () => print('games in backlog: yes.', 'hl') },
-    konami: { run: () => print('UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A. +0 lives. we do not do lives here.', 'hl') },
+    konami: { run: () => print('controller not connected, or not found. sorry.', 'hl') },
     cheats: { run: () => print('you are already in cheats. this is the cheat. congratulations.', 'ok') },
-    secret: { run: () => print('Access denied. [Insufficient permissions]', 'err') },
+    secret: { run: () => print('access denied. [insufficient permissions]', 'err') },
     hello: { run: () => print(pick(['hi.', 'hello, player 2.', 'o/', 'sup. try "help".'])) },
     echo: { run: (a) => print(a.join(' ')) },
-    reboot: { run: () => { print('rebooting arcade...', 'ok'); setTimeout(() => { location.hash = '#/'; }, 400); } },
+    reboot: { run: () => { print('ctrl + r or command + r', 'ok'); setTimeout(() => { location.hash = '#/'; }, 400); } },
     matrix: { run: () => print(['wake up, player 2...', 'the combo has you.', 'follow the white notes.'], 'ok') },
     bot: { run: () => print('etan bot: online-ish. ask it nicely.', 'ok') },
   };

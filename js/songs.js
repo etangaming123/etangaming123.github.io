@@ -89,7 +89,7 @@ const SONGS = [
         ["Professional at", "Procrastinating"],
         ["Self Deprication", "at its finest"],
       ],
-      body: ["mizuki just like me fr"],
+      body: ["she just like me fr"],
       links: [
         { label: "The more personal site", href: "https://etan.etangaming.xyz/" },
         { label: "The old site (bootstrap)", href: "https://bootstrap.etangaming.xyz/" },
@@ -116,18 +116,29 @@ const SONGS = [
           caption: "mizuki (wanted to say it in person)",
           height: "short",
         },
+        {
+          type: "text",
+          paras: ["while i do relate to her on some aspects, i wouldn't call myself a kin (not really). and i wouldn't call myself the no 1 fan either, just some chud behind the screen liking anime girls.", "but i do can't help but say \"she just like me fr...\"", "image unrelated - i'm not gonna run away from everything!! right?"],
+        },
+        {
+          type: "banner",
+          image: "assets/uploads/gomen.png",
+          alt: "mizuki (it's all over)",
+          caption: "mizuki (it's all over)",
+          height: "short",
+        },
       ],
     },
   },
   {
-    id: "rui",
-    title: "Rui",
+    id: "xac",
+    title: "Xac",
     sub: "A close friend of mine <3",
     chips: ["platonic", "friendship", "close"],
     a: "#BB88EE",
     b: "#DDAACC",
     ink: "#BB88EE",
-    jacket: { pattern: "checker", text: "RUI", image: "assets/uploads/rui.png" },
+    jacket: { pattern: "checker", text: "XAC", image: "assets/uploads/rui.png" },
     detail: {
       info: [
         ["First Seen", "5th August, 2025"],
@@ -135,8 +146,13 @@ const SONGS = [
         ["I swear", "It's platonic"],
         ["started from", "maimaiでらっくす"],
       ],
-      body: ["hi 🥺🥺🥺"],
+      body: ["\"im gonna mix ur concrete\""],
       blocks: [
+        { type: "divider" },
+        {
+          type: "text",
+          paras: ["it's a very close friendship between 2 guys. there's no romantic shit going on, we have boundaries you know", "we met from funny arcade game, but didn't really talk much until 22 feb 2026, where he added me on insta. kinda lit!", "from then, i made hurstville lurkers, he, along with a few others, was brought along to help, so yeah.", "beside the arcade, we've both had [redacted] and [redacted], and pushed each other on to keep on going, so... 🥺🥺🥺"],
+        },
         {
           type: "banner",
           image: "assets/uploads/mizurui.png",
@@ -144,13 +160,14 @@ const SONGS = [
           caption: "mizuki and rui",
           height: "short",
         },
-        { type: "heading", text: "todo" },
+        { type: "heading", text: "about him" },
         {
           type: "text",
-          paras: ["i'll write the backstory later i swear"],
+          paras: ["he's cool.", "he plays maimai, draws stuff, uhhhhhhh", "check out his web yo (that's defo not my domain name btw 😁😁😁"],
         },
       ],
       links: [
+        { label: "xac's website", href: "https://xac69.etangaming.xyz" },
         { label: "also go check out hvl", href: "https://hvl.etangaming.xyz" },
       ],
     },
@@ -169,12 +186,18 @@ const SONGS = [
         ["Why", "A rough past"],
         ["Status", "Trying my best"],
         ["Copying", "yeah copy it sure"],
+        ["elaboration?", "if you know you know"],
       ],
       blocks: [
         { type: "markdown", src: "content/ethics.md" },
       ],
       body: ["ethics page cuz i've had a rough past."],
-      links: [],
+      links: [
+        {
+          label: "View as markdown",
+          href: "https://github.com/etangaming123/etangaming123.github.io/blob/main/content/ethics.md",
+        },
+      ],
     },
   },
   {
@@ -258,11 +281,11 @@ const SONGS = [
       blocks: [
         {
           type: "text",
-          paras: ["Sometimes I need to send someone a longer note than a DM allows. It lives in a gist, you get the ID, and it shows up here."],
+          paras: [],
         },
         { type: "message" },
       ],
-      body: [],
+      body: ["have fun :)"],
       links: [],
     },
   },
@@ -281,14 +304,23 @@ const SONGS = [
         ["Where", "Hurstville, NSW"],
         ["Topics", "Hurstville + rhythm games"],
       ],
-      body: ["Your one stop for Hurstville & Rhythm Games.", "Hurstville Lurkers is a Discord server / community, formerly for those who go to Hurstville often, now focusing more on Rhythm Games and their audience!", "Meet up with friends in Hurstville, or somewhere else! Find others who play rhythm games, like maimai or Project SEKAI!"],
+      body: ["Your one stop for Hurstville & Rhythm Games.", "Hurstville Lurkers is a Discord server / community, formerly for those who go to Hurstville often, now focusing more on Rhythm Games and their audience!", "Meet up with friends in Hurstville, or somewhere else! Find others who play rhythm games, like maimai or Project SEKAI!", "icon by xqcz.orbit, banner by vikorium"],
       links: [
         { label: "Join the server", href: "https://discord.gg/2HTKBdp25w" },
         { label: "HVL webpage", href: "https://hvl.etangaming.xyz" },
         { label: "hvlbot source", href: "https://github.com/etangaming123/hvlbot" },
       ],
       widget: { type: "discord", id: "1477464211981603040", invite: "https://discord.gg/hurstville" },
-      blocks: [],
+      blocks: [
+        { type: "divider" },
+        {
+          type: "banner",
+          image: "assets/uploads/hvl.gif",
+          alt: "hurstville lurkers banner (drawn by vikorium)",
+          caption: "hurstville lurkers banner (drawn by vikorium)",
+          height: "tall",
+        },
+      ],
     },
   },
   {
@@ -395,8 +427,8 @@ const SONGS = [
   {
     id: "katsune",
     title: "Katsune",
-    sub: "Discord bot made for Catulus' Cat Tree.",
-    chips: ["Discord", "Python", "Catulus", "Cats?"],
+    sub: "Discord bot made for neo1996's place.",
+    chips: ["Discord", "Python", "Cats?"],
     a: "#FF4D4D",
     b: "#FF8A5A",
     ink: "#FF6B6B",
@@ -405,12 +437,13 @@ const SONGS = [
       info: [
         ["Platform", "Discord"],
         ["Language", "Python"],
-        ["Made for", "Catulus' Cat Tree"],
+        ["Made for", "neo1996's place"],
       ],
-      body: ["The Discord bot for Catulus' Cat Tree!", "The very first Discord bot I made, with a ton of features dedicated to Catulus' Discord server!", "It's old, and its code is not that well written, but I'm still proud of it - how far I've come since then."],
+      body: ["The Discord bot for neo1996's place!", "The very first Discord bot I made, with a ton of features dedicated to Catulus' Discord server!", "It's old, and its code is not that well written, but I'm still proud of it - how far I've come since then."],
       links: [
         { label: "GitHub", href: "https://github.com/etangaming123/katsune" },
         { label: "Report an issue", href: "https://github.com/etangaming123/katsune/issues" },
+        { label: "neo1996's place", href: "https://discord.gg/T3UD5xaQVZ" },
       ],
       blocks: [],
     },

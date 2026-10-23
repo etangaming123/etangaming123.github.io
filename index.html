@@ -44,9 +44,9 @@
           <h2>Player data</h2>
           <dl>
             <dt>Name</dt><dd>etan <span class="todo">(@etangaming123/etangamingxyz)</span></dd>
-            <dt>Class</dt><dd>Making random content on the web, or playing various games.</dd>
-            <dt>Base</dt><dd class="todo">Sydney, Australia.</dd>
-            <dt>Status</dt><dd>Dying</dd>
+            <dt>Pronouns</dt><dd>any (he, she, they, etc.)</dd>
+            <dt>About</dt><dd>Internet 'creations', and GAMING 🤑🤑🤑</dd>
+            <dt>Status</dt><dd id="status">¯\_(ツ)_/¯</dd>
           </dl>
           <p>I'm etangaming123 - rhythm game casual, general (vibe) coder, etc.<br>Welcome to hell - that is, my website.</p>
         </div>
@@ -118,5 +118,17 @@
   <script src="js/from.js"></script>
   <script src="js/app.js"></script>
   <script src="js/console.js"></script>
+  <script>
+    fetch('https://gist.githubusercontent.com/etangaming123/0359f7831ab12de49b1e3313ee2b0c9a/raw')
+      .then(response => {
+        if (!response.ok) throw new Error('Unable to fetch status');
+        return response.text();
+      })
+      .then(status => {
+        const value = status.trim();
+        if (value) document.getElementById('status').textContent = value;
+      })
+      .catch(() => {});
+  </script>
 </body>
 </html>
