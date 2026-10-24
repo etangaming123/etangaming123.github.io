@@ -191,7 +191,7 @@ const SONGS = [
       blocks: [
         { type: "markdown", src: "content/ethics.md" },
       ],
-      body: ["ethics page cuz i've had a rough past."],
+      body: [],
       links: [
         {
           label: "View as markdown",
@@ -214,7 +214,7 @@ const SONGS = [
         ["Main", "maimai DX"],
         ["Cabinet", "Arcade"],
       ],
-      body: ["I LOVE maimai. for more than the game, I've met a whole bunch of cool people at my local arcade :)", "I also play a whole other variety of games - mainly rhythm games, but also some sick ass games like Denshattack!", "Roblox is my guilty pleasure. The platform is shit, but some games, like Super Bomb Survival, and REDLINER, are actually kinda cool.", "And I play Minecraft with a close friend <3 (hi!)"],
+      body: ["I LOVE maimai. for more than the game, I've met a whole bunch of cool people at my local arcade :)", "I also play a whole other variety of games - mainly rhythm games, but also some sick ass games like Denshattack!", "There's also story games, like The NOexistenceN of you AND me, NEEDY STREAMER OVERLOAD... uh that's pretty much it. No she is NOT like me.", "Roblox is my guilty pleasure. The platform is shit, but some games, like Super Bomb Survival, and REDLINER, are actually kinda cool.", "And I play Minecraft with a close friend <3 (hi!)"],
       list: {
         label: "Other games",
         items: [
@@ -253,7 +253,7 @@ const SONGS = [
         ["Everywhere else", "@etangaming123"],
         ["Upload schedule", "Cooked"],
       ],
-      body: ["Every account listed here is confirmed mine. If you see one of these, it's me. Not all of my accounts are listed, though.", "I can't DM on Bluesky (age restrictions, sorry). Instagram: @etangamingxyz is public, @etangaming123 is private and I only accept people I know irl.", "YouTube is for videos I couldn't be bothered making longer."],
+      body: ["when i post the maimai"],
       links: [
         { label: "YouTube", href: "https://youtube.com/@etangaming123" },
         { label: "TikTok", href: "https://tiktok.com/@etangaming123" },
@@ -261,6 +261,7 @@ const SONGS = [
         { label: "Twitter", href: "https://twitter.com/etangaming123" },
         { label: "Bluesky", href: "https://bsky.app/profile/bsky.etangaming.xyz" },
       ],
+      blocks: [],
     },
   },
   {
@@ -398,6 +399,31 @@ const SONGS = [
         { label: "GitHub", href: "https://github.com/etangaming123/circlechiffon" },
       ],
       blocks: [],
+    },
+  },
+  {
+    id: "rafisol",
+    title: "Rafisol",
+    sub: "",
+    chips: ["discord", "moderation", "experimental"],
+    a: "#F395F6",
+    b: "#57E1E6",
+    ink: "#57E1E6",
+    jacket: { pattern: "letter", text: "NEW", image: "assets/jackets/about-me.png" },
+    detail: {
+      info: [
+        ["USE AT YOUR OWN RISK", "Highky Experimental"],
+        ["Use cases", "Multipurpose"],
+      ],
+      body: ["A multipurpose Discord server bot, built for moderation, logging, etc.", "It's new, so expect rough edges."],
+      blocks: [],
+      links: [
+        { label: "Website", href: "https://rafisol.etangaming.xyz/" },
+        {
+          label: "Add to Discord",
+          href: "https://discord.com/oauth2/authorize?client_id=1563324610106236938",
+        },
+      ],
     },
   },
   {
