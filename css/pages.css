@@ -1,0 +1,69 @@
+/* Friend Pages: image gate, source strip, code blocks, import panel (js/pages.js, js/pages-ui.js) */
+
+/* image waiting for a click */
+.img-gate {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  min-height: 130px;
+  padding: 14px 16px 16px;
+  background: var(--edge);
+  border-left: 6px solid var(--b);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+}
+.ig-k { font-family: var(--f-ui); font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+.ig-t { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+.ig-btns { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.ig-btns .dw-btn { height: auto; min-height: 44px; max-width: 100%; padding-block: 8px; white-space: normal; line-height: 1.25; text-align: left; overflow-wrap: anywhere; }
+.ig-bad { border-left-color: #F08A9B; }
+.b-gal .img-gate { min-height: 0; padding: 10px; align-content: start; }
+.b-gal .ig-btns .dw-btn { font-size: 11px; padding-inline: 8px; }
+
+/* "not made by etangaming123" strip under a custom page's header */
+.pg-origin {
+  margin-top: 18px;
+  padding: 10px 14px 12px;
+  background: color-mix(in srgb, var(--b) 12%, var(--edge));
+  border-left: 6px solid var(--ink);
+  font-size: .94em;
+}
+.pg-origin p { margin: 0; overflow-wrap: anywhere; }
+.pg-acts { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 10px; }
+
+/* code block */
+.b-code { margin: 0; background: var(--edge); border-left: 6px solid var(--b); max-width: 100%; }
+.b-code pre { margin: 0; padding: 12px 14px; overflow: auto; max-height: 360px; font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text); tab-size: 2; }
+.bc-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 10px 8px 14px; border-top: 2px solid color-mix(in srgb, var(--a) 35%, transparent); }
+.bc-bar figcaption { font-family: var(--f-ui); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); overflow-wrap: anywhere; }
+.bc-bar .dw-btn { height: 36px; min-height: 36px; padding-inline: 12px; font-size: 12px; }
+
+/* import panel */
+.pgbox { display: grid; gap: 26px; }
+.pg-or { height: 6px; background: repeating-linear-gradient(-45deg, var(--ink) 0 2px, transparent 2px 6px); opacity: .5; margin: 16px 0 14px; }
+.pg-paste {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 0;
+  border-bottom: 4px solid var(--a);
+  border-radius: 0;
+  background: var(--edge);
+  color: var(--text);
+  font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  resize: vertical;
+}
+.pg-keep { display: flex; align-items: center; gap: 10px; margin-top: 14px; min-height: 44px; }
+.pg-keep input { width: 22px; height: 22px; margin: 0; accent-color: var(--ink); }
+.pg-status:empty { display: none; }
+.pg-status { margin-top: 10px; }
+.pg-fails { margin: 6px 0 0; padding-left: 1.2em; color: var(--muted); font-size: .92em; overflow-wrap: anywhere; }
+.pgbox .set-recent li { grid-template-columns: minmax(0, 1fr); }
+
+/* a long code line must scroll inside its block, not stretch the panel's grid column (phones have one implicit auto column) */
+@media (max-width: 859px) { .select { grid-template-columns: minmax(0, 1fr); } }
+.detail, .d-scroll, .d-blocks, .b-code { min-width: 0; }
+.b-code pre { max-width: 100%; }
+
+.pg-foot { margin-top: 26px; display: flex; justify-content: flex-end; }
+.pg-foot .dw-btn { height: 36px; min-height: 36px; padding-inline: 12px; font-size: 12px; }

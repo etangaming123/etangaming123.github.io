@@ -5,8 +5,10 @@
   const pad = (n) => String(n).padStart(2, '0');
   const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>';
 
-  const jacket = (s) => s.jacket.image
-    ? `<div class="jacket j-img"><img src="${esc(s.jacket.image)}" alt="" decoding="async"></div>`
+  // custom (Friend Pages) songs: images go through Pages' gate; a cover from an unloaded host falls back to the CSS cover
+  let custom = false;
+  const jacket = (s) => s.jacket.image && (!s.custom || window.Pages.imgOK(s.jacket.image))
+    ? `<div class="jacket j-img"><img src="${esc(s.custom ? window.Pages.imgInfo(s.jacket.image).href : s.jacket.image)}" alt="" decoding="async"${s.custom ? ' referrerpolicy="no-referrer"' : ''}></div>`
     : `<div class="jacket j-${esc(s.jacket.pattern)}" style="--len:${(s.jacket.text || '').length}"><span class="jt">${esc(s.jacket.text)}</span></div>`;
   const chips = (s) => `<div class="chips">${(s.chips || []).map((c) => `<span class="chip">${esc(c)}</span>`).join('')}</div>`;
   const vars = (s) => `--sa:${s.a};--sb:${s.b};--si:${s.ink}`;
@@ -25,7 +27,7 @@
       .replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<i>$2</i>');
   }
   const paras = (a) => (a || []).map((t) => `<p>${inline(t)}</p>`).join('');
-  const img = (src, alt) => `<img src="${esc(src)}" alt="${esc(alt || '')}" loading="lazy" decoding="async">`;
+  const img = (src, alt) => custom ? window.Pages.gateHTML(src, alt) : `<img src="${esc(src)}" alt="${esc(alt || '')}" loading="lazy" decoding="async">`;
 
   function block(b) {
     switch (b.type) {
@@ -45,6 +47,10 @@
         return `<div class="b-gal">${(b.images || []).map((g) => `<figure>${img(g.src, g.alt)}${g.caption ? `<figcaption>${inline(g.caption)}</figcaption>` : ''}</figure>`).join('')}</div>`;
       case 'divider':
         return '<hr class="b-hr">';
+      case 'code':
+        return `<figure class="b-code"><pre tabindex="0"><code>${esc(b.text)}</code></pre><div class="bc-bar">${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : '<span></span>'}<button type="button" class="dw-btn dw-alt" data-copy>Copy</button></div></figure>`;
+      case 'pages':
+        return `<div class="pgbox" data-pages="${esc(b.name)}"></div>`;
       case 'markdown':
         return `<div class="b-md" data-md="${esc(b.src)}"><p class="msg-note">Loading...</p></div>`;
       case 'message':
@@ -113,7 +119,9 @@
     const d = s.detail || {};
     const placed = new Set((d.blocks || []).filter((b) => b.type === 'section').map((b) => b.name));
     const top = (n) => (placed.has(n) ? '' : sec(n, d));
-    const blocks = blocksHTML(d.blocks, d);
+    custom = !!s.custom;
+    let blocks, origin, foot = '';
+    try { blocks = blocksHTML(d.blocks, d); if (custom) { origin = window.Pages.originHTML(s); foot = window.Pages.footHTML(s); } else origin = ''; } finally { custom = false; }
     return `
       <div class="d-hero">
         <div class="d-jacket">${jacket(s)}</div>
@@ -124,9 +132,11 @@
           ${chips(s)}
         </div>
       </div>
+      ${origin}
       ${top('info')}${top('notes')}
       ${blocks ? `<section class="d-sec d-blocks">${blocks}</section>` : ''}
       ${top('stats')}${top('list')}${top('widget')}${top('links')}
+      ${foot}
       <p class="d-hint">&larr; &rarr; next song &middot; Esc back</p>`;
   }
 
@@ -139,6 +149,8 @@
     if (d.widget && dw && window.mountDiscordWidget) window.mountDiscordWidget(dw, d.widget);
     root.querySelectorAll('[data-md]').forEach(loadMd);
     root.querySelectorAll('[data-settings]').forEach((el) => { if (window.mountSettings) window.mountSettings(el); });
+    root.querySelectorAll('[data-pages]').forEach((el) => { if (window.mountPages) window.mountPages(el, el.dataset.pages); });
+    if (s.custom && window.Pages) window.Pages.lock(root);
     root.querySelectorAll('[data-msg]').forEach((el) => { if (window.mountMessages) window.mountMessages(el, messageId); });
   }
 

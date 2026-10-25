@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>etan://page-editor</title>
+<meta name="description" content="page editor for etangaming.xyz">
+<meta name="theme-color" content="#051631">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@500;700&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#051631; --panel:#08203f; --edge:#030e20; --text:#E4DCEC; --muted:#A39BBF; --a:#DDAACC; --b:#BB88EE; --line:#2a4468; --bad:#F08A9B; --ok:#94E649;
+    --f-display:'Dela Gothic One','Arial Black',system-ui,sans-serif; --f-ui:'Chakra Petch','Arial Narrow',system-ui,sans-serif; --f-body:'Atkinson Hyperlegible',system-ui,sans-serif; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--bg); color: var(--text); font: 16px/1.45 var(--f-body); display: grid; grid-template-columns: minmax(360px, 1fr) minmax(340px, 1fr); grid-template-rows: auto 1fr; }
+  a { color: var(--a); }
+  :focus-visible { outline: 3px solid var(--a); outline-offset: 2px; }
+  header { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 10px 16px; background: var(--edge); border-bottom: 4px solid var(--a); }
+  header h1 { margin: 0 8px 0 0; font: 700 17px var(--f-ui); letter-spacing: .1em; }
+  header h1 b { color: var(--a); }
+  .sp { flex: 1; }
+  button, select, input, textarea { font: inherit; color: var(--text); background: var(--panel); border: 2px solid var(--line); padding: 7px 10px; border-radius: 0; min-height: 40px; }
+  button { cursor: pointer; font-family: var(--f-ui); font-weight: 700; background: #12315a; }
+  button:hover { background: #1b4680; }
+  button.pri { background: linear-gradient(100deg, var(--a), var(--b)); color: #051631; border-color: transparent; }
+  button.small { min-height: 34px; padding: 4px 10px; }
+  button.warn { border-color: var(--bad); }
+  textarea { width: 100%; resize: vertical; min-height: 84px; }
+  input[type=text], input:not([type]), select { width: 100%; }
+  input[type=color] { width: 48px; padding: 2px; }
+  #form { overflow: auto; min-height: 0; padding: 16px 16px 80px; border-right: 2px solid var(--line); }
+  #pv { min-height: 0; background: #000; }
+  #pv iframe { width: 100%; height: 100%; border: 0; display: block; }
+  fieldset { border: 2px solid var(--line); margin: 0 0 16px; padding: 10px 12px 12px; min-width: 0; }
+  legend { padding: 0 8px; font: 700 12px var(--f-ui); letter-spacing: .18em; text-transform: uppercase; color: var(--a); }
+  label { display: grid; gap: 3px; margin: 8px 0; font-size: 13.5px; color: var(--muted); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .colors { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 6px; }
+  .colors > div { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .colors input[type=text] { width: 96px; }
+  .ratio { font-size: 13px; }
+  .ok { color: var(--ok); } .bad { color: var(--bad); }
+  .item { border: 2px solid var(--line); background: var(--edge); padding: 8px 10px; margin: 10px 0; }
+  .bar { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; }
+  .bar b { flex: 1; font: 700 12px var(--f-ui); text-transform: uppercase; letter-spacing: .14em; color: var(--b); }
+  .pair { display: grid; grid-template-columns: 1fr 1.5fr auto; gap: 6px; margin: 6px 0; }
+  .hint { font-size: 13px; color: var(--muted); margin: 6px 0; }
+  #status { min-height: 1.4em; }
+  .note { padding: 8px 12px; background: var(--edge); border-left: 6px solid var(--b); margin: 0 0 16px; font-size: 14px; }
+  dialog { background: var(--panel); color: var(--text); border: 3px solid var(--a); width: min(720px, 94vw); }
+  dialog::backdrop { background: #000a; }
+  dialog textarea { min-height: 300px; font: 13px/1.4 ui-monospace, Menlo, monospace; }
+  @media (max-width: 899px) { body { grid-template-columns: 1fr; grid-template-rows: auto auto 70vh; height: auto; } html, body { height: auto; } #form { border-right: 0; overflow: visible; } .grid2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1><b>etan://</b>page-editor</h1>
+  <button type="button" id="b-new">New</button>
+  <button type="button" id="b-import">Open .json</button>
+  <span class="sp"></span>
+  <button type="button" id="b-copy" class="pri">Copy .json</button>
+  <button type="button" id="b-dl">Download</button>
+  <a href="index.html#/pages/guide/info">How to publish</a>
+  <span class="hint" id="status" role="status"></span>
+</header>
+<main id="form"></main>
+<section id="pv" aria-label="Live preview"><iframe id="fr" title="Live preview of your page"></iframe></section>
+<dialog id="dlg"><form method="dialog"><p class="hint">Paste a page's .json. It stays in this tab.</p><textarea id="dlg-ta" spellcheck="false"></textarea><p><button class="pri" value="ok">Open</button> <button type="button" id="dlg-file">Choose a file</button> <button value="cancel">Cancel</button></p></form></dialog>
+<input type="file" id="file" accept=".json,application/json" hidden>
+
+<script src="js/pages.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const KEY = 'etan:page-editor';
+  const PATTERNS = Pages.PATTERNS;
+  const BLOCKS = {
+    heading: () => ({ type: 'heading', text: 'Heading' }),
+    sub: () => ({ type: 'sub', text: 'Subheading' }),
+    text: () => ({ type: 'text', paras: ['Write something.'] }),
+    banner: () => ({ type: 'banner', image: '', alt: '', caption: '', height: 'short' }),
+    media: () => ({ type: 'media', image: '', alt: '', caption: '', side: 'left', paras: ['Text beside the image.'] }),
+    quote: () => ({ type: 'quote', text: 'A quote.', cite: '' }),
+    gallery: () => ({ type: 'gallery', images: [{ src: '', alt: '' }] }),
+    code: () => ({ type: 'code', text: '', caption: '' }),
+    divider: () => ({ type: 'divider' }),
+    section: () => ({ type: 'section', name: 'notes' }),
+  };
+  const blank = () => ({ title: 'My page', sub: 'One-line tagline.', chips: ['Hello'], a: '#57E1E6', b: '#F395F6', ink: '#57E1E6', jacket: { pattern: 'checker', text: 'HELLO' }, detail: { info: [['Name', 'you']], body: ['Say something about yourself.'], links: [], blocks: [] } });
+  const clone = (o) => JSON.parse(JSON.stringify(o));
+
+  let page;
+  try { page = JSON.parse(localStorage.getItem(KEY)); } catch (e) { page = null; }
+  if (!page || typeof page !== 'object' || !page.detail) page = blank();
+  const store = () => { try { localStorage.setItem(KEY, JSON.stringify(page)); } catch (e) {} };
+  const say = (t) => { $('#status').textContent = t; clearTimeout(say.t); say.t = setTimeout(() => { $('#status').textContent = ''; }, 4000); };
+
+  const h = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) { if (k === 'class') n.className = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else if (v !== false && v != null) n.setAttribute(k, v === true ? '' : v); }
+    n.append(...kids.flat().filter((k) => k != null));
+    return n;
+  };
+  const lines = (a) => (a || []).join('\n\n');
+  const unlines = (s) => s.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
+
+  function text(label, get, set, { area = false, ph = '', max } = {}) {
+    const i = h(area ? 'textarea' : 'input', { placeholder: ph, maxlength: max });
+    i.value = get();
+    i.addEventListener('input', () => { set(i.value); changed(); });
+    return h('label', {}, label, i);
+  }
+  function imageField(label, get, set) {
+    const out = h('span', { class: 'hint' });
+    const i = h('input', { type: 'text', placeholder: 'https://raw.githubusercontent.com/you/repo/main/pic.png' });
+    i.value = get();
+    const check = () => {
+      const v = i.value.trim();
+      if (!v) { out.textContent = ''; return; }
+      const r = Pages.imgInfo(v);
+      out.className = 'hint ' + (r.state === 'ok' ? 'ok' : r.state === 'ask' ? '' : 'bad');
+      out.textContent = r.state === 'ok' ? 'Loads for everyone.' : r.state === 'ask' ? `Viewers will be asked before loading from ${r.host}. GitHub / gist links load instantly.` : r.why;
+    };
+    i.addEventListener('input', () => { set(i.value.trim()); check(); changed(); });
+    check();
+    return h('label', {}, label, i, out);
+  }
+  function listEditor(arr, makeItem, row, addLabel, max) {
+    const box = h('div');
+    const draw = () => {
+      box.replaceChildren();
+      arr.forEach((it, i) => box.append(row(it, i, () => { arr.splice(i, 1); draw(); changed(); })));
+      if (!max || arr.length < max) box.append(h('button', { type: 'button', class: 'small', onclick: () => { arr.push(makeItem()); draw(); changed(); } }, '+ ' + addLabel));
+    };
+    draw();
+    return box;
+  }
+
+  function colorBox(k) {
+    const out = h('span', { class: 'ratio' });
+    const c = h('input', { type: 'color', value: page[k], 'aria-label': 'colour ' + k });
+    const t = h('input', { type: 'text', value: page[k], 'aria-label': k + ' hex' });
+    const upd = () => {
+      const r = Pages.ratio(page[k], '#051631');
+      out.className = 'ratio ' + (r >= 4.5 ? 'ok' : 'bad');
+      out.textContent = r >= 4.5 ? `${r.toFixed(1)}:1 ok` : `${r.toFixed(1)}:1 too dark, will be brightened`;
+    };
+    c.addEventListener('input', () => { page[k] = c.value; t.value = c.value; upd(); changed(); });
+    t.addEventListener('input', () => { if (/^#[0-9a-f]{6}$/i.test(t.value)) { page[k] = t.value; c.value = t.value; upd(); changed(); } });
+    upd();
+    return h('div', {}, h('b', {}, { a: 'Colour A', b: 'Colour B', ink: 'Accent text' }[k]), c, t, out);
+  }
+
+  function blocksEditor(blocks) {
+    const box = h('div');
+    const draw = () => {
+      box.replaceChildren();
+      blocks.forEach((b, i) => {
+        const bar = h('div', { class: 'bar' }, h('b', {}, b.type),
+          h('button', { type: 'button', class: 'small', 'aria-label': 'move up', onclick: () => { if (i) { [blocks[i - 1], blocks[i]] = [blocks[i], blocks[i - 1]]; draw(); changed(); } } }, '↑'),
+          h('button', { type: 'button', class: 'small', 'aria-label': 'move down', onclick: () => { if (i < blocks.length - 1) { [blocks[i + 1], blocks[i]] = [blocks[i], blocks[i + 1]]; draw(); changed(); } } }, '↓'),
+          h('button', { type: 'button', class: 'small warn', 'aria-label': 'delete block', onclick: () => { blocks.splice(i, 1); draw(); changed(); } }, '✕'));
+        const body = [];
+        const T = (l, k, o) => body.push(text(l, () => b[k] || '', (v) => { b[k] = v; }, o));
+        const P = (l = 'Paragraphs (blank line between)') => body.push(text(l, () => lines(b.paras), (v) => { b.paras = unlines(v); }, { area: true }));
+        const I = (l) => body.push(imageField(l, () => b.image || '', (v) => { b.image = v; }));
+        const S = (l, k, opts) => body.push(h('label', {}, l, (() => { const x = h('select', {}, opts.map((o) => h('option', { value: o, selected: b[k] === o }, o))); x.addEventListener('change', () => { b[k] = x.value; changed(); }); return x; })()));
+        switch (b.type) {
+          case 'banner': I('Image'); T('Alt text (describe it)', 'alt'); T('Caption', 'caption'); S('Height', 'height', ['short', 'tall']); break;
+          case 'heading': case 'sub': T('Text', 'text'); break;
+          case 'text': P(); break;
+          case 'media': I('Image'); T('Alt text (describe it)', 'alt'); T('Caption', 'caption'); S('Image side', 'side', ['left', 'right']); P('Text beside the image'); break;
+          case 'quote': T('Quote', 'text', { area: true }); T('Cite', 'cite'); break;
+          case 'gallery': body.push(listEditor(b.images, () => ({ src: '', alt: '' }), (g, gi, del) => h('div', { class: 'pair' },
+            h('input', { value: g.src, 'aria-label': 'image link', oninput: (e) => { g.src = e.target.value.trim(); changed(); } }),
+            h('input', { value: g.alt || '', placeholder: 'alt text', 'aria-label': 'alt text', oninput: (e) => { g.alt = e.target.value; changed(); } }),
+            h('button', { type: 'button', class: 'small', onclick: del, 'aria-label': 'remove image' }, '✕')), 'Add image', 24)); break;
+          case 'code': T('Code / text', 'text', { area: true }); T('Caption', 'caption'); break;
+          case 'section': S('Section', 'name', ['info', 'notes', 'links']); body.push(h('p', { class: 'hint' }, 'Moves that built-in section here instead of its default spot.')); break;
+          default: body.push(h('p', { class: 'hint' }, 'A divider line. No options.'));
+        }
+        box.append(h('div', { class: 'item' }, bar, ...body));
+      });
+      const pick = h('select', { 'aria-label': 'block type', style: 'width:auto' }, Object.keys(BLOCKS).map((k) => h('option', { value: k }, k)));
+      if (blocks.length < 80) box.append(h('div', { class: 'bar', style: 'margin-top:10px' }, pick, h('button', { type: 'button', onclick: () => { blocks.push(BLOCKS[pick.value]()); draw(); changed(); } }, '+ Add block')));
+    };
+    draw();
+    return box;
+  }
+
+  function renderForm() {
+    const d = page.detail;
+    d.info ||= []; d.body ||= []; d.blocks ||= []; d.links ||= [];
+    page.chips ||= []; page.jacket ||= { pattern: 'letter', text: '' };
+    const f = $('#form');
+    f.replaceChildren(
+      h('p', { class: 'note' }, 'Make a page for Friend Pages. Edit on the left, preview on the right. When you are happy, copy the .json and put it in a ', h('a', { href: 'https://gist.github.com', target: '_blank', rel: 'noopener' }, 'GitHub gist'), '. Have fun!'),
+      h('fieldset', {}, h('legend', {}, 'Page'),
+        h('div', { class: 'grid2' }, text('Title', () => page.title || '', (v) => { page.title = v; }, { max: 60 }), text('Subtitle', () => page.sub || '', (v) => { page.sub = v; }, { max: 140 })),
+        text('Tags (comma separated, up to 6)', () => page.chips.join(', '), (v) => { page.chips = v.split(',').map((x) => x.trim()).filter(Boolean).slice(0, 6); }),
+        h('div', { class: 'colors' }, colorBox('a'), colorBox('b'), colorBox('ink'))),
+      h('fieldset', {}, h('legend', {}, 'Cover'),
+        h('div', { class: 'grid2' },
+          h('label', {}, 'Pattern', (() => { const x = h('select', {}, PATTERNS.map((p) => h('option', { value: p, selected: page.jacket.pattern === p }, p))); x.addEventListener('change', () => { page.jacket.pattern = x.value; changed(); }); return x; })()),
+          text('Cover word', () => page.jacket.text || '', (v) => { page.jacket.text = v; }, { max: 12 })),
+        imageField('Cover image (optional, square works best)', () => page.jacket.image || '', (v) => { if (v) page.jacket.image = v; else delete page.jacket.image; })),
+      h('fieldset', {}, h('legend', {}, 'Facts'),
+        h('p', { class: 'hint' }, 'Little label / value plates at the top.'),
+        listEditor(d.info, () => ['Label', 'Value'], (it, i, del) => h('div', { class: 'pair' },
+          h('input', { value: it[0], 'aria-label': 'label', maxlength: 60, oninput: (e) => { it[0] = e.target.value; changed(); } }),
+          h('input', { value: it[1], 'aria-label': 'value', maxlength: 140, oninput: (e) => { it[1] = e.target.value; changed(); } }),
+          h('button', { type: 'button', class: 'small', onclick: del, 'aria-label': 'remove fact' }, '✕')), 'Add fact', 20)),
+      h('fieldset', {}, h('legend', {}, 'Notes'),
+        text('Plain paragraphs (blank line between)', () => lines(d.body), (v) => { d.body = unlines(v); }, { area: true })),
+      h('fieldset', {}, h('legend', {}, 'Content blocks'),
+        h('p', { class: 'hint' }, 'Text supports **bold**, *italic* and [label](https://link).'), blocksEditor(d.blocks)),
+      h('fieldset', {}, h('legend', {}, 'Links'),
+        listEditor(d.links, () => ({ label: 'Label', href: 'https://' }), (it, i, del) => h('div', { class: 'pair' },
+          h('input', { value: it.label, 'aria-label': 'label', maxlength: 60, oninput: (e) => { it.label = e.target.value; changed(); } }),
+          h('input', { value: it.href, 'aria-label': 'link (https://)', oninput: (e) => { it.href = e.target.value.trim(); changed(); } }),
+          h('button', { type: 'button', class: 'small', onclick: del, 'aria-label': 'remove link' }, '✕')), 'Add link', 12)),
+      h('p', { class: 'hint', id: 'size' }));
+  }
+
+  /* ---- output ---- */
+  const output = () => JSON.stringify({ format: 'etan-page', version: 1, ...page }, null, 2) + '\n';
+  function sizeNote() {
+    const n = output().length;
+    const el = $('#size');
+    if (el) { el.className = 'hint ' + (n > 200000 ? 'bad' : ''); el.textContent = `${Math.round(n / 1024 * 10) / 10} KB of 200 KB.`; }
+  }
+
+  /* ---- preview ---- */
+  let pvTimer, pvScroll = 0;
+  function preview() {
+    clearTimeout(pvTimer);
+    pvTimer = setTimeout(() => {
+      let s;
+      try { s = Pages.sanitize(clone(page)); } catch (e) { s = Pages.sanitize({ title: 'Needs a title' }); say(e.message); }
+      s.id = 'preview';
+      if (s.dropped.length) say('Ignored: ' + [...new Set(s.dropped)].join(', '));
+      const fr = $('#fr');
+      try { pvScroll = fr.contentDocument.querySelector('.d-scroll').scrollTop; } catch (e) { pvScroll = 0; }
+      const base = new URL('./', location.href).href;
+      const css = ['base', 'select', 'detail', 'pages'].map((n) => `<link rel="stylesheet" href="css/${n}.css">`).join('');
+      fr.srcdoc = `<!doctype html><html><head><meta charset="utf-8"><base href="${base}">
+        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@500;700&family=Dela+Gothic+One&display=swap" rel="stylesheet">${css}
+        <style>body{overflow:hidden}.detail{grid-column:auto;grid-row:auto;height:100vh;border-left:0;border-top:5px solid var(--a)}.d-hint{display:none}</style></head>
+        <body data-detail="open"><aside class="detail" id="detail"><div class="d-scroll" id="d-scroll"></div></aside>
+        <script src="js/pages.js"><\/script><script src="js/render.js"><\/script>
+        <script>
+          var s = ${JSON.stringify(s).replace(/</g, '\\u003c')};
+          var d = document.getElementById('detail'), sc = document.getElementById('d-scroll'), r = document.documentElement.style;
+          d.style.cssText = SiteRender.vars(s); r.setProperty('--a', s.a); r.setProperty('--b', s.b); r.setProperty('--ink', s.ink);
+          sc.innerHTML = SiteRender.detailHTML(s, 0, 1);
+          SiteRender.mount(sc, s, { active: true });
+          sc.scrollTop = ${pvScroll};
+        <\/script></body></html>`;
+    }, 250);
+  }
+
+  function changed() { store(); sizeNote(); preview(); }
+
+  /* ---- buttons ---- */
+  const slug = () => (page.title || 'page').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'page';
+  $('#b-new').onclick = () => { if (confirm('Start a new page? This clears your current draft (copy it first if you need it).')) { page = blank(); store(); renderForm(); sizeNote(); preview(); } };
+  $('#b-copy').onclick = async () => { try { await navigator.clipboard.writeText(output()); say('Copied. Paste it into a gist.'); } catch (e) { say('Clipboard blocked: use Download.'); } };
+  $('#b-dl').onclick = () => { const a = h('a', { href: URL.createObjectURL(new Blob([output()], { type: 'application/json' })), download: slug() + '.json' }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); };
+  function open(textIn) {
+    try {
+      const raw = JSON.parse(textIn.replace(/^﻿/, ''));
+      Pages.sanitize(clone(raw)); // throws if it is not a page
+      delete raw.format; delete raw.version;
+      page = raw; store(); renderForm(); sizeNote(); preview(); say('Opened.');
+    } catch (e) { say('Could not open that: ' + e.message); }
+  }
+  $('#b-import').onclick = () => { $('#dlg-ta').value = ''; $('#dlg').showModal(); };
+  $('#dlg').addEventListener('close', () => { if ($('#dlg').returnValue === 'ok' && $('#dlg-ta').value.trim()) open($('#dlg-ta').value); $('#dlg').returnValue = ''; });
+  $('#file').addEventListener('change', async (e) => { const f = e.target.files[0]; e.target.value = ''; if (f && f.size < 200000) open(await f.text()); });
+  $('#dlg-file').onclick = () => { $('#dlg').close(); $('#file').click(); };
+
+  renderForm(); sizeNote(); preview();
+})();
+</script>
+</body>
+</html>

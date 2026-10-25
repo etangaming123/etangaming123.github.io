@@ -11,6 +11,9 @@
   const DEFAULT = { a: '#DDAACC', b: '#BB88EE', ink: '#DDAACC' };
   const { esc, pad, jacket, chips, vars } = window.SiteRender;
 
+  let songs = SONGS;   // the wheel's songs: the main list, or (section 'pages') the Friend Pages list
+  let section = 'main';
+  let pendingRoute = null; // a #/pages/<id> link whose page has not finished loading yet
   let sel = 0;
   let view = 'title';
   let lock = 0;       // programmatic scroll in flight: don't let scroll events change selection
@@ -24,19 +27,26 @@
   const wide = matchMedia('(min-width: 860px)');
 
   /* ---------- build ---------- */
-  list.innerHTML = SONGS.map((s, i) => `
-    <li class="song" id="song-${s.id}" role="option" aria-selected="false" data-i="${i}" style="${vars(s)}">
-      <div class="card"><div class="card-in">
-        ${jacket(s)}
-        <div class="c-body">
-          <span class="c-no">${pad(i + 1)}</span>
-          <span class="c-title">${esc(s.title)}</span>
-          <span class="c-sub">${esc(s.sub)}</span>
-          ${chips(s)}
-        </div>
-      </div></div>
-    </li>`).join('');
-  const items = [...list.children];
+  let items = [];
+  function build() {
+    list.innerHTML = songs.map((s, i) => `
+      <li class="song" id="song-${s.id}" role="option" aria-selected="false" data-i="${i}" style="${vars(s)}">
+        <div class="card"><div class="card-in">
+          ${jacket(s)}
+          <div class="c-body">
+            <span class="c-no">${pad(i + 1)}</span>
+            <span class="c-title">${esc(s.title)}</span>
+            <span class="c-sub">${esc(s.sub)}</span>
+            ${chips(s)}
+          </div>
+        </div></div>
+      </li>`).join('');
+    items = [...list.children];
+  }
+  build();
+
+  // hash for a song in the current section
+  const hashFor = (id, info) => `#/${section === 'pages' ? 'pages/' : ''}${id}${info ? '/info' : ''}`;
 
   /* ---------- selection ---------- */
   // each song gets its own streak angle / position / width / stripe spacing
@@ -75,8 +85,8 @@
 
   let heavyTimer;
   function select(i, { scroll = false, instant = false, hash = true, arg = '', defer = false } = {}) {
-    i = Math.max(0, Math.min(SONGS.length - 1, i));
-    const s = SONGS[i];
+    i = Math.max(0, Math.min(songs.length - 1, i));
+    const s = songs[i];
     if (i !== sel || instant) {
       items[sel]?.classList.remove('is-sel');
       items[sel]?.setAttribute('aria-selected', 'false');
@@ -86,30 +96,32 @@
       list.setAttribute('aria-activedescendant', items[i].id);
       applyTheme(s, i);
       $('#ghost').textContent = s.jacket.text;
-      typeSlug(s.id);
-      $('#counter').innerHTML = `${pad(i + 1)}<small>/${pad(SONGS.length)}</small>`;
-      document.title = `etan://${s.id}`;
-      const heavy = () => {
-        renderDetail(s, i, arg);
-        preview.style.cssText = vars(s);
-        preview.innerHTML = `
-        <div class="pv-jacket" role="button" tabindex="-1" aria-label="Open info for ${esc(s.title)}">${jacket(s)}<span class="pv-open">Info &rsaquo;</span></div>
-        <h2 class="pv-title">${esc(s.title)}</h2>
-        <p class="pv-sub">${esc(s.sub)}</p>
-        <div class="pv-chips">${chips(s)}</div>
-        <p class="pv-hint"><kbd>&uarr;</kbd> <kbd>&darr;</kbd> browse &middot; <kbd>Enter</kbd> / click jacket for info &middot; <kbd>Esc</kbd> home</p>`;
-      };
+      typeSlug(section === 'pages' ? `pages/${s.id}` : s.id);
+      $('#counter').innerHTML = `${pad(i + 1)}<small>/${pad(songs.length)}</small>`;
+      document.title = `etan://${section === 'pages' ? 'pages/' : ''}${s.id}`;
+      $('#open span').textContent = s.go ? 'Open' : 'Info';
+      const heavy = () => { renderDetail(s, i, arg); paintPreview(s); };
       clearTimeout(heavyTimer);
       // mid-scroll: keep frames cheap, rebuild the panels once scrolling pauses
       if (defer) heavyTimer = setTimeout(heavy, 90); else heavy();
     }
     if (scroll) scrollToItem(i, instant);
-    if (hash) writeHash(s.id);
+    if (hash) { pendingRoute = null; writeHash(s.id); }
+  }
+
+  function paintPreview(s) {
+    preview.style.cssText = vars(s);
+    preview.innerHTML = `
+      <div class="pv-jacket" role="button" tabindex="-1" aria-label="${s.go ? 'Open' : 'Open info for'} ${esc(s.title)}">${jacket(s)}<span class="pv-open">${s.go ? 'Open' : 'Info'} &rsaquo;</span></div>
+      <h2 class="pv-title">${esc(s.title)}</h2>
+      <p class="pv-sub">${esc(s.sub)}</p>
+      <div class="pv-chips">${chips(s)}</div>
+      <p class="pv-hint"><kbd>&uarr;</kbd> <kbd>&darr;</kbd> browse &middot; <kbd>Enter</kbd> / click jacket for ${s.go ? 'the section' : 'info'} &middot; <kbd>Esc</kbd> ${section === 'pages' ? 'back' : 'home'}</p>`;
   }
 
   function renderDetail(s, i, messageId = '') {
     detailEl.style.cssText = vars(s);
-    dScroll.innerHTML = window.SiteRender.detailHTML(s, i, SONGS.length);
+    dScroll.innerHTML = window.SiteRender.detailHTML(s, i, songs.length);
     window.SiteRender.mount(dScroll, s, { messageId, active: detailOpen });
     dScroll.scrollTop = 0;
   }
@@ -144,22 +156,27 @@
     body.dataset.detail = open ? 'open' : '';
     detailEl.inert = !open;
     list.inert = open && !wide.matches;
-    $('#home .lbl').textContent = open ? 'Back' : 'Home';
+    homeLabel();
     if (open && window.kickStats) window.kickStats(dScroll);
     if (focus) (open ? dScroll : list).focus({ preventScroll: true });
+  }
+  function homeLabel() {
+    $('#home .lbl').textContent = detailOpen || section === 'pages' ? 'Back' : 'Home';
+    $('#home').setAttribute('href', section === 'pages' ? '#/friend-pages' : '#/');
   }
   wide.addEventListener('change', () => { list.inert = !!body.dataset.full || (detailOpen && !wide.matches); });
 
   function openDetail() {
     if (detailOpen) return;
+    if (songs[sel].go) { location.hash = songs[sel].go; return; } // a hardcoded song that is a doorway, not a panel
     pushedDetail = true;
-    location.hash = `#/${SONGS[sel].id}/info`;
+    location.hash = hashFor(songs[sel].id, true);
   }
   function closeDetail() {
     if (!detailOpen) return;
     clearTimeout(hashTimer); // a pending replaceState would rewrite the hash back to /info
     // always land on the list with the current song, never via history (the song may have changed in the panel)
-    location.hash = `#/${SONGS[sel].id}`;
+    location.hash = hashFor(songs[sel].id);
   }
 
   function scrollToItem(i, instant) {
@@ -175,7 +192,7 @@
   function writeHash(id) {
     clearTimeout(hashTimer);
     hashTimer = setTimeout(() => {
-      const h = `#/${id}${detailOpen ? '/info' : ''}`;
+      const h = hashFor(id, detailOpen);
       if (view === 'select' && location.hash !== h) history.replaceState(null, '', h);
     }, 140);
   }
@@ -218,11 +235,35 @@
     }, 700);
   }
 
+  // swap the wheel between the main songs and the Friend Pages list
+  function setSection(next) {
+    if (next === section) return;
+    section = next;
+    songs = next === 'pages' ? window.Pages.list() : SONGS;
+    sel = 0;
+    $('.s-label').textContent = next === 'pages' ? 'Select page' : 'Select song';
+    build();
+    homeLabel();
+  }
+
   function route() {
     clearTimeout(hashTimer);
     resetTransitions();
-    const [id, sub, arg = ''] = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
-    const i = SONGS.findIndex((s) => s.id === id);
+    let parts = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
+    const next = parts[0] === 'pages' ? 'pages' : 'main';
+    if (next === 'pages') { parts = parts.slice(1); window.Pages.init(); }
+    const [id, sub, arg = ''] = parts;
+    setSection(next);
+    if (next === 'pages') { // pick up pages added since the wheel was last built (an import jumps straight to its page)
+      const fresh = window.Pages.list();
+      if (fresh.length !== songs.length || fresh.some((x, k) => x !== songs[k])) { songs = fresh; build(); }
+    }
+    let i = songs.findIndex((s) => s.id === id);
+    if (next === 'pages') {
+      // an imported / listed page may still be on its way: park the link, show the first entry meanwhile
+      pendingRoute = i < 0 && id && window.Pages.loading() ? { id, sub, arg } : null;
+      if (i < 0) i = 0;
+    } else pendingRoute = null;
     if (i < 0) {
       view = 'title';
       body.dataset.view = 'title';
@@ -237,14 +278,15 @@
       settle();
       return;
     }
+    if (songs[i].go && sub === 'info') { location.replace(songs[i].go); return; }
     const entering = view !== 'select';
     view = 'select';
     body.dataset.view = 'select';
     titleView.inert = true;
     selectView.inert = false;
     select(i, { scroll: true, instant: true, hash: false, arg });
-    if (sub !== 'info') pushedDetail = false;
-    setDetail(sub === 'info');
+    if (sub !== 'info' || pendingRoute) pushedDetail = false;
+    setDetail(sub === 'info' && !pendingRoute);
     try { // Message.html redirects set this: open the panel already fullscreen, no morph
       if (sessionStorage.getItem('etan-fs')) { sessionStorage.removeItem('etan-fs'); if (sub === 'info') setFull(true, { instant: true }); }
     } catch (e) {}
@@ -252,6 +294,45 @@
     measure();
     settle();
   }
+
+  // pages finished loading / were saved / removed / trusted a host: rebuild the wheel, keep the selection by id
+  addEventListener('etan:pages', () => {
+    if (section !== 'pages' || view !== 'select') return;
+    const prev = songs[sel];
+    const keep = pendingRoute ? pendingRoute.id : prev?.id;
+    songs = window.Pages.list();
+    build();
+    let i = songs.findIndex((s) => s.id === keep);
+    if (pendingRoute && i >= 0) {
+      const { sub, arg } = pendingRoute;
+      pendingRoute = null;
+      select(i, { scroll: true, instant: true, hash: false, arg });
+      setDetail(sub === 'info');
+      return;
+    }
+    if (pendingRoute && !window.Pages.loading()) { pendingRoute = null; history.replaceState(null, '', '#/pages'); }
+    if (i < 0) { // the selected page went away (removed, discarded)
+      i = Math.max(0, Math.min(pendingRoute ? 0 : sel, songs.length - 1));
+      select(i, { scroll: true, instant: true, hash: false });
+      setDetail(false);
+      history.replaceState(null, '', hashFor(songs[i].id));
+      return;
+    }
+    // same page still selected: only repaint what changed so the open panel keeps its scroll position
+    sel = i;
+    items[i].classList.add('is-sel');
+    items[i].setAttribute('aria-selected', 'true');
+    list.setAttribute('aria-activedescendant', items[i].id);
+    $('#counter').innerHTML = `${pad(i + 1)}<small>/${pad(songs.length)}</small>`;
+    if (songs[i] !== prev || !pendingRoute) paintPreview(songs[i]);
+    if (songs[i] !== prev) renderDetail(songs[i], i);
+    else if (songs[i].origin) { // save / remove changes the source strip
+      const o = dScroll.querySelector('.pg-origin');
+      if (o) o.outerHTML = window.Pages.originHTML(songs[i]);
+    }
+    scrollToItem(i, true);
+  });
+
   addEventListener('hashchange', route);
 
   /* ---------- input ---------- */
@@ -267,7 +348,7 @@
   $('#next').addEventListener('click', () => select(sel + 1, { scroll: true }));
   $('#open').addEventListener('click', openDetail);
   $('#settings').addEventListener('click', () => {
-    if (detailOpen && SONGS[sel].id === 'settings') return closeDetail();
+    if (detailOpen && songs[sel].id === 'settings') return closeDetail();
     pushedDetail = true;
     location.hash = '#/settings/info';
   });
@@ -286,9 +367,9 @@
       case 'PageDown': if (!d) go(sel + 3); break;
       case 'PageUp': if (!d) go(sel - 3); break;
       case 'Home': if (!d) go(0); break;
-      case 'End': if (!d) go(SONGS.length - 1); break;
+      case 'End': if (!d) go(songs.length - 1); break;
       case 'f': if (d) { e.preventDefault(); setFull(!fullOn); } break;
-      case 'Escape': e.preventDefault(); if (fullOn) setFull(false); else if (d) closeDetail(); else location.hash = '#/'; break;
+      case 'Escape': e.preventDefault(); if (fullOn) setFull(false); else if (d) closeDetail(); else location.hash = section === 'pages' ? '#/friend-pages' : '#/'; break;
       case 'Enter': if (!d && !typing) { e.preventDefault(); openDetail(); } break;
     }
   });

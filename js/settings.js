@@ -1,9 +1,9 @@
-// Settings + local storage. Adds a hardcoded "settings" song (last in the wheel) and the stores behind it.
+// Settings + local storage. Adds a hardcoded "settings" song (last in the wheel, after pages.js's friend-pages) and the stores behind it.
 // Everything lives in this browser's localStorage under etan:*  -  nothing is ever sent anywhere.
 //   Settings.get(key) / Settings.set(key, v)   display + behaviour prefs
 //   Settings.saved / Settings.recent           message stores (see messages.js)
 (() => {
-  const KEYS = { prefs: 'etan:settings', saved: 'etan:saved', recent: 'etan:recent' };
+  const KEYS = { prefs: 'etan:settings', saved: 'etan:saved', recent: 'etan:recent', pages: 'etan:pages', trust: 'etan:trust' }; // pages + trust belong to pages.js
   const ID_RE = /^[0-9a-f]{8,40}$/i;
   const MAX_TEXT = 20000;
   const MAX_SAVED = 200;
@@ -74,7 +74,7 @@
       prefs = { ...DEFAULTS };
       for (const k of Object.values(KEYS)) drop(k);
       apply();
-      poke('prefs'); poke('saved'); poke('recent');
+      poke('prefs'); poke('saved'); poke('recent'); poke('pages');
     },
   };
 
@@ -353,7 +353,7 @@
 
     /* reset */
     g = group('Reset');
-    r = row('Reset everything', 'Puts every setting back and deletes all saved + recent messages from this browser.');
+    r = row('Reset everything', 'Puts every setting back and deletes all saved + recent messages, saved Friend Pages and trusted image hosts from this browser.');
     const zone = el('div', 'set-acts');
     const arm = btn('Reset all', () => {
       zone.replaceChildren(el('span', 'set-warn', 'You sure?'),
