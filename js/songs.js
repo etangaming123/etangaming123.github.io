@@ -201,6 +201,41 @@ const SONGS = [
     },
   },
   {
+    id: "dni-list",
+    title: "DNI List",
+    sub: "\"Do Not Interact\" list.",
+    chips: ["bro idek", "im just petty"],
+    a: "#E46883",
+    b: "#FAE85A",
+    ink: "#E46883",
+    jacket: { pattern: "slash", text: "DNI" },
+    detail: {
+      info: [
+        ["What", "sorry dude i dont feel like dealing w u"],
+        ["Where", "github gist"],
+      ],
+      blocks: [
+        { type: "heading", text: "DNI List" },
+        {
+          type: "markdown",
+          src: "https://gist.githubusercontent.com/etangaming123/719329cb7348bbbbb22e2389e63c4ef1/raw",
+        },
+        { type: "heading", text: "DNI Definition" },
+        {
+          type: "text",
+          paras: ["In my case, DNI means you cannot:", "> send me direct messages", "> engage in conversation (i.e replies) - you will be ignored at best", "> \"mutual\" me (friend request, follow / follow back, etc.)", "You can still, of course:", "> \"like\" or save my content", "> repost"],
+        },
+      ],
+      body: ["I have a different definition of \"Do Not Interact\".", "I understand how people aren't bothered reading a whole list just to know if they can like a post or not.", "Right below the list is my definitions of what's interacting and what isn't - so, in the rare case you're on this list, or if you want to know what my definition of \"DNI\" is, go ahead.", "I have the right to change this list at any time."],
+      links: [
+        {
+          label: "View on Gist",
+          href: "https://gist.github.com/etangaming123/719329cb7348bbbbb22e2389e63c4ef1",
+        },
+      ],
+    },
+  },
+  {
     id: "games",
     title: "Games",
     sub: "My name has \"gaming\" dude",
