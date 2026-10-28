@@ -355,7 +355,7 @@
   $('#home').addEventListener('click', (e) => { if (detailOpen) { e.preventDefault(); closeDetail(); } });
 
   addEventListener('keydown', (e) => {
-    if (document.activeElement?.closest?.('#con') || document.activeElement?.matches?.('input, textarea, select') || view !== 'select' || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (document.activeElement?.closest?.('#con, .nt-win, .nt-toast') || document.activeElement?.matches?.('input, textarea, select') || view !== 'select' || e.altKey || e.ctrlKey || e.metaKey) return;
     const go = (n) => { e.preventDefault(); select(n, { scroll: true }); };
     const d = detailOpen; // in the panel, up/down/page keys scroll it; left/right switch song
     const typing = !['BODY', 'UL'].includes(document.activeElement?.tagName) && !document.activeElement?.matches?.('.d-scroll');

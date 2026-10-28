@@ -3,7 +3,7 @@
 //   Settings.get(key) / Settings.set(key, v)   display + behaviour prefs
 //   Settings.saved / Settings.recent           message stores (see messages.js)
 (() => {
-  const KEYS = { prefs: 'etan:settings', saved: 'etan:saved', recent: 'etan:recent', pages: 'etan:pages', trust: 'etan:trust' }; // pages + trust belong to pages.js
+  const KEYS = { prefs: 'etan:settings', saved: 'etan:saved', recent: 'etan:recent', pages: 'etan:pages', trust: 'etan:trust', notice: 'etan:notice' }; // pages + trust belong to pages.js
   const ID_RE = /^[0-9a-f]{8,40}$/i;
   const MAX_TEXT = 20000;
   const MAX_SAVED = 200;
@@ -353,6 +353,13 @@
 
     /* reset */
     g = group('Reset');
+    r = row('Global message', 'The banner that pops up after the title screen only shows once per update. This forgets the one you have already seen, so it shows again next time.');
+    const nz = el('div', 'set-acts');
+    const nstatus = el('p', 'set-desc set-status');
+    nstatus.setAttribute('role', 'status');
+    nz.append(btn('Clear stored global message data', () => { window.Notify?.reset(); nstatus.textContent = 'Cleared. The message will show again next time.'; }));
+    r.append(nz, nstatus);
+    g.append(r);
     r = row('Reset everything', 'Puts every setting back and deletes all saved + recent messages, saved Friend Pages and trusted image hosts from this browser.');
     const zone = el('div', 'set-acts');
     const arm = btn('Reset all', () => {
