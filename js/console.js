@@ -1,4 +1,4 @@
-// "cheats" console. Opened by the Sh in Shit, or the backtick key.
+// "cheats" console. Opened by the St in Stuff, or the backtick key.
 (() => {
   const $ = (s) => document.querySelector(s);
   const body = document.body;

@@ -151,7 +151,7 @@ const SONGS = [
         { type: "divider" },
         {
           type: "text",
-          paras: ["it's a very close friendship between 2 guys. there's no romantic shit going on, we have boundaries you know", "we met from funny arcade game, but didn't really talk much until 22 feb 2026, where he added me on insta. kinda lit!", "from then, i made hurstville lurkers, he, along with a few others, was brought along to help, so yeah.", "beside the arcade, we've both had [redacted] and [redacted], and pushed each other on to keep on going, so... 🥺🥺🥺"],
+          paras: ["it's a very close friendship between 2 guys. there's no romantic stuff going on, we have boundaries you know", "we met from funny arcade game, but didn't really talk much until 22 feb 2026, where he added me on insta. kinda lit!", "from then, i made hurstville lurkers, he, along with a few others, was brought along to help, so yeah.", "beside the arcade, we've both had [redacted] and [redacted], and pushed each other on to keep on going, so... 🥺🥺🥺"],
         },
         {
           type: "banner",
@@ -249,7 +249,7 @@ const SONGS = [
         ["Main", "maimai DX"],
         ["Cabinet", "Arcade"],
       ],
-      body: ["I LOVE maimai. for more than the game, I've met a whole bunch of cool people at my local arcade :)", "I also play a whole other variety of games - mainly rhythm games, but also some sick ass games like Denshattack!", "There's also story games, like The NOexistenceN of you AND me, NEEDY STREAMER OVERLOAD... uh that's pretty much it. No she is NOT like me.", "Roblox is my guilty pleasure. The platform is shit, but some games, like Super Bomb Survival, and REDLINER, are actually kinda cool.", "And I play Minecraft with a close friend <3 (hi!)"],
+      body: ["I LOVE maimai. for more than the game, I've met a whole bunch of cool people at my local arcade :)", "I also play a whole other variety of games - mainly rhythm games, but also some sick (cool) games like Denshattack!", "There's also story games, like The NOexistenceN of you AND me, NEEDY STREAMER OVERLOAD... uh that's pretty much it. No she is NOT like me.", "Roblox is my guilty pleasure. The platform is buns, but some games, like Super Bomb Survival, and REDLINER, are actually kinda cool.", "And I play Minecraft with a close friend <3 (hi!)"],
       list: {
         label: "Other games",
         items: [

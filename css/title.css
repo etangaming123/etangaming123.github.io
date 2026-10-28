@@ -179,7 +179,7 @@
   .t-bottom { grid-column: 1 / -1; grid-row: 3; justify-content: flex-end; padding-right: 4vw; }
 }
 
-/* the "Sh" in Shit: looks like part of the sentence, quietly isn't */
+/* it was "shit" before i renamed it to "stuff" */
 .sh {
   appearance: none;
   margin: 0;
