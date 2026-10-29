@@ -44,7 +44,7 @@ const SONGS = [
         ["Base", "Sydney, Australia"],
         ["Build", "Jack of all trades, master of none"],
       ],
-      body: ["I'm etan, etangaming123, etangamingxyz, \"the rafisol pfp\", or whatever you know me as."],
+      body: ["Refollowing His path since 2026-10-29.", "\“You are the light of the world—like a city on a hilltop that cannot be hidden.\" - Matthew 5:14  (NLT)", "I'm etan, etangaming123, etangamingxyz, \"the rafisol pfp\", or whatever you know me as."],
       links: [
         { label: "GitHub", href: "https://github.com/etangaming123" },
       ],

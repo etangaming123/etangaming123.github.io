@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="css/detail.css">
   <link rel="stylesheet" href="css/settings.css">
   <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/console.css">
   <link rel="stylesheet" href="css/notify.css">
   <link rel="icon" href="assets/jackets/about-me.png">
 </head>
@@ -39,14 +38,14 @@
     <div class="t-main">
       <h1 class="logo">etan<i>://</i></h1>
       <p class="from" id="from" hidden></p>
-      <p class="tagline"><span>I make <button type="button" class="sh" id="sh" aria-haspopup="dialog" aria-label="Sh (opens the cheats console)">st</button>uff on the internet.</span></p>
+      <p class="tagline"><span>I make <button type="button" class="sh" id="sh" aria-haspopup="dialog" aria-label="Sh (opens a little window)">st</button>uff on the internet.</span></p>
 
       <section class="plate" aria-label="Player data">
         <div class="plate-in">
           <h2>Player data</h2>
           <dl>
             <dt>Name</dt><dd>etan <span class="todo">(@etangaming123/etangamingxyz)</span></dd>
-            <dt>Pronouns</dt><dd>any (he, she, they, etc.)</dd>
+            <dt>Pronouns</dt><dd>any (he, she, they, etc.) - i don't mind</dd>
             <dt>About</dt><dd>Internet 'creations', and GAMING 🤑🤑🤑</dd>
             <dt>Status</dt><dd id="status">¯\_(ツ)_/¯</dd>
           </dl>
@@ -94,19 +93,6 @@
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6l7 8 7-8" fill="none" stroke="currentColor" stroke-width="3.5"/></svg></span></button>
       <button class="key key-open" id="open" type="button"><span>Info</span></button>
     </nav>
-  </div>
-
-  <!-- CONSOLE (floating, draggable, non-modal) -->
-  <div class="con" id="con" role="dialog" aria-modal="false" aria-label="Command Prompt" hidden>
-    <div class="con-bar" id="con-bar" tabindex="0" aria-label="Console title bar. Drag, or use arrow keys, to move it.">
-      <span class="con-title">Command Prompt</span>
-      <button class="con-x" id="con-x" type="button" aria-label="Close console">&#x2715;</button>
-    </div>
-    <div class="con-log" id="con-log" role="log" aria-live="polite"></div>
-    <form class="con-form" id="con-form" autocomplete="off">
-      <label class="con-ps" for="con-in">C:\guest&gt;</label>
-      <input id="con-in" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" enterkeyhint="send">
-    </form>
   </div>
 
   <div class="fx" aria-hidden="true"></div>

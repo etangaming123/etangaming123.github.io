@@ -1,245 +1,217 @@
-// "cheats" console. Opened by the St in Stuff, or the backtick key.
+// "HisPath" window: the St in Stuff (or the backtick key) opens a resizable Win98 browser window on
+// HisPath.html. Same chrome, resizing and cover animation as the global message window (notify.js / notify.css).
 (() => {
-  const $ = (s) => document.querySelector(s);
-  const body = document.body;
-  const con = $('#con');
-  const log = $('#con-log');
-  const form = $('#con-form');
-  const input = $('#con-in');
-  const opener = $('#sh');
-  const t0 = performance.now();
+  const SRC = 'HisPath.html';
+  const PAGE = 'https://etangaming.xyz/HisPath.html';
+  const TITLE = 'Following His path once again';
+  const LEAD = 1100;
+  const MIN_W = 240, MIN_H = 160;
+  const SVG = 'http://www.w3.org/2000/svg';
 
-  const PAGES = ['home', ...SONGS.map((s) => s.id)];
-  const ALIAS = { about: 'about-me', me: 'about-me', lurkers: 'hurstville-lurkers', hurstville: 'hurstville-lurkers', bot: 'etan-bot', links: 'automatic-link-cleaner', cleaner: 'automatic-link-cleaner', circle: 'circle-chiffon', chiffon: 'circle-chiffon', social: 'social-media' };
-  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  const reduced = () => document.documentElement.dataset.reduce === '1';
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const icon = (cls, d) => { // static, trusted path data
+    const s = document.createElementNS(SVG, 'svg');
+    s.setAttribute('viewBox', '0 0 16 16');
+    s.setAttribute('class', cls);
+    s.setAttribute('aria-hidden', 'true');
+    s.setAttribute('shape-rendering', 'crispEdges');
+    s.innerHTML = d;
+    return s;
+  };
+  const PAGEICON = '<path fill="#fff" stroke="#000" d="M3.5 1.5h6l3 3v10h-9z"/><path fill="#bb88ee" d="M5 6h6v1H5zM5 8h6v1H5zM5 10h4v1H5z"/>';
 
-  let history = [];
-  let hi = 0;
-  let booted = false;
+  let win = null;
+  let printed = false; // only the first open "loads"; later ones are instant
   let returnTo = null;
 
-  const print = (lines, cls = '') => {
-    for (const t of [].concat(lines)) {
-      const d = document.createElement('div');
-      d.className = `ln ${cls}`;
-      d.textContent = t;
-      log.appendChild(d);
-    }
-    log.scrollTop = log.scrollHeight;
-  };
-
-  function resolve(q) {
-    q = q.toLowerCase().replace(/^etan:\/\//, '').replace(/^#?\//, '').trim();
-    if (!q) return { none: true };
-    if (q === 'title') q = 'home';
-    if (ALIAS[q]) q = ALIAS[q];
-    if (PAGES.includes(q)) return { id: q };
-    const hits = PAGES.filter((p) => p.includes(q) || SONGS.find((s) => s.id === p)?.title.toLowerCase().includes(q));
-    if (hits.length === 1) return { id: hits[0] };
-    return hits.length ? { many: hits } : { none: false };
+  function place(n, left, top, w, h) {
+    w = Math.min(Math.max(w, Math.min(MIN_W, innerWidth)), innerWidth);
+    h = Math.min(Math.max(h, Math.min(MIN_H, innerHeight)), innerHeight);
+    left = Math.max(0, Math.min(left, innerWidth - w));
+    top = Math.max(0, Math.min(top, innerHeight - h));
+    Object.assign(n.style, { left: left + 'px', top: top + 'px', width: w + 'px', height: h + 'px' });
+  }
+  function clamp(n) {
+    const r = n.getBoundingClientRect();
+    place(n, r.left, r.top, r.width, r.height);
   }
 
-  const todoCount = () => (JSON.stringify(SONGS).match(/TODO/g) || []).length;
-
-  const CMDS = {
-    help: { pub: 1, desc: 'list commands, or describe one: help [command]', run: (a) => {
-      const name = (a[0] || '').toLowerCase();
-      if (name) {
-        const c = CMDS[name];
-        if (c && (c.pub || c.desc)) print(`${name}: ${c.desc}`);
-        else print(`help: no help for '${a[0]}'. try 'help'.`, 'err');
-        return;
-      }
-      const pub = Object.keys(CMDS).filter((k) => CMDS[k].pub && Object.keys(CMDS).find((j) => CMDS[j] === CMDS[k]) === k);
-      const w = Math.max(...pub.map((k) => k.length)) + 2;
-      print(['commands:', ...pub.map((k) => `  ${k.padEnd(w)}${CMDS[k].desc}`), '', "aliases: pages=ls, man/?=help, quit=exit, cls=clear, hi=hello", 'tip: Tab completes, Up/Down recalls history, Ctrl+L clears.'], 'dim');
-    } },
-    goto: { pub: 1, desc: 'jump to a page: goto [page]', run: (a) => {
-      const r = resolve(a.join(' '));
-      if (r.id) {
-        print(`catching a train to etan://${r.id === 'home' ? 'home' : r.id} ...`, 'ok');
-        setTimeout(() => { location.hash = r.id === 'home' ? '#/' : `#/${r.id}`; }, 250);
-      } else if (r.many) print(`ambiguous. did you mean: ${r.many.join(', ')}?`, 'err');
-      else if (r.none) print(['usage: goto [page]', `pages: ${PAGES.join(', ')}`], 'dim');
-      else print(`404: no such chart "${a.join(' ')}". try 'ls'.`, 'err');
-    } },
-    ls: { pub: 1, desc: 'list every page', run: () => print(PAGES.map((p, i) => `${String(i).padStart(2, '0')}  etan://${p}`)) },
-    whois: { pub: 1, desc: 'who runs this place?', run: () => print('access denied. [insufficient permissions]', 'err') },
-    whoami: { pub: 1, desc: 'show current user', run: () => print(['guest', 'permissions: read-only. look, don\'t touch.'], 'ok') },
-    lastseen: { pub: 1, desc: 'when was etan last seen?', run: () => print(pick([
-      'last seen: 4 minutes ago, resizing a div by 2px.',
-      'last seen: staring at the backlog. the backlog stared back.',
-      'last seen: pushing to main. regrets pending.',
-      'last seen: touching grass. (unverified)',
-      'last seen: three tabs deep in a rabbit hole nobody asked about.',
-      'last seen: "just one more credit".',
-      'last seen: asleep. probably. check discord.',
-      'last seen: 2 minutes ago, asking Fable 5.1 on Ultracode with dangerous permissions "who is json?"',
-      'last seen: 3 hours ago, [redacted]',
-    ]), 'ok') },
-    status: { pub: 1, desc: 'player stats', run: () => print([
-      'PLAYER ....... guest',
-      'CLASS ........ idk what you do bro',
-      'STATUS ....... empty',
-      'SLEEP ........ few hours?',
-      `TODOs ........ ${todoCount()} and counting`,
-    ], 'ok') },
-    todo: { pub: 1, desc: 'count the TODOs left', run: () => {
-      const n = todoCount();
-      print(n ? [`${n} TODO${n > 1 ? 's' : ''} left in songs.js.`, 'no pressure.'] : ['zero TODOs. who are you and what did you do with etan?'], n ? 'hl' : 'ok');
-    } },
-    fortune: { pub: 1, desc: 'get your fortune', run: () => print(pick([
-      'your next commit will contain exactly one typo.',
-      'a rhythm game will eat your evening. you will say it was worth it.',
-      'the bug is in the line you were sure was fine.',
-      'good news: it works on your machine.',
-      'you will lose a combo to a single stray note. as is tradition.',
-      'someone in the server is about to say "wait, is the bot down?"',
-    ]), 'hl') },
-    credits: { pub: 1, desc: 'who made this', run: () => print([
-      'design + code ... Claude 😁😁😁',
-      'fonts ........... Dela Gothic One, Chakra Petch, Atkinson Hyperlegible, Share Tech Mono',
-      'frameworks ...... none. we do not talk about frameworks.',
-      'real arcade games harmed ... 0',
-    ]) },
-    date: { pub: 1, desc: 'print the date and time', run: () => print(new Date().toString()) },
-    uptime: { pub: 1, desc: 'time spent here', run: () => { const s = Math.round((performance.now() - t0) / 1000); print(`you have wasted ${s} second${s === 1 ? '' : 's'} here. thank you.`); } },
-    clear: { pub: 1, desc: 'clear the screen', run: () => { log.textContent = ''; } },
-    exit: { pub: 1, desc: 'close the console', run: () => close() },
-
-    // hidden
-    sudo: { run: () => print(['guest is not in the sudoers file.', 'this incident will be reported. (to nobody. it is a static site.)'], 'err') },
-    rm: { run: () => print('deleting guest c drive...', 'err') },
-    ping: { run: (a) => print(`pong${a[0] ? ` from ${a[0]}` : ''} (eventually)`, 'ok') },
-    sleep: { run: () => print(['sleep: command not found', 'sleep: also not found on user.'], 'err') },
-    coffee: { run: () => print(['brewing...', 'error: 418 i am a teapot'], 'hl') },
-    rating: { run: () => print('rating: [REDACTED]. it is lower than you think. and higher than it was last week.', 'hl') },
-    backlog: { run: () => print('games in backlog: yes.', 'hl') },
-    konami: { run: () => print('controller not connected, or not found. sorry.', 'hl') },
-    cheats: { run: () => print('you are already in cheats. this is the cheat. congratulations.', 'ok') },
-    secret: { run: () => print('access denied. [insufficient permissions]', 'err') },
-    hello: { run: () => print(pick(['hi.', 'hello, player 2.', 'o/', 'sup. try "help".'])) },
-    echo: { run: (a) => print(a.join(' ')) },
-    reboot: { run: () => { print('ctrl + r or command + r', 'ok'); setTimeout(() => { location.hash = '#/'; }, 400); } },
-    matrix: { run: () => print(['wake up, player 2...', 'the combo has you.', 'follow the white notes.'], 'ok') },
-    bot: { run: () => print('etan bot: online-ish. ask it nicely.', 'ok') },
-  };
-  CMDS.pages = CMDS.ls;
-  CMDS.man = CMDS.help;
-  CMDS['?'] = CMDS.help;
-  CMDS.quit = CMDS.exit;
-  CMDS.hi = CMDS.hello;
-  CMDS.cls = CMDS.clear;
-
-  function run(line) {
-    line = line.trim();
-    if (!line) return;
-    print(`C:\\guest>${line}`);
-    history.push(line);
-    hi = history.length;
-    const [name, ...args] = line.split(/\s+/);
-    const c = CMDS[name.toLowerCase()];
-    if (c) c.run(args);
-    else print(`etan: command not found: ${name}. try 'help'.`, 'err');
-  }
-
-  function complete() {
-    const parts = input.value.split(/\s+/);
-    const pool = parts.length < 2
-      ? Object.keys(CMDS).filter((k) => CMDS[k].pub)
-      : parts[0].toLowerCase() === 'goto' ? PAGES : [];
-    const word = parts[parts.length - 1].toLowerCase();
-    const hits = pool.filter((p) => p.startsWith(word));
-    if (hits.length === 1) {
-      parts[parts.length - 1] = hits[0];
-      input.value = parts.join(' ') + (parts.length < 2 && hits[0] === 'goto' ? ' ' : '');
-    } else if (hits.length > 1) print(hits.join('  '), 'dim');
-  }
-
-  /* ---------- open / close / drag ---------- */
-  const bar = $('#con-bar');
-  const pos = { x: 0, y: 0 };
-  let placed = false;
-  let drag = null;
-
-  const apply = () => {
-    const w = con.offsetWidth, h = con.offsetHeight;
-    pos.x = Math.round(Math.min(Math.max(pos.x, 0), Math.max(0, innerWidth - w)));
-    pos.y = Math.round(Math.min(Math.max(pos.y, 0), Math.max(0, innerHeight - h)));
-    con.style.setProperty('--cx', pos.x + 'px');
-    con.style.setProperty('--cy', pos.y + 'px');
-  };
-  const save = () => { try { sessionStorage.setItem('etan-con', JSON.stringify(pos)); } catch (e) { /* no storage, fine */ } };
-  function place() {
-    let saved = null;
-    try { saved = JSON.parse(sessionStorage.getItem('etan-con')); } catch (e) { /* ignore */ }
-    if (saved && Number.isFinite(saved.x)) Object.assign(pos, saved);
-    else if (innerWidth >= 860) { pos.x = innerWidth - con.offsetWidth - 36; pos.y = innerHeight - con.offsetHeight - 36; }
-    else { pos.x = (innerWidth - con.offsetWidth) / 2; pos.y = 56; }
-    apply();
-    placed = true;
-  }
-
-  bar.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('button') || e.button > 0) return;
-    drag = { dx: e.clientX - pos.x, dy: e.clientY - pos.y };
-    bar.setPointerCapture(e.pointerId);
-    con.classList.add('dragging');
-  });
-  bar.addEventListener('pointermove', (e) => {
-    if (!drag) return;
-    pos.x = e.clientX - drag.dx;
-    pos.y = e.clientY - drag.dy;
-    apply();
-  });
-  const drop = () => { if (drag) { drag = null; con.classList.remove('dragging'); save(); } };
-  bar.addEventListener('pointerup', drop);
-  bar.addEventListener('pointercancel', drop);
-  bar.addEventListener('keydown', (e) => {
-    const step = e.shiftKey ? 96 : 24;
-    const d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
-    if (!d) return;
-    e.preventDefault();
-    pos.x += d[0]; pos.y += d[1];
-    apply(); save();
-  });
-  addEventListener('resize', () => { if (!con.hidden) apply(); });
-
-  function open() {
-    if (!con.hidden) { input.focus(); return; }
+  function openWindow() {
+    if (win) { win.el.focus(); return; }
     returnTo = document.activeElement;
-    con.hidden = false;
-    if (!placed) place(); else apply();
-    if (!booted) {
-      booted = true;
-      print(['etangaming123 Shell console', '(c) no one - 20xx', '', 'logged in as guest.', "type 'help' for commands."]);
+    const el_ = el('div', 'nt-win');
+    el_.setAttribute('role', 'dialog');
+    el_.setAttribute('aria-modal', 'false');
+    el_.setAttribute('aria-label', TITLE);
+    el_.tabIndex = -1;
+
+    const bar = el('div', 'nt-bar nt-drag');
+    bar.append(icon('nt-ico', PAGEICON), el('span', 'nt-bar-t', `${TITLE} - HisPath`));
+    const mk = (cls, label, path) => {
+      const b = el('button', 'nt-btn ' + cls);
+      b.type = 'button';
+      b.setAttribute('aria-label', label);
+      b.append(icon('nt-g', path));
+      return b;
+    };
+    const max = mk('nt-max', 'Maximize', '<path d="M3.5 3.5h9v9h-9z" stroke="#000" stroke-width="1" fill="none"/><path d="M3 3h10v2H3z" fill="#000"/>');
+    const close = mk('nt-x', 'Close', '<path d="M3 3l10 10M13 3L3 13" stroke="#000" stroke-width="2" fill="none"/>');
+    const btns = el('span', 'nt-btns');
+    btns.append(max, close);
+    bar.append(btns);
+
+    const addr = el('div', 'nt-addr');
+    addr.append(el('span', 'nt-addr-l', 'Address'));
+    const url = el('a', 'nt-addr-f', PAGE);
+    url.href = SRC; url.target = '_blank'; url.rel = 'noopener';
+    const throb = el('span', 'nt-throb');
+    throb.setAttribute('aria-hidden', 'true');
+    addr.append(url, throb);
+
+    const view = el('div', 'nt-view nt-frame');
+    const frame = el('iframe');
+    frame.src = SRC;
+    frame.title = TITLE;
+    frame.setAttribute('loading', 'eager');
+    view.append(frame);
+
+    const status = el('div', 'nt-status');
+    const msg = el('span', 'nt-cell nt-msg');
+    msg.setAttribute('role', 'status');
+    const prog = el('span', 'nt-cell nt-prog');
+    const fill = el('i');
+    prog.append(fill);
+    prog.setAttribute('aria-hidden', 'true');
+    status.append(msg, prog, el('span', 'nt-cell nt-zone', 'Internet'));
+
+    const grips = ['n', 'e', 's', 'w', 'ne', 'nw', 'se', 'sw'].map((d_) => {
+      const g = el('div', 'nt-rz nt-rz-' + d_);
+      g.dataset.dir = d_;
+      g.setAttribute('aria-hidden', 'true');
+      return g;
+    });
+    const wrap = el('div', 'nt-wrap');
+    wrap.append(view);
+    el_.append(bar, addr, wrap, status, ...grips);
+    document.body.append(el_);
+
+    // roomy on desktop, nearly full on a phone
+    const vw = innerWidth, vh = innerHeight;
+    const w = Math.min(560, vw - 16), h = Math.min(440, Math.round(vh * .78));
+    place(el_, Math.round((vw - w) / 2), Math.max(8, Math.round((vh - h) / 2) - 10), w, h);
+
+    const st = { el: el_, max: false, saved: null, stop: null };
+    win = st;
+
+    const fit = () => { if (!st.max) clamp(el_); };
+    const doClose = () => {
+      st.stop?.();
+      el_.remove();
+      win = null;
+      removeEventListener('resize', fit);
+      if (returnTo && returnTo.focus && document.contains(returnTo)) returnTo.focus();
+    };
+    addEventListener('resize', fit);
+    close.addEventListener('click', doClose);
+    el_.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.preventDefault(); doClose(); } });
+    st.close = doClose;
+
+    const toggleMax = () => {
+      if (st.max) {
+        st.max = false;
+        el_.classList.remove('is-max');
+        place(el_, ...st.saved);
+        max.setAttribute('aria-label', 'Maximize');
+      } else {
+        const r = el_.getBoundingClientRect();
+        st.saved = [r.left, r.top, r.width, r.height];
+        st.max = true;
+        el_.classList.add('is-max');
+        max.setAttribute('aria-label', 'Restore');
+      }
+    };
+    max.addEventListener('click', toggleMax);
+    bar.addEventListener('dblclick', (e) => { if (!e.target.closest('.nt-btn')) toggleMax(); });
+
+    // drag by title bar. the iframe swallows pointer events, so park a shield over it while dragging/resizing
+    const shield = (on) => { frame.style.pointerEvents = on ? 'none' : ''; };
+    bar.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0 || e.target.closest('.nt-btn') || st.max) return;
+      const r = el_.getBoundingClientRect();
+      const dx = e.clientX - r.left, dy = e.clientY - r.top;
+      bar.setPointerCapture(e.pointerId);
+      shield(true);
+      const move = (ev) => place(el_, ev.clientX - dx, ev.clientY - dy, r.width, r.height);
+      const up = () => { shield(false); bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up); bar.removeEventListener('pointercancel', up); };
+      bar.addEventListener('pointermove', move);
+      bar.addEventListener('pointerup', up);
+      bar.addEventListener('pointercancel', up);
+    });
+
+    // resize from any edge / corner
+    for (const g of grips) {
+      g.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0 || st.max) return;
+        e.preventDefault();
+        const dir = g.dataset.dir;
+        const r = el_.getBoundingClientRect();
+        const sx = e.clientX, sy = e.clientY;
+        g.setPointerCapture(e.pointerId);
+        shield(true);
+        const move = (ev) => {
+          let { left, top, width, height } = r;
+          const ddx = ev.clientX - sx, ddy = ev.clientY - sy;
+          if (dir.includes('e')) width = Math.min(r.width + ddx, innerWidth - r.left);
+          if (dir.includes('s')) height = Math.min(r.height + ddy, innerHeight - r.top);
+          if (dir.includes('w')) { const nl = Math.max(0, Math.min(r.left + ddx, r.right - MIN_W)); width = r.right - nl; left = nl; }
+          if (dir.includes('n')) { const nt = Math.max(0, Math.min(r.top + ddy, r.bottom - MIN_H)); height = r.bottom - nt; top = nt; }
+          place(el_, left, top, Math.max(MIN_W, width), Math.max(MIN_H, height));
+        };
+        const up = () => { shield(false); g.removeEventListener('pointermove', move); g.removeEventListener('pointerup', up); g.removeEventListener('pointercancel', up); };
+        g.addEventListener('pointermove', move);
+        g.addEventListener('pointerup', up);
+        g.addEventListener('pointercancel', up);
+      });
     }
-    input.focus({ preventScroll: true });
-  }
-  function close(restore = true) {
-    if (con.hidden) return;
-    con.hidden = true;
-    if (restore && returnTo && returnTo.focus && document.contains(returnTo)) returnTo.focus();
-  }
 
-  opener.addEventListener('click', open);
-  $('#con-x').addEventListener('click', () => close());
-  form.addEventListener('submit', (e) => { e.preventDefault(); run(input.value); input.value = ''; });
-
-  con.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
-    if (e.target === input) {
-      if (e.key === 'ArrowUp') { e.preventDefault(); if (hi > 0) input.value = history[--hi]; }
-      else if (e.key === 'ArrowDown') { e.preventDefault(); input.value = hi < history.length - 1 ? history[++hi] : ((hi = history.length), ''); }
-      else if (e.key === 'Tab' && !e.shiftKey && input.value.trim()) { e.preventDefault(); complete(); }
-      else if (e.key === 'l' && e.ctrlKey) { e.preventDefault(); log.textContent = ''; }
+    // cover animation: the page is already there; a cover slides down like it is painting in
+    const instant = printed || reduced();
+    printed = true;
+    let cover = null;
+    const finish = () => {
+      cover?.remove();
+      msg.textContent = 'Done';
+      fill.style.animation = 'none';
+      fill.style.width = '100%';
+      throb.classList.remove('is-busy');
+      throb.classList.add('is-done');
+      el_.classList.remove('is-wiping');
+      st.stop = null;
+    };
+    if (instant) finish();
+    else {
+      cover = el('div', 'nt-cover');
+      wrap.append(cover);
+      msg.textContent = 'Connecting to etangaming.xyz...';
+      throb.classList.add('is-busy');
+      const t = setTimeout(() => { msg.textContent = `Opening page ${PAGE}...`; el_.classList.add('is-wiping'); }, LEAD);
+      cover.addEventListener('animationend', finish);
+      st.stop = () => clearTimeout(t);
     }
-  });
+    el_.focus({ preventScroll: true });
+  }
 
+  document.getElementById('sh').addEventListener('click', openWindow);
   addEventListener('keydown', (e) => {
     if (e.key === '`' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) {
       e.preventDefault();
-      con.hidden ? open() : close();
+      win ? win.close() : openWindow();
     }
   });
 })();

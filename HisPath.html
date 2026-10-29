@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Following His path once again</title>
+<meta name="robots" content="noindex">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 14px 16px;
+    background: #2a1050;
+    color: #fff;
+    font-family: Tahoma, 'MS Sans Serif', 'Segoe UI', Verdana, sans-serif;
+    overflow-x: hidden;
+  }
+  /* sunset: banded sky, stepped sun, dark hills */
+  .sky, .sun, .hills { position: fixed; pointer-events: none; z-index: 0; }
+  .sky {
+    inset: 0;
+    background: linear-gradient(180deg, #2a1050 0%, #552b9d 22%, #bb88ee 42%, #f395f6 56%, #ffaa88 68%, #ffd27a 78%);
+  }
+  .sun {
+    left: 50%;
+    bottom: 24%;
+    width: clamp(90px, 38vmin, 200px);
+    aspect-ratio: 1;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: repeating-linear-gradient(180deg, #fff2b0 0 8%, #ffd27a 8% 13%, #ff9a6a 13% 17%);
+    -webkit-mask: linear-gradient(180deg, #000 0 62%, transparent 62% 66%, #000 66% 78%, transparent 78% 82%, #000 82%);
+    mask: linear-gradient(180deg, #000 0 62%, transparent 62% 66%, #000 66% 78%, transparent 78% 82%, #000 82%);
+  }
+  .hills {
+    left: 0; right: 0; bottom: 0;
+    height: 30%;
+    background: #12062b;
+    clip-path: polygon(0 40%, 14% 14%, 30% 46%, 48% 8%, 66% 44%, 82% 18%, 100% 42%, 100% 100%, 0 100%);
+  }
+  h1, .cross, .tags { position: relative; z-index: 1; }
+  h1 {
+    margin: 0;
+    font-size: clamp(20px, 5.4vw, 30px);
+    line-height: 1.15;
+    text-align: center;
+    text-shadow: 2px 2px 0 #12062b;
+  }
+  .cross {
+    flex: none;
+    width: clamp(36px, 11vmin, 64px);
+    fill: #fff;
+    stroke: #12062b;
+    stroke-width: 1.5;
+    paint-order: stroke;
+    filter: drop-shadow(3px 3px 0 rgba(18, 6, 43, .55));
+  }
+  .tags {
+    width: min(100%, 460px);
+    padding: 10px 12px;
+    background: #12062b;
+    box-shadow: inset 1px 1px #808080, inset -1px -1px #fff;
+    font-size: 14px;
+    line-height: 1.35;
+    text-align: center;
+  }
+  .tags p { margin: 0 0 4px; }
+  .tags .since { margin: 8px 0 0; color: #57e1e6; font-size: 13px; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="sun" aria-hidden="true"></div>
+  <div class="hills" aria-hidden="true"></div>
+
+  <h1>Following His path once again</h1>
+  <svg class="cross" viewBox="0 0 24 36" role="img" aria-label="Christian cross"><path d="M9 0h6v10h9v6h-9v20H9V16H0v-6h9z"/></svg>
+  <div class="tags">
+    <p>It's hard after straying from Him for so long</p>
+    <p>But I want to change - for the better.</p>
+    <p class="since">Trying since 2026/10/29</p>
+  </div>
+</body>
+</html>

@@ -258,3 +258,7 @@ body[data-view="select"] .nt-toast { bottom: max(88px, calc(76px + env(safe-area
 @media (hover: hover) { .nt-again:hover { opacity: .8; } }
 @media (min-width: 860px) { .nt-again { bottom: 14px; } }
 @media (pointer: coarse) { .nt-again { width: 34px; height: 30px; } }
+
+/* HisPath window: the page itself is an iframe, no padding, no scroll of its own */
+.nt-view.nt-frame { padding: 0; overflow: hidden; background: #2a1050; }
+.nt-view iframe { display: block; width: 100%; height: 100%; border: 0; background: #2a1050; }
